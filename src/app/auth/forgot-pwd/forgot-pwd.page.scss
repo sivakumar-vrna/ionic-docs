@@ -1,0 +1,66 @@
+.reset-page {
+    .reset-page_main {
+        margin : 0;
+        padding: 0;
+
+        // .reset-page_left {
+        //     background-color: rgb(var(--ion-color-primary-rgb));
+        // }
+
+        .reset-page_right {
+            max-width: 375px !important;
+
+            .reset-logo-img {
+                width : 150px;
+                margin: 0 auto;
+            }
+
+            .reset-form {
+                .form-label {
+                    color      : #434343;
+                    font-family: 'Nunito';
+                }
+                .resend-code{
+                    font-size: 12px;
+                    position: relative;
+                    left: 15vw;
+                    cursor: pointer;
+                    }
+            }
+
+            .forgot-pwd-link {
+                font-size: 12px;
+
+                a {
+                    color : var(--ion-color-secondary);
+                    cursor: pointer;
+
+                    &:hover {
+                        color: var(--ion-color-primary);
+                    }
+                }
+            }
+
+            .signup-link p {
+                margin-left: 5px;
+
+                ion-text {
+                    cursor: pointer;
+
+                    &:hover {
+                        color: var(--ion-color-primary);
+                    }
+                }
+            }
+
+        }
+    }
+
+    .pwd-strength {
+        position     : absolute;
+        z-index      : 999;
+        border-radius: 20px;
+    }
+
+
+}

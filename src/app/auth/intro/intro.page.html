@@ -1,0 +1,63 @@
+<ion-content id="introPage">
+  <swiper #introSlide [config]="introOptions">
+    <ng-template swiperSlide>
+      <div class="d-flex flex-column h-100">
+        <img class="intro-slide-img" src="assets/images/intro/intro-media-1.png" />
+        <ion-text class="my-auto ion-padding ion-text-center" color="dark">
+          <h2>Welcome to VRNA</h2>
+          <p>
+            <b>VRNA</b> is your go to video streaming app for the best of
+            video
+            contents.
+          </p>
+        </ion-text>
+        <ion-text class="ion-padding ion-text-end" color="dark" *ngIf="isDevice">
+          <ion-button (click)="next()" fill="solid" color="dark">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-text>
+      </div>
+    </ng-template>
+
+    <ng-template swiperSlide>
+      <div class="d-flex flex-column h-100">
+        <img class="intro-slide-img" src="assets/images/intro/intro-media-2.png" />
+        <ion-text class="my-auto ion-padding ion-text-center" color="dark">
+          <h2>Theater Quality</h2>
+          <p>
+            <b>VRNA</b> is an platform build to give you high quality in
+            theater
+            experience.
+          </p>
+        </ion-text>
+        <ion-text class="ion-padding ion-text-end" color="dark" *ngIf="isDevice">
+          <ion-button (click)="next()" fill="solid" color="dark">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-text>
+      </div>
+    </ng-template>
+
+    <ng-template swiperSlide>
+      <div class="d-flex flex-column h-100">
+        <img class="intro-slide-img" src="assets/images/intro/intro-media-3.png" />
+        <ion-text class="my-auto ion-padding ion-text-center" color="dark">
+          <h2>Get Started</h2>
+          <p>
+            <b>VRNA</b> all available, ad-free, with a world class customer
+            experience.
+          </p>
+          <ion-button (click)="start('/auth/login')" expand="block" fill="solid" color="primary" *ngIf="isDevice">Login
+          </ion-button>
+          <ion-button (click)="start('/auth/signup')" expand="block" fill="solid" color="secondary" *ngIf="isDevice">Signup
+          </ion-button>
+          <p class="terms">
+            By signing up, you agree to our <a [routerLink]="['/terms']">Terms of Service</a> and <a
+              [routerLink]="['/policy']">Privacy Policy</a>.
+          </p>
+        </ion-text>
+      </div>
+    </ng-template>
+
+  </swiper>
+</ion-content>

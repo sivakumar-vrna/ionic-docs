@@ -1,0 +1,12 @@
+.forgot-pwd-link {
+    font-size: 12px;
+
+    a {
+        color : var(--ion-color-secondary);
+        cursor: pointer;
+
+        &:hover {
+            color: var(--ion-color-primary);
+        }
+    }
+}

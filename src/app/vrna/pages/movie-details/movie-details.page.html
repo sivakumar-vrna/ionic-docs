@@ -1,0 +1,193 @@
+<ion-header class="ion-no-border" *ngIf="!isLoading">
+  <ion-toolbar class="movie-detail-topbar" *ngIf="movieDetails">
+    <ion-button fill="clear" class="back-btn" slot="start" (click)="dismiss()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+
+    <ion-title>
+      <ion-text>
+        <h4 class="fs-14 ion-no-margin">
+          {{movieDetails.moviename}} ( {{movieDetails.movieyear}})
+        </h4>
+        <div class="common-genre py-1 ion-no-margin ion-text-start">
+          <ul>
+            <li *ngFor="let genre of movieDetails.genre">{{genre}}</li>
+          </ul>
+        </div>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="movie-details-content" fullscreen>
+  <ion-grid class="ion-no-padding">
+    <ion-row *ngIf="movieDetails">
+      <ion-col class="position-relative movie-detail-banner">
+
+        <!-- Banner Image -->
+        <ion-img class="mdc-banner-img" [src]="movieDetails.moviebannerurl"></ion-img>
+
+        <div class="bg-overlay"></div>
+
+        <div class="bottom-bar d-flex">
+          <!-- Play Trailer -->
+          <app-play-trailer [trailerUrl]="movieDetails.trailerurl"></app-play-trailer>
+          <!-- Rating -->
+          <div class="ms-auto my-auto">
+            <app-rating [userRating]="movieDetails.userRating" [movieId]="movieDetails.movieId"></app-rating>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="movieDetails">
+      <ion-col class="mdc-details px-3" size="12">
+        <p class="ion-text-wrap pt-2 my-0 mdc-description">
+          {{movieDetails.description}}
+        </p>
+        <table class="mdc-detail-table mt-2">
+          <tr>
+            <th>Director</th>
+            <td><span>{{movieDetails.director}}</span></td>
+          </tr>
+          <tr>
+            <th>Producer</th>
+            <td><span>{{movieDetails.producer}}</span></td>
+          </tr>
+          <tr>
+            <th>Musician</th>
+            <td><span>{{movieDetails.musicdirector}}</span></td>
+          </tr>
+          <tr>
+            <th>Cast</th>
+            <td>
+              <a class="comma cast-link" *ngFor="let cast of casts" (click)="onCastDetail(cast)">{{cast.castname}}</a>
+            </td>
+          </tr>
+        </table>
+      </ion-col>
+
+      <ion-col class="position-relative mt-2 pe-3" size="12">
+        <ion-row id="myHeader">
+          <ion-col class="position-relative" size="4">
+            <div class="d-flex">
+              <ion-button class="share-btn" color="primary" fill="clear" (click)="shareUs()">
+                <ion-icon name="share-social"></ion-icon>
+              </ion-button>
+              <app-favorite-btn [movieId]="movieId" *ngIf="movieId"></app-favorite-btn>
+            </div>
+          </ion-col>
+          <ion-col class="position-relative" size="2"> </ion-col>
+          <ion-col class="position-relative" size="6">
+            <div class="d-flex">
+              <ion-button class="w-100" expand="block" fill="solid" color="primary"
+                (click)="onSubmit(movieDetails.isRented)">
+                {{movieDetails.isRented ? 'Play': 'Rent'}}
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <!-- #Skeleton Loader -->
+    <ion-row *ngIf="!movieDetails">
+      <ion-col class="position-relative" size="12">
+        <ion-skeleton-text animated class="banner-skeleton"></ion-skeleton-text>
+      </ion-col>
+      <ion-col class="mdc-details p-3" size="12">
+        <h4 class="m-0">
+          <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+        </h4>
+        <div class="common-genre pb-2 m-0 ion-text-start">
+          <ul>
+            <li>
+              <ion-skeleton-text animated style="width: 150px"></ion-skeleton-text>
+            </li>
+          </ul>
+        </div>
+        <p class="ion-text-wrap pt-2 my-0 mdc-description">
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </p>
+        <p class="ion-text-wrap pt-0 my-0 mdc-description">
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </p>
+        <p class="ion-text-wrap pt-0 my-0 mdc-description">
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </p>
+        <table class="mdc-detail-table mt-2">
+          <tr>
+            <th>
+              <ion-skeleton-text animated style="width: 75px"></ion-skeleton-text>
+            </th>
+            <td>
+              <span>
+                <ion-skeleton-text animated style="width: 175px"></ion-skeleton-text>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <ion-skeleton-text animated style="width: 75px"></ion-skeleton-text>
+            </th>
+            <td>
+              <span>
+                <ion-skeleton-text animated style="width: 175px"></ion-skeleton-text>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <ion-skeleton-text animated style="width: 75px"></ion-skeleton-text>
+            </th>
+            <td>
+              <span>
+                <ion-skeleton-text animated style="width: 175px"></ion-skeleton-text>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <ion-skeleton-text animated style="width: 75px"></ion-skeleton-text>
+            </th>
+            <td>
+              <span>
+                <ion-skeleton-text animated style="width: 175px"></ion-skeleton-text>
+              </span>
+            </td>
+          </tr>
+        </table>
+      </ion-col>
+    </ion-row>
+
+    <!---------------------------------- #Related Suggestions Section --------------------------------------->
+    <ion-row class="suggestions-section p-3" *ngIf="suggestions">
+      <!-- title -->
+      <ion-col size="12">
+        <ion-text class="suggestions-section-title" color="primary">
+          <h5 class="m-1">Related Suggestions</h5>
+        </ion-text>
+      </ion-col>
+
+      <!-- carousal -->
+      <ion-col size="12">
+        <app-carousel [carouselData]="suggestions" [carouselOptions]="suggestionOptions"></app-carousel>
+      </ion-col>
+    </ion-row>
+
+    <!-- #Skeleton Loader -->
+    <ion-row class="p-3" *ngIf="!suggestions">
+      <ion-col class="mdc-details" size="12">
+        <h4 class="m-0">
+          <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+        </h4>
+      </ion-col>
+      <ion-col class="p-1" size="6" size-sm="6" size-md="4" size-xl="4" *ngFor="let
+        load of skeletonData">
+        <ion-skeleton-text animated style="width: 100%; height: 225px"></ion-skeleton-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

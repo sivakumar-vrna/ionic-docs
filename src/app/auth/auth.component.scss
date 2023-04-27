@@ -1,0 +1,65 @@
+.auth-page {
+    .auth-page_main {
+
+        .auth-page_right {
+            max-width: 375px !important;
+
+
+            .auth-logo-img {
+                width   : 150px;
+                margin  : 0 auto;
+            }
+
+            .signup-link p {
+                margin-left: 5px;
+
+                ion-text {
+                    cursor: pointer;
+
+                    &:hover {
+                        color: var(--ion-color-primary);
+                    }
+                }
+            }
+
+        }
+    }
+
+    // Social Login Divider
+    .social-btn-divider {
+        margin    : 1em 0 1em 0;
+        font-size : 10px;
+        text-align: center;
+        max-width : 600px;
+        position  : relative;
+
+        &:before {
+            content   : "";
+            display   : block;
+            width     : 15%;
+            height    : 0.5px;
+            background: #2e484c;
+            left      : 30%;
+            top       : 50%;
+            position  : absolute;
+        }
+
+        &:after {
+            content   : "";
+            display   : block;
+            width     : 15%;
+            height    : 0.5px;
+            background: #2e484c;
+            right     : 30%;
+            top       : 50%;
+            position  : absolute;
+        }
+    }
+
+    p.terms {
+        color    : #838383;
+        font-size: 10px;
+        position : absolute;
+        bottom   : 1rem;
+    }
+}

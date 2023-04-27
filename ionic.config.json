@@ -1,0 +1,7 @@
+{
+  "name": "VRNA",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

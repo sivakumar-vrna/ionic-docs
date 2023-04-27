@@ -1,0 +1,27 @@
+.searchbar-input.sc-ion-searchbar-md {
+    border-radius: 10px;
+}
+
+.search-grid {
+    border-radius: 10px;
+    margin       : 8px !important;
+}
+
+.search-suggestions {
+    font-family: 'Montserrat-medium';
+    cursor     : pointer;
+    color      : var(--ion-color-secondary);
+
+    &:hover {
+        color: var(--ion-color-primary);
+    }
+
+    &:not(:empty):not(:last-child):after {
+        content: " | ";
+    }
+}
+
+.search-input {
+    max-width: 750px;
+    margin   : auto;
+}

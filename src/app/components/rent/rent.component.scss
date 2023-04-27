@@ -1,0 +1,18 @@
+.rent-content-main {
+
+
+    ion-item {}
+
+    ion-item,
+    ion-list-header,
+    .rent-cards-list {}
+}
+
+::ng-deep .rent-footer-main {
+
+    .movie-banner-img {
+        img {
+            height: 32px;
+        }
+    }
+}

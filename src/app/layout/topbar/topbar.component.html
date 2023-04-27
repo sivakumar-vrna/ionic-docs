@@ -1,0 +1,16 @@
+<ion-toolbar class="home-topbar">
+  <ion-img slot="start" class="vrna-home-logo" src="assets/images/logo.png" alt="logo" (click)="onNavigate('/home')">
+  </ion-img>
+
+  <ion-buttons class="home-menu-btn" slot="end">
+    <ion-button color="primary" size="small" (click)="getLocation()">
+      {{currency}} <ion-icon name="location-outline"></ion-icon>
+    </ion-button>
+    <ion-toggle [checked]="currentTheme" (ionChange)="onThemeChange($event)"></ion-toggle>
+    <ion-button class="ion-margin-start me-2" Fill="clear" (click)="onNavigate('/search')">
+      <ion-icon class="home-search-icon" name="search-outline"></ion-icon>
+    </ion-button>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+
+</ion-toolbar>

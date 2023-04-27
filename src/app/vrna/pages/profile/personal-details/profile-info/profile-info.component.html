@@ -1,0 +1,142 @@
+<form class="mx-auto" [formGroup]="profileInfoForm">
+    <ion-row>
+        <ion-col class="ion-text-center m-auto" size="12" size-sm="12" size-md="3" size-lg="3" size-xl="2">
+            <img class="profile-img" [src]="userImage" />
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="9" size-lg="9" size-xl="10">
+            <ion-row>
+                <!-- #First Name-->
+                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="form-label">First Name </ion-label>
+                    <ion-toolbar>
+                        <ion-item lines="{{f.firstName.disabled ? 'none' : 'full'}}">
+                            <ion-input type="text" formControlName="firstName"></ion-input>
+                        </ion-item>
+                        <ion-buttons slot="secondary">
+                            <ion-button (click)="onEdit('firstName')">
+                                <ion-icon slot="icon-only" color="{{!f.firstName.disabled ? 'danger':'secondary'}}"
+                                    name="{{!f.firstName.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
+                            </ion-button>
+                            <ion-button (click)="onSubmit('firstName')" *ngIf="!f.firstName.disabled">
+                                <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-col>
+                <!-- #Middle Name-->
+                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="form-label">Middle Name </ion-label>
+                    <ion-toolbar>
+                        <ion-item lines="{{f.middleName.disabled ? 'none' : 'full'}}">
+                            <ion-input type="text" formControlName="middleName"></ion-input>
+                        </ion-item>
+                        <ion-buttons slot="secondary">
+                            <ion-button (click)="onEdit('middleName')">
+                                <ion-icon slot="icon-only" color="{{!f.middleName.disabled ? 'danger':'secondary'}}"
+                                    name="{{!f.middleName.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
+                            </ion-button>
+                            <ion-button (click)="onSubmit('middleName')" *ngIf="!f.middleName.disabled">
+                                <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-col>
+                <!-- #Last Name-->
+                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="form-label">Last Name </ion-label>
+                    <ion-toolbar>
+                        <ion-item lines="{{f.lastName.disabled ? 'none' : 'full'}}">
+                            <ion-input type="text" formControlName="lastName"></ion-input>
+                        </ion-item>
+                        <ion-buttons slot="secondary">
+                            <ion-button (click)="onEdit('lastName')">
+                                <ion-icon slot="icon-only" color="{{!f.lastName.disabled ? 'danger':'secondary'}}"
+                                    name="{{!f.lastName.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
+                            </ion-button>
+                            <ion-button (click)="onSubmit('lastName')" *ngIf="!f.lastName.disabled">
+                                <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-col>
+                <!-- #Gender-->
+                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="form-label">Gender</ion-label>
+                    <ion-toolbar>
+                        <ion-item lines="{{f.gender.disabled ? 'none' : 'full'}}">
+                            <ion-select placeholder="Select gender" formControlName="gender">
+                                <ion-select-option value="female">Female</ion-select-option>
+                                <ion-select-option value="male">Male</ion-select-option>
+                                <ion-select-option value="unknown">Unknown</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-buttons slot="secondary">
+                            <ion-button (click)="onEdit('gender')">
+                                <ion-icon slot="icon-only" color="{{!f.gender.disabled ? 'danger':'secondary'}}"
+                                    name="{{!f.gender.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
+                            </ion-button>
+                            <ion-button (click)="onSubmit('gender')" *ngIf="!f.gender.disabled">
+                                <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-col>
+                <!-- #Date of Birth-->
+                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="form-label">Date of Birth</ion-label>
+                    <ion-toolbar>
+                        <ion-item lines="{{f.dob.disabled ? 'none' : 'full'}}">
+                            <ion-input type="date" formControlName="dob"></ion-input>
+                        </ion-item>
+                        <ion-buttons slot="secondary">
+                            <ion-button (click)="onEdit('dob')">
+                                <ion-icon slot="icon-only" color="{{!f.dob.disabled ? 'danger':'secondary'}}"
+                                    name="{{!f.dob.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
+                            </ion-button>
+                            <ion-button (click)="onSubmit('dob')" *ngIf="!f.dob.disabled">
+                                <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-col>
+                <!-- #Phone-->
+                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="form-label">Phone</ion-label>
+                    <ion-toolbar>
+                        <ion-item lines="{{f.mobile.disabled ? 'none' : 'full'}}">
+                            <ion-input type="text" formControlName="mobile"></ion-input>
+                        </ion-item>
+                        <ion-buttons slot="secondary">
+                            <ion-button (click)="onEdit('mobile')">
+                                <ion-icon slot="icon-only" color="{{!f.mobile.disabled ? 'danger':'secondary'}}"
+                                    name="{{!f.mobile.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
+                            </ion-button>
+                            <ion-button (click)="onSubmit('mobile')" *ngIf="!f.mobile.disabled">
+                                <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-col>
+                <!-- #Nationality-->
+                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="form-label">Nationality</ion-label>
+                    <ion-toolbar>
+                        <ion-item lines="{{f.nationality.disabled ? 'none' : 'full'}}">
+                            <ion-input type="text" formControlName="nationality"></ion-input>
+                        </ion-item>
+                        <ion-buttons slot="secondary">
+                            <ion-button (click)="onEdit('nationality')">
+                                <ion-icon slot="icon-only" color="{{!f.nationality.disabled ? 'danger':'secondary'}}"
+                                    name="{{!f.nationality.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
+                            </ion-button>
+                            <ion-button (click)="onSubmit('nationality')" *ngIf="!f.nationality.disabled">
+                                <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+
+</form>

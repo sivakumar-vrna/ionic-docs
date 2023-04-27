@@ -1,0 +1,8 @@
+<div id="carouselSwiper">
+  <swiper #carousel [config]="continuewatching ? continueWatchOption : carouselOptions">
+    <ng-template swiperSlide *ngFor="let carousel of carouselData; trackBy:trackItems">
+      <app-poster-card [cardData]="carousel" *ngIf="!continuewatching"></app-poster-card>
+      <app-continue-card [cardData]="carousel" *ngIf="continuewatching"></app-continue-card>
+    </ng-template>
+  </swiper>
+</div>

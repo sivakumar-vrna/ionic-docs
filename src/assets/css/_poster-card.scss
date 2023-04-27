@@ -1,0 +1,59 @@
+#carouselSwiper .swiper-slide,
+.view-category-card {
+    cursor: pointer;
+}
+
+.poster-card-main {
+    position: relative;
+
+    .pc-img {
+        img {
+            border-radius: 15px !important;
+            box-shadow   : 0 0.025rem 0.2rem black;
+        }
+    }
+
+    .pc-overlay {
+        z-index      : -1;
+        opacity      : 0;
+        position     : absolute;
+        width        : 100%;
+        height       : 100%;
+        top          : 0;
+        bottom       : 0;
+        left         : 0;
+        right        : 0;
+        border-radius: 15px;
+        background   : linear-gradient(360deg, rgb(0 0 0) 5%, rgb(1 1 1 / 50%) 50%, rgb(10 10 10 / 75%) 90%);
+    }
+
+    .pc-footer {
+        z-index : -1;
+        opacity : 0;
+        position: absolute;
+        width   : 100%;
+        bottom  : 10px;
+        left    : 10px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+
+    #carouselSwiper .swiper-slide,
+    .view-category-card {
+
+        &:hover {
+            .poster-card-main {
+                .pc-overlay {
+                    z-index: 1;
+                    opacity: 1;
+                }
+
+                .pc-footer {
+                    z-index: 2;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

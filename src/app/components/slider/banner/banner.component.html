@@ -1,0 +1,23 @@
+<div id="banner-main" *ngIf="bannerData?.length > 0">
+  <swiper #bannerSwiper [config]="config">
+    <ng-template swiperSlide *ngFor="let banner of bannerData; index as i">
+      <div class="banner-img" (click)="onBannerClick(banner)">
+        <img [src]="banner.moviebannerurl" />
+      </div>
+    </ng-template>
+  </swiper>
+</div>
+
+<!-- <ion-col size=12>
+  <ion-text class="home-section-title" color="dark">
+    <div class="d-flex">
+      <h5 class="m-1">Favourite Movies</h5>
+    </div>
+  </ion-text>
+</ion-col> -->
+
+<div style="display:inline-flex;text-align: center;">
+  <div class="container generes" *ngFor="let item of generes" (click)="openIonModal(item)">
+    <span>{{item.genreDesc}}</span>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+{
+	"appId": "com.vrna.customer",
+	"appName": "VRNA",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"clientId": "706306776113-i5i82n0gt2os9ijb83aka4sbfmm2b7re.apps.googleusercontent.com",
+	"server": {
+		"allowNavigation": [
+			"https://dev.vrnaplex.com*",
+			"http://ec2-3-21-205-116.us-east-2.compute.amazonaws.com*",
+			"https://accounts.google.com*"
+		]
+	},
+	"plugins": {
+		"LocalNotifications": {
+			"smallIcon": "ic_launcher",
+			"iconColor": "#070a0d",
+			"sound": "beep.wav"
+		},
+		"GoogleAuth": {
+			"scopes": ["profile", "email"],
+			"serverClientId": "706306776113-i5i82n0gt2os9ijb83aka4sbfmm2b7re.apps.googleusercontent.com",
+			"forceCodeForRefreshToken": true
+		  }
+	}
+}

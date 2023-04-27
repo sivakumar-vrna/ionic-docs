@@ -1,0 +1,28 @@
+.side-menu-header {
+    .menu-profile-panel {
+        border-radius: 20px;
+        border       : 1px solid #bababa;
+    }
+}
+
+.side-menu-list {
+    height: 90%;
+
+    ion-item {
+        &.side-menu-active {
+
+            background-color: var(--ion-color-primary);
+            color           : var(--ion-color-primary-contrast);
+            border-radius   : 20px;
+
+            ion-icon {
+                color: var(--ion-color-primary-contrast);
+            }
+
+        }
+    }
+
+    .side-menu-logout {
+        width   : 100%;
+    }
+}

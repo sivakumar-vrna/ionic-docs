@@ -1,0 +1,11 @@
+.cast-image {
+    cursor             : pointer;
+    margin : 1px auto;
+    height : 235px;
+    background-repeat  : no-repeat;
+    background-size    : cover;
+    background-position: center;
+    border-radius : 15px !important;
+    box-shadow         : 0 0.025rem 0.2rem black;
+    background-image : url('/assets/images/movie-posters-placeholder.jpg');
+}

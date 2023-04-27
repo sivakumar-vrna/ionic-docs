@@ -1,0 +1,35 @@
+#container {
+    display: flex;
+    /* establish flex container */
+    flex-direction: row;
+    /* make main axis vertical */
+    justify-content: center;
+    /* center items vertically, in this case */
+    align-items: center;
+    /* center items horizontally, in this case */
+
+}
+
+section {
+    height: 300px;
+    background-color: black;
+}
+
+.wrapper {
+    height: 300px;
+}
+
+.box {
+    width: 140px;
+    margin: 5px;
+    text-align: center;
+    color: white;
+    /* will center text in <p>, which is not a flex item */
+}
+
+.box-sitemap {
+    margin: 5px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}

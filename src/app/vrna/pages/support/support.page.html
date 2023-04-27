@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Support</ion-title>
+    <ion-buttons class="home-menu-btn" slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form class="support-form" [formGroup]="supportForm" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row *ngIf="!mailResponse">
+        <ion-col size="12">
+          <ion-label>Comment</ion-label>
+          <ion-item>
+            <ion-textarea #support id="support" formControlName="content" rows="10" minlength="25" maxlength="512" autoGrow="true"
+              autofocus="true" required="true">
+            </ion-textarea>
+          </ion-item>
+          <ion-text color="danger" *ngIf="isSubmitted && (f.content.dirty || f.content.touched ||
+          f.content.invalid)" class="help-block">
+            <small class="error-msg" *ngIf="f.content.invalid">{{getContentErrorMsg()}}</small>
+          </ion-text>
+        </ion-col>
+        <ion-col size="12" class="d-flex">
+          <ion-button class="w-100 me-1" color="primary" fill="outline" type="button" expand="block" (click)="onClear()"
+            [disabled]="isLoading"> Clear
+          </ion-button>
+          <ion-button class="w-100 ms-1" color="primary" fill="solid" type="submit" expand="block"
+            [disabled]="isLoading"> Submit
+            <ion-spinner name="bubbles" *ngIf="isLoading"></ion-spinner>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="mailResponse">
+        <ion-col size="12">
+          <ion-item color="success">
+            <ion-text>
+              <h2> {{mailResponse}}</h2>
+              <a class="new-support-form" (click)="onNewMsg()"> Submit another message</a>
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

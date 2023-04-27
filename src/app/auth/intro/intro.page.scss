@@ -1,0 +1,38 @@
+ion-content#introPage {
+    --background: var(--ion-color-primary-tint);
+
+    .swiper {
+        background-image   : url(/assets/images/intro-bg-1.png);
+        background-repeat  : no-repeat;
+        background-size    : cover;
+        background-position: 100% 100%;
+        height             : 100%;
+
+        .swiper-slide {
+            .intro-slide-img {
+                max-width     : 75%;
+                max-height    : 50%;
+                margin        : auto;
+                pointer-events: none;
+            }
+
+            b {
+                font-weight: 500;
+            }
+
+            p {
+                padding    : 0 40px;
+                font-size  : 14px;
+                line-height: 1.5;
+                color      : var(--ion-color-step-600, #2d2e2f);
+            }
+
+            p.terms {
+                color    : #838383;
+                font-size: 10px;
+            }
+
+        }
+    }
+
+}

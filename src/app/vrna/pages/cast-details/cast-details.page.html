@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-button fill="clear" class="back-btn" slot="start" (click)="dismiss()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>{{cast.castname}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-card class="w-100">
+        <div class="cast-img" [style.background-image]="'url(' + cast.imageUrl + ')'"></div>
+        <ion-card-header>
+          <ion-card-subtitle>{{cast.yearsActive}}</ion-card-subtitle>
+          <ion-card-title>{{cast.castname}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{cast.description}}
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+    <ion-row *ngIf="castMoviesData">
+      <ion-col size="12">
+        <ion-text>
+          <h5>Related Movies</h5>
+        </ion-text>
+      </ion-col>
+      <ion-col size="12">
+        <app-carousel [carouselData]="castMoviesData" [carouselOptions]="suggestionOptions"></app-carousel>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

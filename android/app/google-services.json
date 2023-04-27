@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "706306776113",
+    "project_id": "vrna-customer-app",
+    "storage_bucket": "vrna-customer-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706306776113:android:fea1ae285edd575e144910",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706306776113-i5i82n0gt2os9ijb83aka4sbfmm2b7re.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFKUIO3536isqh5ojJaZVk7kYjht5Abho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706306776113-i5i82n0gt2os9ijb83aka4sbfmm2b7re.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

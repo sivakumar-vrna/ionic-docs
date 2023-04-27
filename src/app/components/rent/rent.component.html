@@ -1,0 +1,76 @@
+<ion-content class="rent-content-main">
+    <ion-list class="rent-cards-list">
+        <ion-list-header>
+            <ion-label color="dark">
+                <h4>Your card details:</h4>
+            </ion-label>
+            <ion-item lines="none" *ngIf="!isPromoCodeValid">
+                <ion-checkbox class="me-1" color="primary" [(ngModel)]="isPromoCode"></ion-checkbox>
+                <ion-label>Have Promo Code?</ion-label>
+            </ion-item>
+        </ion-list-header>
+
+        <ion-radio-group [value]="selectedCard" (ionChange)="onCardSelection($event)" *ngIf="contentPrice !== 0">
+            <ion-item lines="none" *ngFor="let card of cardData">
+                <ion-radio color="dark" slot="start" [value]="card" [disabled]="isLoading"></ion-radio>
+                <ion-label color="dark">**** **** ****
+                    {{card.cardNo}}
+                </ion-label>
+                <ion-icon name="card-outline" slot="end"></ion-icon>
+            </ion-item>
+            <ion-item lines="none" class="add-card-design">
+                <ion-button class="m-auto" fill="clear" color="dark" size="small" (click)="onAddNewCard()"
+                    [disabled]="isLoading">
+                    <ion-icon name="add-circle"></ion-icon> Add New Card
+                </ion-button>
+            </ion-item>
+        </ion-radio-group>
+    </ion-list>
+</ion-content>
+<ion-footer class="ion-no-border rent-footer-main">
+    <ion-row class="m-2">
+        <ion-col size=12 class="ion-text-end" *ngIf="isPromoCode">
+            <ion-row class="p-1">
+                <ion-col size=12 class="d-flex">
+                    <div class="ms-auto">
+                        <ion-item lines="inset" class="ms-auto">
+                            <ion-label position="stacked">Promo Code: </ion-label>
+                            <ion-input placeholder="CODE" [formControl]="promoCode"></ion-input>
+                        </ion-item>
+                    </div>
+                    <ion-button expand="block" (click)="applyCoupon()" *ngIf="contentPrice !== 0">
+                        Apply
+                    </ion-button>
+                    <ion-button expand="block" (click)="clearCoupon()" *ngIf="contentPrice === 0">
+                        Remove
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+        <ion-col size=12>
+            <ion-item lines="none">
+                <img class="movie-banner-img" [attr.data-src]="contentData.moviebannerurl" height="32" loading="lazy" />
+                <ion-label class="ion-text-end" color="dark">
+                    <h3>{{contentData.moviename}} (
+                        {{contentData.movieyear}})
+                    </h3>
+                    <h3>Total:
+                        {{contentPrice | currency:currency}}
+                    </h3>
+                </ion-label>
+            </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-button fill="solid" expand="block" fill="outline" color="dark" (click)="dismiss(false)"
+                [disabled]="isLoading">
+                Cancel
+            </ion-button>
+        </ion-col>
+        <ion-col>
+            <ion-button fill="solid" expand="block" fill="solid" color="dark" (click)="onGetRental()"
+                [disabled]="isLoading || (!selectedCard && contentPrice !== 0)">
+                Checkout <ion-spinner name="bubbles" *ngIf="isLoading"></ion-spinner>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-footer>

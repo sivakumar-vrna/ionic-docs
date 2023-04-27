@@ -1,0 +1,9 @@
+/* Video.js */
+@import '~video.js/dist/video-js.css';
+
+::ng-deep{
+    .disclaimer{
+      display: none !important;
+    }
+  }
+  

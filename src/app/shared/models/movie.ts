@@ -1,0 +1,31 @@
+export interface Movie {
+    movieId: number;
+    moviename: string;
+    country?: string;
+    year?: string;
+    rating?: string;
+    certificate?: string;
+    description?: string;
+    posterurl?: string;
+    language?: string;
+    trailerurl?: string;
+    filepath?: string;
+    movielength?: string;
+    moviebannerurl?: string;
+    movieyear?: string;
+    maturityrating?: string;
+    pauseTime?: number;
+    continuewatching?: boolean;
+    percentWatched?: any;
+    playTime?: any;
+    date?: any;
+    subtitles?: string[];
+    audiolanguages?: string[];
+    director?: string[];
+    musicdirector?: string[];
+    releasedby?: string[];
+    cast?: string[];
+    genre?: string[];
+    producer?: string[];
+    isRented?: boolean;
+}

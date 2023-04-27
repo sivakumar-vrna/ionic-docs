@@ -1,0 +1,30 @@
+<ion-header class="home-header ion-no-border">
+  <app-topbar></app-topbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list class="mx-auto transactions-main">
+    <ion-list-header>
+      Transactions
+    </ion-list-header>
+
+    <ion-item *ngFor="let transaction of transactionsDataSource">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="transaction.posterImage"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{transaction.movieName}}</h2>
+        <p>Payment Method: {{transaction.paidMethod}}</p>
+        <p>Rent Status: {{transaction.rentStatus}}</p>
+      </ion-label>
+      <ion-label slot="end">
+        <h6>{{transaction.paidAmount | currency}}</h6>
+        <p>Date: {{transaction.rentedDate | date}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

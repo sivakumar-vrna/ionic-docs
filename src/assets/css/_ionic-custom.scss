@@ -1,0 +1,37 @@
+ion-item.form-control {
+    max-width       : 575px;
+    --background    : var(--ion-color-dark-contrast);
+    border-radius   : 15px;
+    margin-top      : 5px;
+    // border       : 1px solid var(--ion-color-light-tint );
+    // box-shadow   : 1px 1px 5px 0.5px var(--ion-color-medium );
+}
+
+ion-lable.form-label {
+    font-size : 12px;
+    margin-top: 5px;
+}
+
+ion-button {
+    --box-shadow   : none;
+    --border-radius: 15px;
+    height         : 48px;
+    text-transform : uppercase;
+    font-family    : 'Montserrat-bold';
+}
+
+.searchbar-input.sc-ion-searchbar-md {
+    border-radius: 15px;
+    background   : var(--ion-color-step-50);
+}
+
+.date-picker {
+    max-width    : 575px;
+    --background : var(--ion-color-dark-contrast);
+    border-radius: 15px;
+    margin-top   : 5px;
+}
+
+.menu-content-open {
+    pointer-events: auto;
+}

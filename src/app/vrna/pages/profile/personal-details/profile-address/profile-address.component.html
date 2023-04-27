@@ -1,0 +1,77 @@
+<div class="profile-form mx-auto">
+    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+        <div class="d-flex title-bar">
+            <div class="p-1 ms-auto my-auto">
+                <ion-button color="secondary" type="button" (click)="isEditable()" *ngIf="!editable">
+                    Edit
+                </ion-button>
+            </div>
+        </div>
+        <div class="p-1">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                    <!-- #Address Line 1 -->
+                    <ion-label>Address Line 1</ion-label>
+                    <ion-item>
+                        <ion-input type="text" maxlength="50" formControlName="address1"></ion-input>
+                    </ion-item>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                    <!-- #Address Line 2 -->
+                    <ion-label>Address Line 2</ion-label>
+                    <ion-item>
+                        <ion-input type="text" maxlength="50" formControlName="address2"></ion-input>
+                    </ion-item>
+                </div>
+            </div>
+        </div>
+        <div class="p-1">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                    <!-- #Area -->
+                    <ion-label>Area</ion-label>
+                    <ion-item>
+                        <ion-input type="text" maxlength="50" formControlName="area"></ion-input>
+                    </ion-item>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                    <!-- #State -->
+                    <ion-label>State</ion-label>
+                    <ion-item>
+                        <ion-input type="text" maxlength="50" formControlName="state"></ion-input>
+                    </ion-item>
+                </div>
+            </div>
+        </div>
+        <div class="p-1">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                    <!-- #country -->
+                    <ion-label>country</ion-label>
+                    <ion-item>
+                        <ion-input type="text" maxlength="50" formControlName="country"></ion-input>
+                    </ion-item>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                    <!-- #zipcode -->
+                    <ion-label>Postal Code</ion-label>
+                    <ion-item>
+                        <ion-input type="text" maxlength="6" formControlName="zipcode" placeholder="000000"></ion-input>
+                        <ion-text color="danger" *ngIf="isSubmitted && (f.zipcode.dirty || f.zipcode.touched ||
+        f.zipcode.invalid)" class="help-block">
+                            <small class="error-msg" *ngIf="f.zipcode.invalid">Pincode is invalid</small>
+                        </ion-text>
+                    </ion-item>
+                </div>
+            </div>
+        </div>
+        <div class="p-1 text-right" *ngIf="editable">
+            <ion-button color="danger" class="me-2" type="button" (click)="isEditable()">
+                Cancel
+            </ion-button>
+            <ion-button color="primary" type="submit">
+                Save
+            </ion-button>
+        </div>
+    </form>
+</div>

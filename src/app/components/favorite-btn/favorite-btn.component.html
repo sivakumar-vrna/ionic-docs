@@ -1,0 +1,4 @@
+<ion-button class="favorites-btn" [color]="favIcon === 'heart' ? 'danger' : 'primary'" fill="clear" (click)="onFavorite()" [disabled]="loading">
+  <ion-icon [name]="favIcon" *ngIf="!loading"></ion-icon>
+  <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
+</ion-button>

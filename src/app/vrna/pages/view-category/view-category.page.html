@@ -1,0 +1,21 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="text-capitalize">{{category}}</ion-title>
+    <ion-buttons class="home-menu-btn" slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="view-category-card" size='6' size-sm='4' size-md='3' size-lg='3' size-xl='2' *ngFor="let content of contentData">
+        <app-poster-card [cardData]="content"></app-poster-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

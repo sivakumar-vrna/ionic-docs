@@ -1,0 +1,91 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Search
+    </ion-title>
+    <ion-buttons class="home-menu-btn" slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="search-input">
+    <ion-row>
+      <ion-col size="12">
+        <ion-searchbar class="search-input" #search autocomplete="true" inputmode="search" animated="true"
+          debounce="1000" (ionChange)="fromSearchBar($event); getFilteredItems($event)">
+        </ion-searchbar>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-row>
+
+          <ion-col size="4">
+            <small>Genre:</small>
+            <ion-item>
+              <ion-select placeholder="All" [(ngModel)]="genre" (ionChange)="getFilteredItems( 'genre')">
+                <ion-select-option [value]="genre.genreId" *ngFor="let genre of genres">{{genre.genreDesc}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <small>Rating</small>
+            <ion-item>
+              <ion-select placeholder="All" [(ngModel)]="rating" (ionChange)="getFilteredItems('rating')">
+                <ion-select-option value="0">All</ion-select-option>
+                <ion-select-option value="1">1</ion-select-option>
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
+                <ion-select-option value="4">4</ion-select-option>
+                <ion-select-option value="5">5</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <small>Time Range</small>
+            <ion-item>
+              <ion-select placeholder="All" [(ngModel)]="timeRange" (ionChange)="getFilteredItems('timeRange')">
+                <ion-select-option value="0">current Year</ion-select-option>
+                <ion-select-option value="1">1 to 4 Years Old</ion-select-option>
+                <ion-select-option value="2">5 to 10 years</ion-select-option>
+                <ion-select-option value="3">10 to 15 Years</ion-select-option>
+                <ion-select-option value="4">Before 15 Years</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="search-grid">
+    <ion-row>
+      <ion-col size="12" *ngIf="searchSuggest">
+        <ion-text>
+          Explore search related to :
+          <span class="search-suggestions" *ngFor="let result of searchSuggest" (click)="onSearch(result)">
+            {{result}}
+          </span>
+        </ion-text>
+      </ion-col>
+      <ion-col size="12" *ngIf="searchKey">
+        <ion-text>
+          <h6>Result for <b>{{searchKey | uppercase}}</b> : <ion-label color="secondary">{{searchResult?.length}}
+              results
+            </ion-label>
+          </h6>
+        </ion-text>
+      </ion-col>
+      <ion-col size="6" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let result of searchResult">
+        <app-poster-card [cardData]="result"></app-poster-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

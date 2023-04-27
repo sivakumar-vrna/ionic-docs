@@ -1,0 +1,16 @@
+<div class="ion-no-padding ion-no-margin poster-card-main" lines="none" (click)="onCardClick()">
+    <div class="pc-img" lazy-load-images>
+        <img [attr.data-src]="cardData.posterurl" loading="lazy" />
+    </div>
+    <!-- #background Overlay -->
+    <div class="pc-overlay"></div>
+
+    <!-- #Footer -->
+    <ion-text class="pc-footer" color="light">
+        <h6 class="ion-no-margin fs-12">{{ cardData.moviename }}</h6>
+    </ion-text>
+
+    <ion-label class="rented-ribbon" *ngIf="cardData.isRented">
+        <span>Rented</span>
+    </ion-label>
+</div>

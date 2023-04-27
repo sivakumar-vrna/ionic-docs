@@ -1,0 +1,119 @@
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+// #Swiper.js
+@import '~swiper/swiper-bundle.min.css';
+
+@import './font';
+@import './utilities';
+@import './reponsive';
+@import './ionic-custom';
+@import './forms';
+
+// #Carousel
+@import './poster-card';
+@import './cast';
+
+// #Player
+@import './player';
+
+@import './footer';
+
+// #Disclaimer
+@import './disclaimer';
+
+body {
+    font-family: 'Lato';
+}
+
+ion-modal.movie-details-modal {
+    --min-height: 95vh;
+}
+
+.common-genre {
+    ul {
+        font-size  : 12px;
+        font-family: 'Lato-light';
+        list-style : none;
+        margin     : 0px 0 0px 0;
+        padding    : 0px 0 10px 0;
+        width      : 100%;
+        text-align : center;
+        height     : 100%;
+
+        li {
+            cursor        : pointer;
+            position      : relative;
+            float         : left;
+            margin-right  : 5px;
+            padding       : 0;
+            text-transform: capitalize;
+
+            &:not(:empty):not(:last-child):after {
+                content: " | ";
+            }
+        }
+    }
+}
+
+// Social Login Button
+.social-media-btn {
+
+    ion-img {
+        height  : 20px;
+        position: absolute;
+        left    : 0px;
+    }
+
+    &.google-login {
+        background-color: #fff9e7;
+        border-radius   : 15px;
+        border          : 1px solid #fff6d3;
+        color           : #f41d2a;
+    }
+
+    &.fb-login {
+        background-color: #d6e0fb;
+        border-radius   : 15px;
+        border          : 1px solid #eaf0ff;
+        color           : #0053bf;
+    }
+}
+
+:host(.menu-type-overlay) .menu-inner {
+    box-shadow: none !important;
+}
+
+.menu-inner {
+    box-shadow: none !important;
+}
+
+ion-modal.add-new-card-modal {
+    --max-height  : 275px;
+    align-items   : flex-end;
+    padding-bottom: 10px;
+    border-radius : 30px 30px;
+}
+
+ion-modal.rent-modal {
+    --max-height : 475px;
+    align-items  : flex-end;
+    border-radius: 30px 30px 0 0;
+}
+
+.comma:not(:empty):not(:last-child):after {
+    content: ", ";
+}

@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>{{model_title}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-row>
+
+        <ion-col size="6" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let result of searchResult">
+            <app-poster-card [cardData]="result"></app-poster-card>
+        </ion-col>
+
+
+    </ion-row>
+    <ion-row>
+        <span style="margin-left:20vw">
+            <h3 *ngIf="searchResult.length<=0">No Movies Found</h3>
+        </span>
+    </ion-row>
+</ion-content>

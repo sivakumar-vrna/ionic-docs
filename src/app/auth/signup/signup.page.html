@@ -1,0 +1,71 @@
+<form class="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <ion-row class="">
+
+    <!-- Email -->
+    <ion-col class="ion-padding-vertical" size="12">
+      <label class="form-label">Email</label>
+      <ion-item class="form-control" lines="none">
+        <ion-icon class="me-2" name="mail-outline" slot="start"></ion-icon>
+        <ion-input autofocus="true" inputmode="email" type="email" formControlName="email" required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isSubmitted && (f.email.dirty || f.email.touched || f.email.invalid)"
+        class="help-block">
+        <small class="error-msg" *ngIf="f.email.invalid">{{getEmailErrorMsg()}}</small>
+      </ion-text>
+    </ion-col>
+
+    <!-- Password -->
+    <ion-col class="ion-padding-bottom signup-password position-relative" size="12">
+      <label class="form-label">Password
+      </label>
+      <ion-item class="form-control" lines="none">
+        <ion-icon class="me-2" name="lock-open-outline" slot="start"></ion-icon>
+        <ion-input [type]="hide ? 'password' : 'text'" formControlName="password" maxlength="25"
+          (ionFocus)="passwordFocused= true" (ionBlur)="passwordFocused= false">
+        </ion-input>
+        <ion-icon [name]="hide ? 'eye-outline' : 'eye-off-outline'" slot="end" (click)="hide= !hide">
+        </ion-icon>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isSubmitted || (f.password.dirty || f.password.touched)" class="help-block w-100">
+        <small class="error-msg" *ngIf="f.password.invalid">{{getPwdErrorMsg()}}</small>
+      </ion-text>
+      <div class="pwd-strength shadow" *ngIf="f.password.errors?.pattern && passwordFocused">
+        <app-password [hasNumber]="hasNumber" [hasUpper]="hasUpper" [hasLower]="hasLower"
+          [hasSpecialCharacter]="hasSpecialCharacter" [hasMinCharacter]="!f.password.errors?.minlength">
+        </app-password>
+      </div>
+    </ion-col>
+
+    <!-- Re-Enter Password -->
+    <ion-col class="ion-padding-bottom confirm-password" size="12">
+      <label class="form-label">Retype Password</label>
+      <ion-item class="form-control" lines="none">
+        <ion-icon class="me-2" name="lock-open-outline" slot="start"></ion-icon>
+        <ion-input [type]="hideRetype ? 'password' : 'text'" formControlName="confirmPassword" maxlength="25" required>
+        </ion-input>
+        <ion-icon [name]="hideRetype ? 'eye-outline' :
+        'eye-off-outline'" slot="end" (click)="hideRetype=
+        !hideRetype"></ion-icon>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isSubmitted || (f.confirmPassword.dirty ||
+      f.confirmPassword.touched)" class="help-block">
+        <small class="error-msg" *ngIf="f.confirmPassword.invalid">{{getConfirmPwdErrorMsg()}}</small>
+      </ion-text>
+    </ion-col>
+
+    <!-- Submit Button -->
+    <ion-col class="ion-padding-top" size="12">
+      <ion-button color="primary mx-auto" expand="block" type="submit" [disabled]="isLoading">Sign Up
+      </ion-button>
+    </ion-col>
+
+    <!-- Signup -->
+    <ion-col class="signup-link ion-no-padding ion-no-margin" size="12">
+      <p class="fs-12 pointer">
+        Have account already? <ion-text color="secondary" [routerLink]="['/auth/login']"> Sign In to
+          your account</ion-text>
+      </p>
+    </ion-col>
+  </ion-row>
+</form>

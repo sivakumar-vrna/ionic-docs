@@ -1,0 +1,154 @@
+<ion-header class="home-header ion-no-border">
+  <app-topbar></app-topbar>
+</ion-header>
+
+<ion-content class="ion-no-padding" id="main">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row>
+    <ion-col class="ion-no-padding">
+      <app-banner [bannerData]="bannerContents"></app-banner>
+    </ion-col>
+  </ion-row>
+
+  <!---------------------------------- # Continue Watch Sections --------------------------------------->
+
+  <div class="home-content" *ngIf="favouritesDataSource?.length > 0">
+    <ion-row class="home-section ion-margin-top p-1" *ngIf="continueWatchDataSource?.length > 0">
+
+      <!-- title -->
+      <ion-col size=12>
+        <ion-text class="home-section-title" color="dark">
+          <div class="d-flex">
+            <h5 class="m-1">Continue Watching</h5>
+          </div>
+        </ion-text>
+      </ion-col>
+
+      <!-- carousal -->
+      <ion-col size=12>
+        <app-carousel [domainUrl]="domainUrl" [carouselData]="continueWatchDataSource" [continuewatching]=true>
+        </app-carousel>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!---------------------------------- # Favourites Watch Sections --------------------------------------->
+
+  <div class="home-content" *ngIf="favouritesDataSource?.length > 0">
+    <ion-row class="home-section ion-margin-top p-1">
+
+      <!-- title -->
+      <ion-col size=12>
+        <ion-text class="home-section-title" color="dark">
+          <div class="d-flex">
+            <h5 class="m-1">Favourite Movies</h5>
+          </div>
+        </ion-text>
+      </ion-col>
+
+      <!-- carousal -->
+      <ion-col size=12>
+        <app-carousel [domainUrl]="domainUrl" [carouselData]="favouritesDataSource"></app-carousel>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!---------------------------------- # Rented Watch Sections --------------------------------------->
+
+  <div class="home-content" *ngIf="rentedDataSource?.length > 0">
+    <ion-row class="home-section ion-margin-top p-1">
+
+      <!-- title -->
+      <ion-col size=12>
+        <ion-text class="home-section-title" color="dark">
+          <div class="d-flex">
+            <h5 class="m-1">Rented Movies</h5>
+          </div>
+        </ion-text>
+      </ion-col>
+
+      <!-- carousal -->
+      <ion-col size=12>
+        <app-carousel [domainUrl]="domainUrl" [carouselData]="rentedDataSource"></app-carousel>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!---------------------------------- # # # # # # # # # # # # # # # # # # -------------------------------->
+
+  <div class="home-content" *ngIf="homeData">
+
+    <!---------------------------------- # Sections --------------------------------------->
+    <section *ngFor="let home of homeData;let i = index">
+
+      <ion-row class="home-section ion-margin-top p-1" *ngIf="home?.data?.length> 0">
+
+        <!-- title -->
+        <ion-col size=12>
+          <ion-text class="home-section-title" color="dark">
+            <div class="d-flex">
+              <h5 class="m-1">{{home.title}}</h5>
+            </div>
+          </ion-text>
+        </ion-col>
+
+         <!-- <div style="display:inline-flex;text-align: center;" *ngIf="i==1">
+          <div class="container gener" *ngFor="let item of generes" (click)="openIonModal(item)">
+            <span>{{item.genreDesc}}</span>
+          </div>
+        </div> -->
+        
+        <div style="display:inline-flex;text-align: center;">
+          <div class="container gener" *ngFor="let item of generes" (click)="filterByGenre(item)">
+            <span>{{item.genreDesc}}</span>
+          </div>
+        </div>
+        
+        <ion-col size="12">
+          <div [hidden]="!homeData || filteredData">
+            <app-carousel [domainUrl]="domainUrl" [carouselData]="home.data"></app-carousel>
+          </div>
+        </ion-col>
+        
+        <ion-col size="12">
+          <div [hidden]="!filteredData">
+            <app-carousel [domainUrl]="domainUrl" [carouselData]="filteredData"></app-carousel>
+          </div>
+        </ion-col>
+        </ion-row>
+        </section>
+        </div>
+        
+<!---------------------------------- # Cast Sections --------------------------------------->
+  <div class="home-content" *ngIf="featuredCast">
+    <ion-row class="home-section ion-margin-top p-1">
+
+      <!-- title -->
+      <ion-col size=12>
+        <ion-text class="home-section-title" color="dark">
+          <div class="d-flex">
+            <h5 class="m-1">Featured Cast</h5>
+          </div>
+        </ion-text>
+      </ion-col>
+
+      <!-- carousal -->
+      <ion-col size=12>
+        <app-cast-slider [domainUrl]="domainUrl" [castData]="featuredCast"></app-cast-slider>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+  <ion-row *ngIf="!homeData">
+    <ion-col *ngFor="let load of loadingData" class="p-1" size="6" size-sm="6" size-md="4" size-xl="4">
+      <ion-skeleton-text animated style="width: 100%; height: 225px;"></ion-skeleton-text>
+    </ion-col>
+  </ion-row>
+  <app-footer></app-footer>
+
+</ion-content>
+

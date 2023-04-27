@@ -1,0 +1,52 @@
+// .home-header {}
+
+.home-content {
+  padding   : 0 5%;
+  margin-top: 10px;
+
+  .home-section {
+    .home-section-title {
+      h5 {
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+
+  .home-menu-main,
+  .home-header-search {
+    display: none;
+  }
+
+  .home-menu-main {
+    padding   : 0;
+    text-align: center;
+  }
+
+  .home-content {
+    padding: 0;
+  }
+
+  .home-section-title {
+    h5 {
+      font-size: 16px;
+    }
+  }
+
+}
+.gener:hover{
+  background-color: rgb(229, 32, 88);
+}
+
+@media (min-width: 575.98px) {
+
+  .home-menu-btn {
+    display: none;
+  }
+}
+
+
+
+

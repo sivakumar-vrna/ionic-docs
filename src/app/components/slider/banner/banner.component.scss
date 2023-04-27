@@ -1,0 +1,107 @@
+#banner-main {
+
+    .swiper-slide {
+
+        .banner-img {
+            margin: 1px auto;
+
+            img {
+                border-radius: 20px;
+                box-shadow   : 0 0.225rem 0.29rem rgb(0 0 0);
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .swiper {
+
+            .swiper-button-prev,
+            .swiper-button-next,
+            .swiper-pagination {
+                display: none;
+            }
+        }
+      
+        // .generes{
+        //     position:fixed;
+        // }
+        // .swiper-slide {
+        //     // margin-bottom: 10px;
+        // }
+    }
+
+    @media only screen and (min-width: 1200px) {
+        .swiper {
+
+            .swiper-button-prev,
+            .swiper-button-next {
+
+                &:after {
+                    color: var(--ion-color-warning);
+                }
+            }
+
+            .swiper-button-prev {
+                height: 100%;
+                margin: auto 0;
+                top   : 0;
+                bottom: 0;
+                width : 7rem;
+                left  : 0;
+
+                &:hover {
+                    background: linear-gradient(270deg, rgba(2, 0, 36, 0) 20%, rgba(1, 0, 15, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%);
+                }
+            }
+
+            .swiper-button-next {
+                height: 100%;
+                margin: auto 0;
+                top   : 0;
+                bottom: 0;
+                width : 7rem;
+                right : 0;
+
+                &:hover {
+                    background: linear-gradient(90deg, rgba(2, 0, 36, 0) 20%, rgba(1, 0, 15, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%);
+                }
+            }
+        }
+    }
+    
+
+    // .swiper-slide {
+    //     //margin-bottom: 2em;
+    // }
+    
+}
+
+.container{
+    width: 159px;
+    padding: 16px;
+    background: rgb(24 37 44);
+    border-radius: 9px;
+    margin: 5px;
+    color: white;
+    cursor: pointer;
+}
+.generes{
+    left: 85px;
+    position: relative;
+}
+.generes:hover{
+    background-color: rgb(229, 32, 88);
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+      width: 100%;
+      margin: 0;
+      justify-content: center;
+      align-items: center;
+    }
+    .generes {
+      left: 0;
+      text-align: center;
+    }
+  }

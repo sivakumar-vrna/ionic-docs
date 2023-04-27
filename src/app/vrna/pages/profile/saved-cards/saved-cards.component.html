@@ -1,0 +1,12 @@
+<ion-list class="mx-auto saved-cards-main" lines="none">
+  <ion-item class="card-design" *ngFor="let card of cardData; trackBy:trackItems">
+    <ion-icon name="card" slot="start" color="light"></ion-icon>
+    <ion-label class="ion-text-end" color="dark">**** **** **** {{card.cardNo}}</ion-label>
+    <app-delete-card-btn slot="end" [cardDetail]="card" (cardDeleted)="refresh()"></app-delete-card-btn>
+  </ion-item>
+  <ion-item class="add-card-design">
+    <ion-button class="m-auto" fill="clear" size="large" (click)="onAddNewCard()">
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-list>
