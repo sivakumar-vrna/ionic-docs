@@ -28,10 +28,18 @@ export class PaymentService {
     return this.http.postCall(url, capacitorUrl, postData);
   }
 
+  // async getSavedCards(): Promise<Observable<any>> {
+  //   const userName = await this.userService.getEmail()
+  //   const baseUrl = environment.paymentUrl + 'payment';
+  //   const url = baseUrl + `/cardinfo?email=${userName}`
+  //   const capacitorUrl = environment.capaciorUrl + url;
+  //   return this.http.getCall(url, capacitorUrl);
+  // }
+
   async getSavedCards(): Promise<Observable<any>> {
-    const userName = await this.userService.getEmail()
-    const baseUrl = environment.paymentUrl + 'payment';
-    const url = baseUrl + `/cardinfo?userName=${userName}`
+    const userId = await this.userService.getUserId();
+    const baseUrl = environment.paymentUrl + 'payment';    
+    const url = baseUrl + `/cardinfo/${userId}`
     const capacitorUrl = environment.capaciorUrl + url;
     return this.http.getCall(url, capacitorUrl);
   }

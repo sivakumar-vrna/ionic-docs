@@ -1,6 +1,5 @@
-<ion-button class="social-media-btn fb-login mx-auto" fill="clear" expand="block"
-  (click)="signInWithFB()">
-  <ion-img class="ion-margin-end" slot="start" src="assets/images/facebook.png">
-  </ion-img>
-  <ion-label> Sign in Facebook </ion-label>
+<ion-button  (keydown)="keypressOnFBbtn($event)" tabindex="1" class="arrow-navigable social-media-btn fb-login mx-auto" fill="clear" expand="block"
+  (click)="signInWithFB()" aria-label="Sign in with Facebook">
+  <ion-icon class="ion-margin-end" name="logo-facebook" slot="start"></ion-icon>
+  <ion-label> {{btnLabel}} </ion-label>
 </ion-button>

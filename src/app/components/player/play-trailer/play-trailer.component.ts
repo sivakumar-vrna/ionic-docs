@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { isPlatform } from '@ionic/core';
-import { environment } from 'src/environments/environment';
 import { PlayerService } from '../service/player.service';
+import { environment } from 'src/environments/environment';
+import { ErrorService } from 'src/app/shared/services/error.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-play-trailer',
@@ -9,27 +11,45 @@ import { PlayerService } from '../service/player.service';
   styleUrls: ['./play-trailer.component.scss'],
 })
 export class PlayTrailerComponent implements OnInit {
-
+  @Input() contentData: any; 
   @Input() trailerUrl: string;
   domainUrl: string;
+  @Input() movieId:number;
+  @Input() uniquePageId:any;
+  @Input() btnDesc:any;
 
   constructor(
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private errorService: ErrorService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
-
+    console.time('Perf: CompnPlayerPlayTrailer Screen');
   }
 
-  onPlay() {
-    console.log(this.trailerUrl);
+  ngAfterViewInit() {
+    console.timeEnd('Perf: CompnPlayerPlayTrailer Screen');
+  }
+
+  async onPlay() {
+
+    let userId: any;
+    userId = await this.userService.getUserId();
+
+    //if no login session, then show an alert and return;
+    if(isNaN(userId) || userId == null){
+      this.errorService.showAlertMessage('Login Required!', 'Please login to continue.');
+      return false;
+    }
+
+
     if (isPlatform('capacitor')) {
-      this.domainUrl = environment.capaciorUrl;
+      this.domainUrl = environment.cloudflareUrl;
     } else {
-      this.domainUrl = window.location.origin;
+      this.domainUrl = (window as any).location.origin;
     }
     const url = this.domainUrl + '/' + this.trailerUrl;
-    console.log(url);
-    this.playerService.playTrailer(url)
+    this.playerService.playTrailer(url,this.contentData);
   }
 }

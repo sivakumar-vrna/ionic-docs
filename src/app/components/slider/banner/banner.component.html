@@ -1,23 +1,39 @@
-<div id="banner-main" *ngIf="bannerData?.length > 0">
-  <swiper #bannerSwiper [config]="config">
-    <ng-template swiperSlide *ngFor="let banner of bannerData; index as i">
-      <div class="banner-img" (click)="onBannerClick(banner)">
-        <img [src]="banner.moviebannerurl" />
+<div viewportNotifier (visibilityChange)="_visibilityChangeHandler($event)"
+   id="bannerMain" style="width:100%;" tabindex="0" 
+   (keydown)="handleKeyboardEvent($event)" class="arrow-navigable">
+   <div [class]="hideOrShowMuteWarning" id="divMutedWarning">Press any key to Unmute!</div>
+  <swiper  id="swiper_container_banner" #bannerSwiper [config]="config"
+   (swiper)="onSwiper($event, bannerData[$event.activeIndex])"
+   (afterInit)="onSwiperInit($event)"
+   (imagesReady) = "onSwiperImagesReady($event, bannerData[0], btnPausevideo)">
+   
+    <ng-template swiperSlide *ngFor=" let banner of bannerData; let i = index">
+      <div id="banner-slide-{{i}}" lazy-load-images class="banner-image" 
+        style="background:#000;" (click)="onPlayerClick(i)">
+        <!--<img [src]="banner.moviebannerurl" alt="Banner" loading="lazy" class="banner-img poster" 
+          id="banner-img-{{i}}" (click)="onPlayerClick(i)" />-->
+
+          <img [src]="banner.moviebannerurl" loading="lazy" class="banner-img poster" 
+          id="divImgPlayer-{{i}}" />          
+
+          <div [innerHtml]="playerHtml[i]" style="opacity:0;" class="banner-image trailer" 
+            id="divPlayer-{{i}}"></div>
+
+          <!--<img src="assets/images/border1.png" class="overlay-img" />      -->
+
+        <!--<div class="movie-details" *ngIf="banner_images_loaded">
+          <ion-button id="id_cta_btn_{{i}}" (click)="onBannerDetails(banner)" tabindex="0" 
+            class="rent-button" shape="round" color="warning">
+            <ion-icon name="play-sharp" size="large" slot="start"></ion-icon>
+            {{banner.isRented ? 'Play Movie' : 'Rent to watch'}}</ion-button>
+        </div>-->
+        <!--<div class="mute-overlay" (click)="toggleMute(i)" *ngIf="banner_images_loaded">
+          <ion-icon class="mute-icon" [name]="getMuteIcon(i)"></ion-icon>
+        </div>-->
+        <!--<button *ngIf="banner_images_loaded" id="play-{{i}}" (click)="onPlayTrailer(banner, i)" data-title="Play" class="play-button">
+          <ion-icon class="icon" name="play"></ion-icon>
+        </button>-->
       </div>
-    </ng-template>
+      </ng-template>
   </swiper>
-</div>
-
-<!-- <ion-col size=12>
-  <ion-text class="home-section-title" color="dark">
-    <div class="d-flex">
-      <h5 class="m-1">Favourite Movies</h5>
-    </div>
-  </ion-text>
-</ion-col> -->
-
-<div style="display:inline-flex;text-align: center;">
-  <div class="container generes" *ngFor="let item of generes" (click)="openIonModal(item)">
-    <span>{{item.genreDesc}}</span>
-  </div>
 </div>

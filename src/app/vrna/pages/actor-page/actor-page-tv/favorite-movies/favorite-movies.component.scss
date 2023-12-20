@@ -1,0 +1,60 @@
+//tober
+::ng-deep #favorite_movies_search .searchbar-search-icon {
+    position: absolute;
+    margin-left: 84% !important;
+    cursor: pointer; 
+    color:#54717f;
+}
+::ng-deep .searchbar .searchbar-input {
+    position: relative;
+    background-color:#16262ff0; 
+    align-items: start;
+    justify-content: start; 
+}
+
+.searchbar {
+    position: relative;
+    --placeholder-color: initial;
+    text-align: start;
+}
+.vrna-home-logo {
+    height      : 40px;
+    padding-left: 5px;
+}
+.content {
+    position:relative;
+    --ion-background-color:#0a151b;
+    top: 20px;
+    left: 15px;
+    width: 95%;
+    height: 80%;
+}
+
+.topbar{
+    position: relative;
+    --background: #0a151b; 
+    width: 97%;
+}
+.topbar-label{
+    position: relative;
+    top: 10px;
+    color:#54717f;
+    text-transform: none;
+    align-items: start; 
+    font-size: 20px;
+    left: -5px;
+}
+
+//main content
+.main{
+    position: relative;
+}
+
+
+.actors {
+    color: #ffffff;
+}
+.Favorite_count{
+    color:#e2ba1f; 
+    font-weight: 600;
+}

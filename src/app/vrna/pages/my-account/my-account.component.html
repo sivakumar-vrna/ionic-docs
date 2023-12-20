@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (keydown)="keypressOnBackbtn($event)" defaultHref="home" id="accountBkBtn_{{uniquePageId}}" tabindex="0" class="arrow-navigable"></ion-back-button>
+    </ion-buttons>
+    <ion-title id="accountPageTitle">My Account</ion-title>
+    <ion-buttons (keydown)="keypressOnMenu($event)"  class="home-menu-btn" slot="end">
+      <ion-menu-button id="btnMenuAccount_{{uniquePageId}}" tabindex="0" class="arrow-navigable mnuclass-for-dpad"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="tbl-context">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <form class="mx-auto">
+
+    <ion-grid class="responsive-table">
+      <ion-row id="grid-heading">
+        <ion-col size="3">Device</ion-col>
+        <ion-col size="2">Type</ion-col>
+        <ion-col size="2">OS</ion-col>
+        <ion-col size="2">IP</ion-col>
+        <ion-col size="2">Primary</ion-col>
+        <ion-col size="1"></ion-col>
+      </ion-row>
+          
+      <ion-row class = "table-row" *ngFor="let item of itemList | paginate : { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: count};
+          let i = index">
+          
+          <ion-col class="device" size="3"><span class="txt-design">{{ item.deviceName }}</span></ion-col>
+          <ion-col class="device" size="2"><span class="txt-design">{{ item.deviceType }}</span></ion-col>
+          <ion-col class="device" size="2"><span class="txt-design">{{ item.deviceOS }}</span></ion-col>
+          <ion-col class="device" size="2"><span class="txt-design">{{ item.ipAddress }}</span></ion-col>
+          <ion-col class="device" size="2" (keydown)="keypressOnPrimaryOpt($event, i)">
+              <ion-toggle [checked]="item.primary"
+              id="primary_opt-{{i}}"
+              tabindex="0" class="arrow-navigable focusable toggle"
+              (ionChange)="onSubmit(item.deviceId, item.userId, !item.primary, i)"></ion-toggle>
+          </ion-col>
+
+          <ion-col class="device" size="1" (keydown)="keypressOnDelBtn($event, i)">
+            <button class="btn-style" (click)="onDeleteDevice(item.deviceId, i)"      
+              id="delbtn-{{i}}"
+              tabindex="0" class="arrow-navigable">
+              <ion-icon class="icon-style" name="trash" color="danger"></ion-icon>
+            </button>
+          </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+
+</form>
+
+
+</ion-content>
+
+
+<pagination-controls 
+  class="paginator"
+  previousLabel="Prev"
+  nextLabel="Next"
+  (keydown)="keypressOnPagination($event)"
+  (pageChange)="onChange($event)">
+</pagination-controls>
+
+<pagination-template 
+  #p="paginationApi"
+  (pageChange)="onChange($event)">    
+</pagination-template>

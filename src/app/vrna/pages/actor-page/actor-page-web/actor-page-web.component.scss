@@ -1,0 +1,440 @@
+  //topbar
+  ::ng-deep ion-searchbar .searchbar-search-icon {
+      position: absolute;
+      margin-left: 80%;
+      cursor: pointer; 
+  }
+
+  ::ng-deep .searchbar .searchbar-input {
+      background-color:rgba(6, 31, 45, 0.925); 
+      align-items: start;
+      justify-content: start; 
+    }
+  ::ng-deep .searchbar .searchbar-input::placeholder {
+      color:#5d8fa8; 
+  }
+    
+  .searchbar {
+      --placeholder-color: initial;
+      text-align: start;
+      padding-left: 2px;
+  }
+  .vrna-home-logo {
+    height      : 30px;
+    padding-left: 5px;
+  }
+  .topbar{
+    --background: #000; 
+  }
+  .person-icon {
+      font-size: 20px;
+      color: yellow;
+  }
+  .person-button {
+    cursor: pointer;
+    background-color:rgba(5, 62, 95, 0.925);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .menu-btn{
+    color: #fff;
+  }
+  .back-btn{
+    color: #fff;
+  }
+  
+  //Actor img section
+  .actor-row {
+    position: relative;
+    height: 60%;
+    width: 100%;
+    // background: linear-gradient(90deg, rgba(14,177,223,1) 0%, rgba(0,0,0,1) 31%, rgba(15,10,0,1) 60%, rgba(239,165,1,1) 99%);
+    background: linear-gradient(90deg, rgba(14,177,223,1) 0%, rgba(0,0,0,1) 29%, rgba(15,10,0,1) 64%, rgba(239,165,1,1) 99%);
+
+  }
+  .container-fluid{
+    width: 100%;
+    height: 50px;
+    background-color:black;
+    z-index: 1;
+  }
+  .crop-img{
+    position: absolute;
+    width: 100%;
+    height: 110%;
+    margin-left: -150px;
+    z-index: 1;
+   }
+   .side-des{
+    position: absolute;
+    background-color: black;
+    width: 55%;
+    height: 25%;
+    bottom: 32%;
+    left: 45%;
+    align-items: center;
+    justify-content: center;
+   }
+   .side-head{
+    position:absolute;
+    width: 50%;
+    left: 15%;
+    top: 20px;
+    font-weight: lighter;
+    color: #fff;
+  }
+  .side-actor-name{
+   position: absolute;
+   width: 35%;
+   height: 35%;
+   left: 42%;
+   bottom: 65%;
+   border-radius: 150px; 
+   background-color:#000;
+   color: #fff;
+  }
+  .actor-names{
+    position: absolute;
+    left: 25%;
+    top: 80px;
+  }
+  .actor-names h1{
+    font-size: 30px;
+    font-weight: 900;
+  }
+  .actor-names h4{
+    color: #008ab3;
+    font-weight: lighter;
+  }
+  .actor-vertical-line {
+    width: 2px; 
+    height: 35px;
+    background-color:#00c6fe; 
+    margin-right: 10px;
+    position: absolute;
+    left: 1px; 
+  }
+  // first row his movies 
+  .row-one{
+    background-color: #1c303a;
+    width: 100%;
+    height: 170%;
+  }
+  .content-col{
+    position: relative;
+    top: 20px;
+    height: 130%;
+  }
+  .Releted-movies{
+    position: relative;
+    top: 30px;
+  }
+  ion-card-content.Releted-movies {
+    width: 80%;
+    height: 30%;
+    left: 80px;
+    position: relative;
+
+  }
+  .head-name{
+    position: relative;
+    color: #cfac21;
+    left: 20px;
+    font-weight: 700;
+  }
+  .head-line {
+    display: flex;
+  }
+  .button-prev,
+  .button-next {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    color: #96a3a8;
+  }
+
+  .button-prev {
+    position: absolute;
+    left: -90px;
+    font-size: 30px !important;
+  }
+
+  .button-next {
+    position: absolute;
+    left: calc(100% + 14%); 
+    font-size: 30px !important; 
+
+  }
+  .Horizontal-line {
+    width: 83%; 
+    height: 1px; 
+    background-color:#012036; 
+    position: relative;
+    top: 80px;
+    z-index: 1
+  }
+  .Horizontal-line-two{
+    width: 83%; 
+    height: 1px; 
+    background-color:#352c21; 
+    position: relative;
+    top: 85px;
+    z-index: 1
+  }
+  .Horizontal-line-bottom{
+    width: 83%; 
+    height: 1px; 
+    background-color:#012036; 
+    position: relative;
+    top:500px;
+    z-index: 1
+  }
+  .Horizontal-line-bottom-two{
+    width: 83%; 
+    height: 1px; 
+    background-color:#352c21; 
+    position: relative;
+    top: 505px;
+    z-index: 1
+  }
+  .vertical-line {
+    width: 3px; 
+    height: 30px;
+    background-color: white; 
+    margin-right: 10px;
+    position: relative;
+    left: 20px; 
+  }
+  .vertical-actor-name{
+    position: absolute;
+    margin-top: 415px;
+    rotate: -90deg;
+    margin-left: -112%;
+  }
+  .vertical-actor-name h1{
+    font-size: 163px;
+    font-weight: 900;
+    color:#e2ba1f;
+  }
+  .film-icon{
+    position: absolute;
+    bottom:-42%;
+    left: 80%;
+  }
+  .film-icon ion-icon{
+    font-size: 350px;
+    rotate: 40deg;
+    color: #13242d;
+  }
+  
+  /// second row actors bio///
+  .actor-bio{
+    position: relative;
+    background-color:#050514;
+    height: 77%;
+    top: 40px;
+  }
+  .cast-color{
+    color: #caa61e;
+    font-weight: 900;
+  }
+  .des-head{
+    color: #cba81e;
+    font-weight: 600;
+    position: relative;
+    top: -10px;
+  }
+  .description-last{
+    font-size: 16px;
+    overflow: auto;
+    height: 260px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    color: #88a0ad;
+    font-family: 'Gill Sans', sans-serif;
+    justify-content: space-between;
+    position: relative;
+    top: -15px;
+  }
+  .description-last::-webkit-scrollbar {
+    display: none;
+  }
+  .second-row{
+    background-color: #101012;
+  }
+
+  .watch-trailer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .watch-trailer ion-card-content {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .watch-trailer video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
+  .description{
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow: auto;
+    height: 284px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+    top: -5px;
+  }
+  .description::-webkit-scrollbar {
+    display: none;
+  }
+ 
+  .description-container {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Gill Sans', sans-serif;
+  }
+  
+  .description-two {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  .description-two .cast-des{
+    font-size: 16px;
+    width: 100%;
+    overflow-y: auto ;
+    height: 340px;
+    position: relative;
+    top: -15px;
+  }
+  .description-two .cast-des::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .description-two .cast-des {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .second-img ion-img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  //video-depenency
+    .play-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    width: 30%;
+    background-color: #fff;
+    color: #000;
+    height: 40px;
+  }
+  .play-button span {
+    margin-right: 10px;
+    margin-left: 2px;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #53535d;
+  }
+  .play-button ion-icon {
+    font-size: 24px;
+    transform: scale(1.8); 
+    color: black;
+  }
+  .play-button:hover{
+    background-color: #000;
+    color: #fff;
+  }
+  .play-button:hover ion-icon,
+  .play-button:hover span {
+    color: white;
+  }
+
+    .description,.description-two{
+      color: #88a0ad;
+      font-family: 'Gill Sans', sans-serif;
+
+  }
+
+ 
+  //footer
+ 
+  .two{
+    background-color: black;
+    padding-bottom: 40%;
+  }
+  .three{
+    background-image: linear-gradient(#d4af1c,#7d660c);
+    padding: 130px;
+  }
+  
+
+  #container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+
+  }
+
+  section {
+      height: 200px;
+      position: relative;
+      left: 25%;
+      margin-top: -9%;
+  }
+
+  .wrapper {
+      height: 300px;
+  }
+  .copyright-text{padding-left:10px;}
+
+  .box-sitemap {
+      margin: 5px;
+      text-align: center;
+      color: white;
+      cursor: pointer;
+  }
+  a{
+      text-decoration: none;
+      color: #ffffff63 ;
+  }
+  .poster:focus {
+      border-radius: 15px;
+      box-shadow: 0 0 6px 6px var(--ion-color-step-950);
+      transform: scale(0.90); 
+      transition: 0.3s;
+      outline: none;
+  }
+  ion-button{
+    text-transform: none !important;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+
+  }
+
+
+  
+

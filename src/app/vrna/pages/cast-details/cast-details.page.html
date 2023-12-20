@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-button fill="clear" class="back-btn" slot="start" (click)="dismiss()">
+    <ion-button tabindex="0" (keydown)="keypressOnCast($event)" fill="clear" id="backbtn_cast" class="back-btn arrow-navigable" slot="start" (click)="dismiss()">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-button>
     <ion-title>{{cast.castname}}</ion-title>
@@ -8,27 +8,41 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-card class="w-100">
-        <div class="cast-img" [style.background-image]="'url(' + cast.imageUrl + ')'"></div>
+  <ion-grid text-center>
+    <ion-row class="vertical-center">
+      <ion-img tabindex="0" (keydown)="keypressOnCastImg($event)"  id="idCastImg" class="casts-img arrow-navigable" [src]="cast.imageUrl" alt="Cast Photo"></ion-img>        
+      <ion-card class="card-design w-100">        
         <ion-card-header>
-          <ion-card-subtitle>{{cast.yearsActive}}</ion-card-subtitle>
           <ion-card-title>{{cast.castname}}</ion-card-title>
+          <ion-card-subtitle>{{cast.dob}}</ion-card-subtitle>
+          <ion-card-subtitle>{{cast.nationality}}</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content>
+        <ion-card-content id="Cast_Dec" class="arrow-navigable" tabindex="0" (keydown)="keypressOnCastDesc($event)">
           {{cast.description}}
         </ion-card-content>
       </ion-card>
     </ion-row>
+
+
+
+  <!--Actor pgae-->
+    <!-- <ion-row  class="vertical-center">
+      <ion-card class="card-design w-100">  
+        <ion-card-header>
+          <ion-card-title   (click)="onActorPage(cast)" class="actor-page">Actor Information</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-row> -->
+    
+    <!--Releted Movies-->
     <ion-row *ngIf="castMoviesData">
       <ion-col size="12">
         <ion-text>
           <h5>Related Movies</h5>
         </ion-text>
       </ion-col>
-      <ion-col size="12">
-        <app-carousel [carouselData]="castMoviesData" [carouselOptions]="suggestionOptions"></app-carousel>
+      <ion-col size='6' >
+        <app-carousel (keydown)="keypressOnRelated_cast($event)" [sectionName]="'related_cast_movies'" [carouselData]="castMoviesData" [carouselOptions]="suggestionOptions"></app-carousel>
       </ion-col>
     </ion-row>
   </ion-grid>

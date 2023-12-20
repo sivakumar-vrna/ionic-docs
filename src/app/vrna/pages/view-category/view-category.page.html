@@ -1,21 +1,24 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
-    </ion-buttons>
-    <ion-title class="text-capitalize">{{category}}</ion-title>
-    <ion-buttons class="home-menu-btn" slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+  <ion-toolbar class="movie-detail-topbar">
+    <ion-button  (keydown)="keypressOnbtn($event)" id="btnBackCategory_{{uniquePageId}}" [routerLink]="['/home']" autofocus fill="clear" slot="start" autofocus tabindex="0" >
+      <ion-icon tabindex="0" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-menu-button  (keydown)="keypressOnbtnMenu($event)" id="btnMenuCategory_{{uniquePageId}}" 
+    slot="end" tabindex="0" class="home-menu-btn arrow-navigable mnuclass-for-dpad"></ion-menu-button>
+    <ion-title class="text-capitalize">{{i18n_PageLabels [ 'catpage_'+category+'_title'] }}</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
+<ion-content>    
   <ion-grid>
     <ion-row>
-      <ion-col class="view-category-card" size='6' size-sm='4' size-md='3' size-lg='3' size-xl='2' *ngFor="let content of contentData">
-        <app-poster-card [cardData]="content"></app-poster-card>
+      <ion-spinner name="crescent" *ngIf="contentData_loading"></ion-spinner>
+      <ion-text *ngIf="contentData_empty">No records available on this category.</ion-text>
+      <ion-col class="view-category-card" size='12' size-xs='6' size-sm='4' size-md='3' size-lg='2' size-xl='2' size-xxl='2' 
+      *ngFor="let content of contentData;let i=index;"  (keydown)="keypressOnCnt($event,i,uniquePageId)">
+        <app-poster-card [movieId]="uniquePageId" [sectionName]="'Cnt_Index'" [carouselIndex]="i" [cardData]="content"></app-poster-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+
+

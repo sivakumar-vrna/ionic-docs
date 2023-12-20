@@ -1,11 +1,34 @@
+::ng-deep {
+    .movie-details-modal {
+        //--max-height: 70vh;
+        //--max-width: 60vw;
+        //--min-width : 335px;
+        --min-width : 100%;
+        --min-height : 100%;
+    }    
+}
+
 .cast-image {
     cursor             : pointer;
-    margin : 1px auto;
-    height : 235px;
+    margin : 1px auto;    
+    //height : 235px;
+    //max-width:250px;    
     background-repeat  : no-repeat;
     background-size    : cover;
     background-position: center;
-    border-radius : 15px !important;
+    border-radius : 10px !important;
     box-shadow         : 0 0.025rem 0.2rem black;
     background-image : url('/assets/images/movie-posters-placeholder.jpg');
+}
+.poster:focus {
+    border-radius: 15px;
+    box-shadow: 0 0 6px 6px var(--ion-color-step-950);
+    transform: scale(0.90); 
+    transition: 0.3s;
+    outline: none;
+}
+
+.cast-popup-modal{
+    --min-width : 100%;
+    --min-height : 100%;
 }

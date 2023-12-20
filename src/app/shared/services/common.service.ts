@@ -21,7 +21,7 @@ export class CommonService {
   }
 
   getLocation() {
-    const country = 'IN';
-    Storage.set({ key: COUNTRY_KEY, value: country });
+    //const country = null;
+    //Storage.set({ key: COUNTRY_KEY, value: country });
   }
 }

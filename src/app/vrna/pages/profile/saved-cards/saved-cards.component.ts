@@ -15,6 +15,37 @@ export class SavedCardsComponent implements OnInit {
     public addCardModal: AddCardService
   ) { }
 
+  keypressOnAddCardBtn(event: KeyboardEvent): void {    
+    if(event.key == 'ArrowRight'){
+      event.stopPropagation();
+      let elem = document.getElementById('delCard-0');
+      elem.focus();
+    }  
+  }
+  keypressOnAddBtn(event: KeyboardEvent):void {
+    if(event.key == 'ArrowRight' || event.key == 'ArrowLeft' || event.key == 'ArrowDown'){
+      event.stopPropagation();
+      event.preventDefault();
+    } 
+    if(event.key == 'ArrowUp'){
+      let elem:any;
+      elem = document.getElementById('delCard-0');
+      if(!elem){
+        elem = document.getElementById('tabCards');
+      }
+      if(elem){
+        event.stopPropagation();
+        elem.focus();
+        event.preventDefault();
+      }
+    }
+  }
+  keypressOndeletedIcon(event:KeyboardEvent):void{
+    if(event.key == 'ArrowRight' || event.key == 'ArrowLeft'){
+      event.stopPropagation();
+      event.preventDefault();
+    } 
+  }
   ngOnInit() { }
 
   async onAddNewCard() {

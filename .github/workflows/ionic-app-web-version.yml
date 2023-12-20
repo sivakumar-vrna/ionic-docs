@@ -1,0 +1,121 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: vrna-ionic-app CI
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+  
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+    
+    #- name: Install Node.js dependencies
+    #  run: |
+    #      npm i -g pnpm
+    #      pnpm i
+  #  - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+     
+    - name: npm install, build, and test example
+    #  working-directory: example
+      run: |
+          npm install --legacy-peer-deps
+          npm install -g ionic 
+    - name:  ionic build
+      run: |
+             #   npm install -g @ionic/cli
+              #  npm install --legacy-peer-deps true
+                ls -lrta && pwd
+               # npm run timestamp
+              #  ionic build --dev1 -- --base-href /
+             npm run timestamp
+             ionic build
+             
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      
+    - name: Get current time
+      uses: josStorer/get-current-time@v2
+      id: current-time
+      with:
+        format: YYYYMMDD-HH
+        utcOffset: "+08:00"
+    - name: Use current time
+      env:
+        R_TIME: "${{ steps.current-time.outputs.readableTime }}"
+        F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
+      run: echo $TIME $R_TIME $F_TIME $YEAR $DAY
+      
+    - name: Set env.BRANCH
+      run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+    - name: Build, tag, and push image to docker hub
+      env:
+        DOCKER_REGISTRY: vrnaplex
+        ECR_REPOSITORY: vrna-ionic-app-service
+        #IMAGE_TAG: vrna-ionic-app-service-${{ github.run_number }}-${{ steps.date.outputs.date }}
+        IMAGE_TAG: vrna-ionic-app-service-build-${{ github.run_number }}
+      run: |
+       
+        docker build -t vrnaplex/vrna-ionic-app-service:$IMAGE_TAG .
+        #docker build -t $DOCKER_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push  vrnaplex/vrna-ionic-app-service:$IMAGE_TAG   
+    
+    - name: Kubernetes set context
+      uses: Azure/k8s-set-context@v1
+      with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}  
+    - name: pods check
+      run: |
+            kubectl get pods -n dev1
+            
+    - name: Check out service-k8s repo
+      uses: actions/checkout@master
+      with:
+          repository: vrnaplex/service-k8s  
+          token: ${{ secrets.GIT_TOKEN }}
+          
+    - name: servicek8s folder list 
+     
+          
+      run: |
+            cd vrna-ionic-app-service
+            echo vrna-ionic-app-service-${{ github.run_number }}
+            ls
+            cat values-dev1.sh 
+            sed -i 's|imageTag=.*|imageTag=vrna-ionic-app-service-build-${{ github.run_number }}|g' values-dev1.sh && cat values-dev1.sh|grep imageTag    
+            git config --global user.email "saravanakumar.c@vrnaplex.com"
+            git config --global user.name "csaravanakumar"
+            git add *
+            git commit -m "committed"
+            cat values-dev1.sh
+            git push origin master
+            source base.sh
+            #cat vrna-metadata-service/values-dev1.sh
+            applyK dev1 vrna-ionic-app-deployment-linode.yaml
+            kubectl get pod -n dev1
+            
+    - name: Clear repository
+      run: sudo rm -fr $GITHUB_WORKSPACE && mkdir $GITHUB_WORKSPACE
+      
+    - name: Checkout repo
+      uses: actions/checkout@master
+      with:
+        #token: ${{ secrets.GIT_HUB_KEY }}
+        #repository: service-k8s/vrna-support-service
+        path: master
+

@@ -1,0 +1,13 @@
+<div id="topCastSlider" (keydown)="keypressOnTopCastSlider($event)">
+  <swiper #topCastSlider [config]="castSliderOptions">
+    <ng-template swiperSlide *ngFor="let cast of castData; let i=index">
+      <ion-row>
+      <img id="{{sectionName}}-{{i}}_{{uniquePageId}}" tabindex="0" [src]="cast.imageUrl" (click)="onCastDetail(cast)" (focus)="onCastFocus(sectionName)"
+      class="casts-image arrow-navigable poster" onerror="this.onerror=null;this.src='assets/images/placeholder.png';"/>      
+    </ion-row>
+    <ion-row>
+      <span class="cast-text">{{cast.castname}}</span>
+    </ion-row>
+    </ng-template>
+  </swiper>
+</div>

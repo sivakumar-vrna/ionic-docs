@@ -1,77 +1,97 @@
-<div class="profile-form mx-auto">
-    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
-        <div class="d-flex title-bar">
-            <div class="p-1 ms-auto my-auto">
-                <ion-button color="secondary" type="button" (click)="isEditable()" *ngIf="!editable">
-                    Edit
-                </ion-button>
-            </div>
-        </div>
-        <div class="p-1">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
-                    <!-- #Address Line 1 -->
-                    <ion-label>Address Line 1</ion-label>
-                    <ion-item>
-                        <ion-input type="text" maxlength="50" formControlName="address1"></ion-input>
-                    </ion-item>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
-                    <!-- #Address Line 2 -->
-                    <ion-label>Address Line 2</ion-label>
-                    <ion-item>
-                        <ion-input type="text" maxlength="50" formControlName="address2"></ion-input>
-                    </ion-item>
+    <div class="profile-form mx-auto">
+        <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+            <div class="d-flex title-bar">
+                <div class="p-1 ms-auto my-auto">
+                    <ion-button id="btnEditAddress" color="secondary" type="button" (keydown)="keypressOnEdit($event)" (click)="isEditable()" 
+                    *ngIf="!editable" class="arrow-navigable" tabindex="0">
+                        {{i18n_PageLabels.edit}}
+                    </ion-button>
                 </div>
             </div>
-        </div>
-        <div class="p-1">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
-                    <!-- #Area -->
-                    <ion-label>Area</ion-label>
-                    <ion-item>
-                        <ion-input type="text" maxlength="50" formControlName="area"></ion-input>
-                    </ion-item>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
-                    <!-- #State -->
-                    <ion-label>State</ion-label>
-                    <ion-item>
-                        <ion-input type="text" maxlength="50" formControlName="state"></ion-input>
-                    </ion-item>
-                </div>
-            </div>
-        </div>
-        <div class="p-1">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
-                    <!-- #country -->
-                    <ion-label>country</ion-label>
-                    <ion-item>
-                        <ion-input type="text" maxlength="50" formControlName="country"></ion-input>
-                    </ion-item>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
-                    <!-- #zipcode -->
-                    <ion-label>Postal Code</ion-label>
-                    <ion-item>
-                        <ion-input type="text" maxlength="6" formControlName="zipcode" placeholder="000000"></ion-input>
-                        <ion-text color="danger" *ngIf="isSubmitted && (f.zipcode.dirty || f.zipcode.touched ||
-        f.zipcode.invalid)" class="help-block">
-                            <small class="error-msg" *ngIf="f.zipcode.invalid">Pincode is invalid</small>
-                        </ion-text>
-                    </ion-item>
+            <div class="p-1">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                        <!-- Address Line 1 -->
+                        <ion-label>{{i18n_PageLabels.address_addressline_1}}</ion-label>
+                        <ion-item class="arrow-navigable" tabindex="0" (keydown)="keypressOnAddrLine1($event)">
+                            <ion-input #address_line_1  
+                            id="address_line_1" type="text" maxlength="50" formControlName="address1" pattern="^[a-zA-Z0-9#,-\s]*$"></ion-input>
+                            <span slot="error">Please provide a valid address</span>
+                        </ion-item>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                        <!-- Address Line 2 -->
+                        <ion-label>{{i18n_PageLabels.address_addressline_2}}</ion-label>
+                        <ion-item class="arrow-navigable" tabindex="0" (keydown)="keypressOnAddrLine2($event)">
+                            <ion-input #address_line_2 id="address_line_2" type="text" 
+                            maxlength="50" formControlName="address2"  pattern="^[a-zA-Z0-9#,-\s]*$"></ion-input>
+                            <span slot="error">Please provide a valid address</span>
+                        </ion-item>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="p-1 text-right" *ngIf="editable">
-            <ion-button color="danger" class="me-2" type="button" (click)="isEditable()">
-                Cancel
-            </ion-button>
-            <ion-button color="primary" type="submit">
-                Save
-            </ion-button>
-        </div>
-    </form>
-</div>
+            <div class="p-1">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                        <!-- Area -->
+                        <ion-label>{{i18n_PageLabels.address_area}}</ion-label>
+                        <ion-item class="arrow-navigable" tabindex="0" (keydown)="keypressOnAreaInput($event)">
+                            <ion-input type="text" #idInputArea id="id_input_area"
+                            maxlength="50" formControlName="area" pattern="^[a-zA-Z\s]*$"></ion-input>
+                            <span slot="error">Please provide a valid area</span>
+                        </ion-item>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                        <!-- State -->
+                        <ion-label>{{i18n_PageLabels.address_state}}</ion-label>
+                        <ion-item class="arrow-navigable" tabindex="0" (keydown)="keypressOnState($event)">
+                            <ion-input type="text" #id_input_state id="id_input_state"
+                            maxlength="50" formControlName="state" pattern="^[a-zA-Z]*$"></ion-input>
+                            <span slot="error">Please provide a valid State</span>
+                        </ion-item>
+                    </div>
+                </div>
+            </div>
+            <div class="p-1">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                        <!--country-->
+                        <ion-label>{{i18n_PageLabels.address_country}}</ion-label>
+                        <ion-item class="arrow-navigable" tabindex="0" (keydown)="keypressOnCountry($event)">
+                            <ion-input
+                                #id_input_country
+                                id="id_input_country"                            
+                                type="text"
+                                formControlName="country"
+                                placeholder="Search for a country"
+                                (input)="onSearchInputChange($event)"
+                                [value]="selectedCountryName"
+                                pattern="^[a-zA-Z]*$">
+                            </ion-input>
+                            <span slot="error">Please provide a valid Country</span>
+                        </ion-item>
+                        <ion-list *ngIf="showDropdown" >
+                            <ion-radio-group    formControlName="selectedCountryCode">
+                                <ion-item  (keydown)="keypressOnRadiogroup($event,country)" *ngFor="let country of filteredCountries;let i=index;">
+                                    <ion-label>{{ country.country_name }}</ion-label>
+                                    <ion-radio #id_opt_country id="opt_country_name_{{i}}" class="arrow-navigable" tabindex="0"  [value]="country.countryCode" (click)="onCountryRadioSelect(country)"></ion-radio>
+                                </ion-item>
+                            </ion-radio-group>
+                        </ion-list>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-xl-6 mb-1">
+                        <!-- Postal Code -->
+                        <ion-label>{{i18n_PageLabels.address_zip}}</ion-label>
+                        <ion-item class="arrow-navigable" tabindex="0" (keydown)="keypressOnZip($event)">
+                        <ion-input type="text" #id_input_zip id="id_input_zip" formControlName="zipcode" placeholder="000000"(input)="onZipcodeInput($event)"></ion-input>
+                        <span slot="error" >Please provide a valid Postal Code</span>
+                        </ion-item>
+                    </div>
+                </div>
+            </div>
+            <div class="p-1 text-right" (keydown)="keypressOnOption($event)" *ngIf="editable"  >
+                <ion-button id="btnCancelAddress" color="danger" class="me-2" type="button" (click)="isClosetable()" class="arrow-navigable" tabindex="0">{{i18n_PageLabels.cancel}} </ion-button>
+                <ion-button #id_savebtn id="btnSaveAddress" color="primary" type="submit" class="arrow-navigable" tabindex="0">{{i18n_PageLabels.profile_save}}</ion-button>
+            </div>
+        </form>
+    </div>

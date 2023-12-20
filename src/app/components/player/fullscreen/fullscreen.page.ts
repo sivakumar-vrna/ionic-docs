@@ -53,14 +53,18 @@ export class FullscreenPage implements OnInit {
   }
 
   async ngOnInit() {
-    console.log('in ngOnInit');
+    console.time('Perf: CompnPlayerFullscreen Screen');
+
     this.mTestApi = this.testApi ? this.testApi : false;
     const player: any = await setVideoPlayer();
-    console.log(player);
     this.videoPlayer = player.plugin;
-    console.log(this.videoPlayer);
     await this.addListenersToPlayerPlugin();
   }
+
+  ngAfterViewInit() {
+    console.timeEnd('Perf: CompnPlayerFullscreen Screen');
+  }
+
   async ionViewDidEnter() {
     this.mUrl = this.url;
     this.mSturl = this.sturl;
@@ -79,7 +83,6 @@ export class FullscreenPage implements OnInit {
         playerId: 'fullscreen',
         componentTag: 'app-fullscreen',
       });
-      console.log(`res ${JSON.stringify(res)}`);
       if (
         !res.result &&
         (this.platform === 'ios' || this.platform === 'android')
@@ -90,10 +93,8 @@ export class FullscreenPage implements OnInit {
           position: 'bottom',
         });
       }
-      console.log('res.result ', res.result);
-      if (!res.result) {
-        console.log(`res.message ${res.message}`);
-      }
+      // if (!res.result) {
+      // }
     }
   }
 
@@ -147,74 +148,72 @@ export class FullscreenPage implements OnInit {
     return;
   }
   private async playerPlay(data: any): Promise<void> {
-    console.log(`Event jeepCapVideoPlayerPlay`);
-    console.log(data);
+    // console.log(`Event jeepCapVideoPlayerPlay`);
     return;
   }
   private async playerPause(data: any): Promise<void> {
-    console.log(`Event jeepCapVideoPlayerPause ${data}`);
+    // console.log(`Event jeepCapVideoPlayerPause ${data}`);
     return;
   }
   private async playerEnd(data: any): Promise<void> {
-    console.log(`Event jeepCapVideoPlayerEnded ${data}`);
+    // console.log(`Event jeepCapVideoPlayerEnded ${data}`);
     await this.leaveModal();
     return;
   }
   private async playerExit(data: any): Promise<void> {
-    console.log(`Event jeepCapVideoPlayerExit ${data}`);
+    // console.log(`Event jeepCapVideoPlayerExit ${data}`);
     this.backToState();
     await this.leaveModal();
     return;
   }
   private async playerReady(data: any): Promise<void> {
-    console.log(`Event jeepCapVideoPlayerReady:`);
-    console.log(data);
-    console.log(`testVideoPlayerPlugin testAPI ${this.mTestApi}`);
-    console.log(`testVideoPlayerPlugin first ${this.first}`);
+    // console.log(`Event jeepCapVideoPlayerReady:`);
+    // console.log(`testVideoPlayerPlugin testAPI ${this.mTestApi}`);
+    // console.log(`testVideoPlayerPlugin first ${this.first}`);
     if (this.mTestApi && this.first) {
       // test the API
       this.first = false;
-      console.log('testVideoPlayerPlugin calling isPlaying ');
+      // console.log('testVideoPlayerPlugin calling isPlaying ');
       let isPlaying = await this.videoPlayer.isPlaying({
         playerId: 'fullscreen',
       });
-      console.log(` isPlaying ${isPlaying}`);
+      // console.log(` isPlaying ${isPlaying}`);
       this.apiTimer1 = setTimeout(async () => {
         let pause = await this.videoPlayer.pause({ playerId: 'fullscreen' });
-        console.log(`pause ${pause}`);
+        // console.log(`pause ${pause}`);
         isPlaying = await this.videoPlayer.isPlaying({
           playerId: 'fullscreen',
         });
-        console.log(`const isPlaying after pause ${isPlaying}`);
+        // console.log(`const isPlaying after pause ${isPlaying}`);
         const currentTime = await this.videoPlayer.getCurrentTime({
           playerId: 'fullscreen',
         });
-        console.log('const currentTime ', currentTime);
+        // console.log('const currentTime ', currentTime);
         let muted = await this.videoPlayer.getMuted({ playerId: 'fullscreen' });
         if (muted.value) {
-          console.log('getMuted true');
+          // console.log('getMuted true');
         } else {
-          console.log('getMuted false');
+          // console.log('getMuted false');
         }
         let setMuted = await this.videoPlayer.setMuted({
           playerId: 'fullscreen',
           muted: !muted.value,
         });
         if (setMuted.value) {
-          console.log('setMuted true');
+          // console.log('setMuted true');
         } else {
-          console.log('setMuted false');
+          // console.log('setMuted false');
         }
         muted = await this.videoPlayer.getMuted({ playerId: 'fullscreen' });
         if (muted.value) {
-          console.log('getMuted true');
+          // console.log('getMuted true');
         } else {
-          console.log('getMuted false');
+          // console.log('getMuted false');
         }
         let duration = await this.videoPlayer.getDuration({
           playerId: 'fullscreen',
         });
-        console.log(`duration ${duration}`);
+        // console.log(`duration ${duration}`);
         // valid for movies havin a duration > 25
         const seektime =
           currentTime.value + 0.5 * duration.value < duration.value - 25
@@ -224,43 +223,43 @@ export class FullscreenPage implements OnInit {
           playerId: 'fullscreen',
           seektime,
         });
-        console.log('setCurrentTime ', setCurrentTime.value);
+        // console.log('setCurrentTime ', setCurrentTime.value);
         let play = await this.videoPlayer.play({ playerId: 'fullscreen' });
-        console.log(`play ${play}`);
+        // console.log(`play ${play}`);
         this.apiTimer2 = setTimeout(async () => {
           setMuted = await this.videoPlayer.setMuted({
             playerId: 'fullscreen',
             muted: false,
           });
-          console.log('setMuted ', setMuted);
+          // console.log('setMuted ', setMuted);
           const setVolume = await this.videoPlayer.setVolume({
             playerId: 'fullscreen',
             volume: 0.5,
           });
-          console.log(`setVolume ${setVolume}`);
+          // console.log(`setVolume ${setVolume}`);
           let volume = await this.videoPlayer.getVolume({
             playerId: 'fullscreen',
           });
-          console.log(`Volume ${volume}`);
+          // console.log(`Volume ${volume}`);
           this.apiTimer3 = setTimeout(async () => {
             pause = await this.videoPlayer.pause({ playerId: 'fullscreen' });
-            console.log('const pause ', pause);
+            // console.log('const pause ', pause);
             duration = await this.videoPlayer.getDuration({
               playerId: 'fullscreen',
             });
-            console.log(`duration ${duration}`);
+            // console.log(`duration ${duration}`);
             volume = await this.videoPlayer.setVolume({
               playerId: 'fullscreen',
               volume: 1.0,
             });
-            console.log(`Volume ${volume}`);
+            // console.log(`Volume ${volume}`);
             setCurrentTime = await this.videoPlayer.setCurrentTime({
               playerId: 'fullscreen',
               seektime: duration.value - 3,
             });
-            console.log(`setCurrentTime ${setCurrentTime}`);
+            // console.log(`setCurrentTime ${setCurrentTime}`);
             play = await this.videoPlayer.play({ playerId: 'fullscreen' });
-            console.log(`play ${play}`);
+            // console.log(`play ${play}`);
           }, 10000);
         }, 8000);
       }, 7000);

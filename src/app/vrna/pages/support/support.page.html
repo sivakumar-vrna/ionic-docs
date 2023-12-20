@@ -1,11 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button id="btnbackSupport_{{uniquePageId}}" (keydown)="keypressOnbackbtn($event)" tabindex="0" class="arrow-navigable" defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>Support</ion-title>
     <ion-buttons class="home-menu-btn" slot="end">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button id="btnMenuSupport_{{uniquePageId}}" (keydown)="keypressOnMenubtn($event)" tabindex="0" class="arrow-navigable mnuclass-for-dpad"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -16,9 +16,9 @@
       <ion-row *ngIf="!mailResponse">
         <ion-col size="12">
           <ion-label>Comment</ion-label>
-          <ion-item>
-            <ion-textarea #support id="support" formControlName="content" rows="10" minlength="25" maxlength="512" autoGrow="true"
-              autofocus="true" required="true">
+          <ion-item id="Id_suport" tabindex="0" class="arrow-navigable">
+            <ion-textarea (keydown)="keypressOnNewline($event, support)" #support id="support" formControlName="content" rows="10" minlength="25" maxlength="512" autoGrow="true"
+             autofocus="true" required="true">
             </ion-textarea>
           </ion-item>
           <ion-text color="danger" *ngIf="isSubmitted && (f.content.dirty || f.content.touched ||
@@ -26,11 +26,11 @@
             <small class="error-msg" *ngIf="f.content.invalid">{{getContentErrorMsg()}}</small>
           </ion-text>
         </ion-col>
-        <ion-col size="12" class="d-flex">
-          <ion-button class="w-100 me-1" color="primary" fill="outline" type="button" expand="block" (click)="onClear()"
+        <ion-col (keydown)="keypressOnSupportBtn($event)" size="12" class="d-flex">
+          <ion-button class="w-100 me-1 arrow-navigable" tabindex="0" color="primary" fill="outline" type="button" expand="block" (click)="onClear()"
             [disabled]="isLoading"> Clear
           </ion-button>
-          <ion-button class="w-100 ms-1" color="primary" fill="solid" type="submit" expand="block"
+          <ion-button class="w-100 ms-1 arrow-navigable" tabindex="0" color="primary" fill="solid" type="submit" expand="block"
             [disabled]="isLoading"> Submit
             <ion-spinner name="bubbles" *ngIf="isLoading"></ion-spinner>
           </ion-button>
@@ -40,9 +40,9 @@
       <ion-row *ngIf="mailResponse">
         <ion-col size="12">
           <ion-item color="success">
-            <ion-text>
+            <ion-text >
               <h2> {{mailResponse}}</h2>
-              <a class="new-support-form" (click)="onNewMsg()"> Submit another message</a>
+              <a class="new-support-form arrow-navigable" id="nextmsg" tabindex="0" (click)="onNewMsg()"> Submit another message</a>
             </ion-text>
           </ion-item>
         </ion-col>

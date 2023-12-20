@@ -1,0 +1,76 @@
+<ion-content>
+  <ion-grid class="display center-content mt-5 pt-5" [fixed]="true">
+    <ion-row class="">
+      <ion-col >
+        <h1>Who's watching?</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="mt-5 ion-text-center center-content">
+      <ion-col class="mt-1">
+        <!-- <ion-button class="profiles me-2" color="dark" (click)="route_to_home()"> -->
+
+        <img (keydown)="keypressOnUserimg($event)" id="user-img"
+             tabindex="0"
+          [src]="userImage"
+          *ngIf="userImage"
+          alt="userImage"
+          class="profiles arrow-navigable"
+          (click)="def_route_to_home()"
+        />
+        
+        <!-- </ion-button> -->
+        <p class="mt-1 mx-3">{{ primary_name }}</p>
+      </ion-col>
+      <ion-col
+        (keydown)="keypressOnItem($event, i)"
+        class="mt-1"
+        *ngFor="let item of itemList; let i = index"
+      >
+        <ion-icon
+          (keydown)="keypressOndeletedIcon($event, i)"
+          id="itemlist-{{ i }}"
+          tabindex="0"
+          name="trash-outline"
+          *ngIf="showDeleteIcon"
+          class="delete-profile arrow-navigable mt-2"
+          (click)="deleteProfile(item.profileId)"
+          >delete</ion-icon
+        >
+        <img
+          id="Id_img-{{ i }}"
+          tabindex="0"
+          [src]="getImageUrl(item.imageUrl)"
+          color="dark"
+          class="profiles arrow-navigable"
+          (click)="route_to_home(item.imageUrl,item.name)"
+        />
+        <p class="mt-1 mx-3">{{ item.name }}</p>
+      </ion-col>
+      <ion-col
+      (keydown)="keypressOnAddIconbtn($event, i)"
+      *ngFor="let i of addItems(); let count = index; "
+      >
+        <ion-button
+        [id]="'addprofileopt-'+count"
+        tabindex="0"
+          class="profiles mx-1 arrow-navigable"
+          color="dark"
+          (click)="add_profile()">
+          <ion-icon name="add-outline" class="mx-2"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (keydown)="keypressOnManageBtn($event)">
+        <ion-button
+          fill="clear"
+          id="managebtn"
+          tabindex="0"
+          class="manage-profile arrow-navigable"
+          (click)="showDeleteIcon = !showDeleteIcon"
+          >Manage Profiles</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

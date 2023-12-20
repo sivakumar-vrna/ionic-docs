@@ -1,36 +1,7 @@
 @font-face {
     font-family: 'Lato';
     src        : url('../fonts/Lato/Lato-Regular.ttf');
-}
-
-@font-face {
-    font-family: 'Lato-light';
-    src        : url('../fonts/Lato/Lato-Light.ttf');
-}
-
-@font-face {
-    font-family: 'Nunito';
-    src        : url('../fonts/Nunito/Nunito-Regular.ttf');
-}
-
-@font-face {
-    font-family: 'Montserrat-light';
-    src        : url('../fonts/Montserrat/Montserrat-Light.ttf');
-}
-
-@font-face {
-    font-family: 'Montserrat-regular';
-    src        : url('../fonts/Montserrat/Montserrat-Regular.ttf');
-}
-
-@font-face {
-    font-family: 'Montserrat-medium';
-    src        : url('../fonts/Montserrat/Montserrat-Medium.ttf');
-}
-
-@font-face {
-    font-family: 'Montserrat-bold';
-    src        : url('../fonts/Montserrat/Montserrat-Bold.ttf');
+    font-display: swap;
 }
 
 p,
@@ -38,7 +9,7 @@ a,
 button,
 input,
 ion-lable {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Lato';
 }
 
 h1,
@@ -47,7 +18,8 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Montserrat-medium', sans-serif;
+    font-family: 'Lato';
+    font-display: swap;
 }
 
 .fs-10 {
@@ -60,6 +32,18 @@ h6 {
 
 .fs-14 {
     font-size: 14px;
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.fs-20 {
+    font-size: 20px;
+}
+
+.fs-24 {
+    font-size: 24px;
 }
 
 .text-uppercase {

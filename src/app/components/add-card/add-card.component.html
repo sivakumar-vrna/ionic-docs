@@ -1,13 +1,16 @@
 <ion-grid class="ion-padding">
   <form [formGroup]="newCardForm" (ngSubmit)="onSubmit()">
     <ion-row class="ion-justify-content-center">
-
       <ion-col size="12">
         <ion-label class="fs-14" color="dark">Card Number</ion-label>
-        <ion-item class="form-control" lines="none">
-          <ion-input type="text" inputmode="numeric" minlength="16" maxlength="16" autofocus="true" type="text"
+        <ion-item lines="none" (keydown)="keypressCardNum($event)">
+          <input id="idCardNumber" type="number" class="form-control arrow-navigable" tabindex="0" inputmode="numeric" minlength="16" maxlength="16" autofocus="true" type="text"
+            formControlName="cardNo" required (keypress)="numberOnlyValidation($event)" />
+          <!--
+          <ion-input id="idCardNumber" type="text" class="arrow-navigable" tabindex="0" inputmode="numeric" minlength="16" maxlength="16" autofocus="true" type="text"
             formControlName="cardNo" required (keypress)="numberOnlyValidation($event)"></ion-input>
-        </ion-item>
+          -->
+          </ion-item>
         <ion-text color="danger" *ngIf="isSubmitted && (f.cardNo.dirty || f.cardNo.touched || f.cardNo.invalid)"
           class="help-block">
           <small class="error-msg" *ngIf="f.cardNo.invalid">{{getErrorMsg()}}</small>
@@ -16,8 +19,9 @@
 
       <ion-col size="4">
         <ion-label class="fs-14" color="dark">Month</ion-label>
-        <ion-item class="form-control" lines="none">
-          <ion-select class="w-100" formControlName="expiryMonth" placeholder="mm" interface="alert">
+        <ion-item lines="none">
+          <!--
+          <ion-select tabindex="0" class="w-100 arrow-navigable" formControlName="expiryMonth" placeholder="mm" interface="alert" tabindex="0">
             <ion-select-option value="01">January</ion-select-option>
             <ion-select-option value="02">February</ion-select-option>
             <ion-select-option value="03">March</ion-select-option>
@@ -31,6 +35,26 @@
             <ion-select-option value="11">November</ion-select-option>
             <ion-select-option value="12">December</ion-select-option>
           </ion-select>
+          -->
+          <select style="appearance:auto !important;" id="idOptMonth"
+           (keydown)="keypressOnCardMonth($event)" tabindex="0"
+            class="w-100 arrow-navigable form-control" 
+            formControlName="expiryMonth" placeholder="mm" 
+            interface="alert">
+            <option value="" selected>Month</option>
+            <option value="01">January</option>
+            <option value="02">February</option>
+            <option value="03">March</option>
+            <option value="04">April</option>
+            <option value="05">May</option>
+            <option value="06">June</option>
+            <option value="07">July</option>
+            <option value="08">August</option>
+            <option value="09">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
         </ion-item>
         <ion-text color="danger"
           *ngIf="isSubmitted && (f.expiryMonth.dirty || f.expiryMonth.touched || f.expiryMonth.invalid)"
@@ -41,10 +65,18 @@
 
       <ion-col size="4">
         <ion-label class="fs-14" color="dark">Year</ion-label>
-        <ion-item class="form-control" lines="none">
-          <ion-select class="w-100" formControlName="expiryYear" placeholder="YYYY" interface="alert">
+        <ion-item lines="none">
+          <!--<ion-select tabindex="0" class="w-100 arrow-navigable" formControlName="expiryYear" placeholder="YYYY" interface="alert" tabindex="0">
             <ion-select-option [value]="year" *ngFor="let year of selectYears">{{year}}</ion-select-option>
-          </ion-select>
+          </ion-select>-->
+          <select id="idOptYear" tabindex="0" style="appearance:auto !important;"
+          class="w-100 arrow-navigable form-control" 
+          (keydown) = "keypressOnCardYear($event)"
+          formControlName="expiryYear" placeholder="YYYY"
+           interface="alert" tabindex="0">
+            <option value="" selected>Year</option>
+            <option [value]="year" *ngFor="let year of selectYears">{{year}}</option>
+          </select>
         </ion-item>
         <ion-text color="danger"
           *ngIf="isSubmitted && (f.expiryYear.dirty || f.expiryYear.touched || f.expiryYear.invalid)"
@@ -55,10 +87,15 @@
 
       <ion-col size="4">
         <ion-label class="fs-14" color="dark">CVV</ion-label>
-        <ion-item class="form-control" lines="none">
-          <ion-input minlength="3" maxlength="3" autofocus="true" inputmode="email" type="text" inputmode="numeric"
+        <ion-item lines="none">
+          <!--<ion-input tabindex="0" class="arrow-navigable form-control" minlength="3" maxlength="3" autofocus="true" inputmode="email" type="text" inputmode="numeric"
             formControlName="secretPin" (keypress)="numberOnlyValidation($event)" required>
-          </ion-input>
+          </ion-input>-->
+          <input tabindex="0" id="idCardCVV" class="arrow-navigable form-control" 
+          (keydown) = "keypressOnCardCVV($event)"
+          minlength="3" maxlength="3" autofocus="true" inputmode="email" type="text" inputmode="numeric"
+            formControlName="secretPin" (keypress)="numberOnlyValidation($event)" required />
+          
         </ion-item>
         <ion-text color="danger"
           *ngIf="isSubmitted && (f.secretPin.dirty || f.secretPin.touched || f.secretPin.invalid)" class="help-block">
@@ -67,10 +104,10 @@
       </ion-col>
 
       <ion-col size="6">
-        <ion-button type="button" expand="block" fill="outline" color="primary" (click)="onCancel()">Cancel</ion-button>
+        <ion-button (keydown)="keypressOnbtnCencelCard($event)" type="button" expand="block" fill="outline" color="primary" (click)="onCancel()" class="arrow-navigable" tabindex="0">Cancel</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button type="submit" expand="block" fill="solid" color="primary">Save</ion-button>
+        <ion-button (keydown)="keypressOnbtnSaveCard($event)" id="btnSaveCard" type="submit" expand="block" fill="solid" color="primary" class="arrow-navigable" tabindex="0">Save</ion-button>
       </ion-col>
     </ion-row>
   </form>

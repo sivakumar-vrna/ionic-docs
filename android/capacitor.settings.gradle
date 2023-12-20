@@ -50,5 +50,8 @@ project(':capacitor-toast').projectDir = new File('../node_modules/@capacitor/to
 include ':codetrix-studio-capacitor-google-auth'
 project(':codetrix-studio-capacitor-google-auth').projectDir = new File('../node_modules/@codetrix-studio/capacitor-google-auth/android')
 
+include ':capacitor-firebase-auth'
+project(':capacitor-firebase-auth').projectDir = new File('../node_modules/capacitor-firebase-auth/android')
+
 include ':capacitor-video-player'
 project(':capacitor-video-player').projectDir = new File('../node_modules/capacitor-video-player/android')

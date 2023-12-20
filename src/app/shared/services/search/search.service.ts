@@ -31,13 +31,53 @@ export class SearchService {
         return this.http.getCall(url, capacitorUrl);
     }
 
+    async onGenreSearch(genreId: number) {
+        const baseUrl = environment.vrnaFlowUrl + 'genre';
+        const userId = await this.userService.getUserId();
+        const url = baseUrl + `?genre=${genreId}&userId=${userId}`;
+        const capacitorUrl = environment.capaciorUrl + url;
+        return this.http.getCall(url, capacitorUrl);
+    }
+
+    addParameterToURL(param){
+        var url = "";
+        url += (param.split('?')[1] ? '&':'?') + param;
+        return url;
+    }
+
+    async onFilteredSearch(params: any) {
+        const baseUrl = environment.vrnaFlowUrl + 'search';
+        const userId = await this.userService.getUserId();
+        var  url = baseUrl + `?userId=${userId}`;
+        var q = Object.entries(params).map(([key, val])=>`${key}=${val}`).join("&");        
+        url = url + "&"+ q;        
+        const capacitorUrl = environment.capaciorUrl + url;        
+        return this.http.getCall(url, capacitorUrl);
+    }
+
     onSearchfiltered(params: any): Observable<any> {
         const baseUrl = environment.vrnaFlowUrl + 'search';
-        const userId = this.getUserId();
-        params.userId = localStorage.getItem('USER_KEY');
-        console.log(params);
+        let userId: any;
+
+
+        try{
+
+          userId = localStorage.getItem('USER_KEY');
+          if(userId == null){
+            userId = this.getUserId();            
+          }
+
+          params.userId = userId;
+          //params.userId = userId;
+        } catch(err){
+          alert('err: '+err);
+        }
+
+        //error is here//
+        //TBD
+        //alert(params);
+
         const headers = this.getHeaders()
-        console.log(headers)
         return this.httpClient.get(baseUrl, { headers: headers, params: params })
     }
 

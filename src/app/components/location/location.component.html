@@ -1,20 +1,25 @@
 <ion-app>
   <ion-header translucent>
     <ion-toolbar>
-      <ion-title>Please chooose your location to proceed</ion-title>
+      <ion-title>Please choose your location to proceed</ion-title>
     </ion-toolbar>
-    <ion-toolbar>
-      <ion-searchbar (ionInput)="onSearchCountry($event)"></ion-searchbar>
+    <ion-toolbar *ngIf="selectedCountryName">
+      <ion-title><h4>Current location: {{ selectedCountryName }}</h4></ion-title>
+    </ion-toolbar>
+
+    <ion-toolbar (keydown)="keypressOnInputBox($event)">
+      <ion-searchbar #countrySearchInput (ionInput)="onSearchCountry($event)"></ion-searchbar>
     </ion-toolbar>
   </ion-header>
+  
 
   <ion-content>
     <ion-list>
-      <ion-radio-group [value]="location">
-        <ion-item lines="none" *ngFor="let country of countries | filter : searchText">
+      <ion-radio-group (keydown)="keypressOnRadioGroup($event)"  [(ngModel)]="location">
+        <ion-item lines="none" *ngFor="let country of countries | filter : searchText; let i=index">
           <ion-label>{{country.country_name}}</ion-label>
-          <ion-radio slot="start" [value]="country.countryCode"
-            (ionFocus)="onLocation(country.countryCode, country.currency)">
+          <ion-radio id="opt_country_{{i}}" class="arrow-navigable" tabindex="0" slot="start" [value]="country.countryCode"
+            (ionFocus)="onLocation(country.countryCode, country.currency);onUserInput($event)">
           </ion-radio>
         </ion-item>
       </ion-radio-group>
@@ -23,10 +28,12 @@
 
   <ion-footer>
     <ion-toolbar>
-      <ion-button class="ion-padding-end" slot="end" fill="outline" color="dark" (click)="onSubmit()">
-        Cancel
+      <ion-button tabindex="0" class="ion-padding-end arrow-navigable" 
+      slot="end" fill="outline" color="dark" (click)="dismiss()"  *ngIf="cntry !== 'null' && location !== 'null' && searchText === ''">
+      Cancel
       </ion-button>
-      <ion-button class="ion-padding-end" slot="end" fill="solid" color="dark" (click)="onSubmit()">
+      <ion-button id="btnOk" tabindex="0" class="ion-padding-end arrow-navigable" slot="end" 
+        fill="solid" color="dark" (click)="onSubmit()" [disabled]="isDisabled">
         Submit
       </ion-button>
     </ion-toolbar>

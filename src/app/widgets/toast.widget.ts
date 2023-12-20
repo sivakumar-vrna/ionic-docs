@@ -19,7 +19,8 @@ export class ToastWidget {
             position: 'bottom',
             animated: true,
             color: 'success',
-            duration: 3000
+            duration: 3000,
+            htmlAttributes: { tabindex: undefined }
         });
         toast.present();
     }
@@ -40,7 +41,8 @@ export class ToastWidget {
                     text: 'Okay',
                     role: 'ok',
                 }
-            ]
+            ],
+            htmlAttributes: { tabindex: undefined }
         });
         await toast.present();
         const { role } = await toast.onDidDismiss();
@@ -54,7 +56,21 @@ export class ToastWidget {
             position: 'bottom',
             animated: true,
             color: 'secondary',
-            duration: 3000
+            duration: 3000,
+            htmlAttributes: { tabindex: undefined }
+        });
+        toast.present();
+    }
+
+    async wPopup(msg: string) {
+        const toast = await this.toastController.create({
+            header: '',
+            message: msg,
+            position: 'bottom',
+            animated: true,            
+            duration: 1000,
+            cssClass: 'errpopup',
+            htmlAttributes: { tabindex: undefined }
         });
         toast.present();
     }
@@ -76,7 +92,8 @@ export class ToastWidget {
                     text: 'Okay',
                     role: 'cancel',
                 }
-            ]
+            ],
+            htmlAttributes: { tabindex: undefined }
         });
         toast.present();
     }

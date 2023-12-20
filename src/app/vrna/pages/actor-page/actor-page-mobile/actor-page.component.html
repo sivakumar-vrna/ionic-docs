@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<ion-header class="ion-no-border">
+  <ion-toolbar class="toolbar">
+    <ion-button tabindex="0"  fill="clear" id="backbtn_cast" class="back-btn arrow-navigable" slot="start" (click)="dismiss()">
+      <span class="material-symbols-outlined">undo</span>
+    </ion-button>
+    <ion-title  >Actor</ion-title>
+    <ion-button class="btn-1" fill="clear" slot="end">
+      <ion-icon name="share-social-outline"></ion-icon>
+    </ion-button>
+    <ion-button class="btn-2" fill="clear" slot="end">
+      <ion-icon name="heart-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content" >
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row>
+  <div class="img-container"></div>
+  <div class="actor-img">
+        <ion-img tabindex="0" class="arrow-navigable crop-img" [src]="cast.imageUrl" alt="Cast Photo"></ion-img> 
+        <div class="actor-name">
+          <ion-text>{{cast.castname | uppercase}}</ion-text>
+          <h3>Actor</h3>
+        </div>
+  </div>
+</ion-row>
+
+<ion-row>
+   <div class="frist-row"></div>
+</ion-row>
+
+<ion-card-content class="His-movies">
+    <ion-row>
+      <ion-col  size="12">
+        <ion-text>
+          <h5>HIS <span class="movie-color">MOVIES</span></h5>
+        </ion-text>
+         <app-carousel [isActorPage]="isActorPage" class="cast-releted" [sectionName]="'related_cast_movies'" [carouselData]="castMoviesData" [carouselOptions]="suggestionOptions"></app-carousel>
+        </ion-col>
+    </ion-row>
+    
+    <ion-row class="img-row">
+      <ion-col>
+        <ion-img tabindex="0" class="arrow-navigable landscape-img" src="assets/images/sk.img" alt="Cast Photo"></ion-img> 
+        </ion-col>
+      </ion-row>
+    
+    <ion-row>
+      <div id="Cast_Dec" class="arrow-navigable second-row" tabindex="0">
+        <div [ngClass]="{'expand-description': isExpanded}" class="description">
+          <span class="cast-color">{{cast.castname}}</span> {{ cast.description }}
+        </div>
+        <span  (click)="toggleDescription()">
+          ...<span class="cast-description">{{ isExpanded ? 'less' : 'more' }}</span>
+        </span>
+      </div>
+    </ion-row>
+
+    <ion-row>
+    <div class="video-container">
+      <swiper [config]="swiperTrailers" #swiper>
+        <ng-template *ngFor="let trailer of castMoviesData; let i = index" swiperSlide>
+          <video class="trailer-video" [src]="trailerUrl" #trailerVideo (click)="playVideo(trailerVideo)"></video>
+          <ion-icon *ngIf="!isVideoPlaying" name="play-circle" class="play-icon" (click)="playVideo(trailerVideo)"></ion-icon>
+        </ng-template>
+      </swiper>
+    </div>
+    
+    <div class="trailer-heading">
+      <h4>Trailers</h4>
+      <div class="custom-pagination">
+        <span class="dot" *ngFor="let trailer of castMoviesData; let i = index" [class.active]="i === activeSlideIndex" (click)="goToSlide(i)"></span>
+         <span class="dot"></span>
+         <span class="dot"></span>
+        </div>
+    </div>
+    </ion-row>
+
+  <ion-row class="last-row">
+    <div id="Cast_Dec" class="arrow-navigable" tabindex="0">
+      <span class="carrier-color">The beggininers of his carrierr</span>
+      <div [ngClass]="{'expand-description': isCarrierExpanded}" class="description-last">
+        {{ cast.description }}
+      </div>
+        <span (click)="toggleCarrier()" class="cast-description">{{ isCarrierExpanded ? 'less' : 'more' }}</span>.
+    </div>
+  </ion-row>
+</ion-card-content>
+</ion-content>

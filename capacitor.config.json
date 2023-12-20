@@ -3,11 +3,11 @@
 	"appName": "VRNA",
 	"webDir": "www",
 	"bundledWebRuntime": false,
-	"clientId": "706306776113-i5i82n0gt2os9ijb83aka4sbfmm2b7re.apps.googleusercontent.com",
+	"clientId": "706306776113-iltcnm7fha9uulcv3agv0fe1j12qvrha.apps.googleusercontent.com",
 	"server": {
 		"allowNavigation": [
-			"https://dev.vrnaplex.com*",
-			"http://ec2-3-21-205-116.us-east-2.compute.amazonaws.com*",
+			"https://vrnaplex.com*",
+			"http://vrnaplex.com*",
 			"https://accounts.google.com*"
 		]
 	},
@@ -19,7 +19,7 @@
 		},
 		"GoogleAuth": {
 			"scopes": ["profile", "email"],
-			"serverClientId": "706306776113-i5i82n0gt2os9ijb83aka4sbfmm2b7re.apps.googleusercontent.com",
+			"serverClientId": "706306776113-iltcnm7fha9uulcv3agv0fe1j12qvrha.apps.googleusercontent.com",
 			"forceCodeForRefreshToken": true
 		  }
 	}

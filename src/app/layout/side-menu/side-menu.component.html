@@ -1,25 +1,37 @@
 <ion-header class="ion-no-border side-menu-header">
   <ion-toolbar translucent>
-    <ion-item class="menu-profile-panel" lines="none" button routerLink="/profile" (click)="dismissSideMenu()">
+    <ion-item id="id_profile_mnu" tabindex="0" 
+    class="arrow-navigable poster menu-profile-panel" 
+    lines="none" button routerLink="/profile" (click)="dismissSideMenu()"
+    autofocus="true"
+    (keydown)="keypressOnUpperMnu($event)">
       <ion-avatar slot="start">
-        <img [src]="userImage" />
+        <img *ngIf="pId == 'false'" [src]="userImage" />
+        <img *ngIf="pId == 'true'" [src]="multiUserImage" />
       </ion-avatar>
       <ion-label>
-        <h3>{{name | uppercase}}</h3>
-        <p>{{username}}</p>
+        <h3 *ngIf="pId == 'false'">{{name | uppercase}}</h3>
+        <h3 *ngIf="pId == 'true'">{{multiUsername | uppercase}}</h3>
+        <p *ngIf="pId == 'false'">{{username}}</p>
       </ion-label>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-list class="side-menu-list" lines="none">
-    <ion-item [routerLink]="menu.url" routerLinkActive="side-menu-active" [routerLinkActiveOptions]="{ exact: true }"
-      (click)="dismissSideMenu()" *ngFor="let menu of menus">
+    <ion-item [routerLink]="menu.url" routerLinkActive="side-menu-active" 
+    [routerLinkActiveOptions]="{ exact: true }"
+      (click)="dismissSideMenu()" *ngFor="let menu of menus; let i=index;" 
+      (keydown)="keypressOnMnu($event, i)"
+      id="mnuindex-{{i}}"
+      button
+      class="arrow-navigable poster" tabindex="0">
       <ion-icon [name]="menu.icon" slot="start"></ion-icon>
       <ion-label>{{menu.title}}</ion-label>
     </ion-item>
-
-    <ion-item class="side-menu-logout" button (click)="onLogout()">
+    <ion-item tabindex="0" button class="arrow-navigable poster side-menu-logout" 
+    id="mnuLogout" (click)="onLogout()"
+    (keydown)="keypressOnOtherMnu($event)">
       <ion-icon name="log-out" slot="start"></ion-icon>
       <ion-label>Logout</ion-label>
     </ion-item>

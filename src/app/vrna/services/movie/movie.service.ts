@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -22,7 +21,12 @@ export class MovieService {
   }
 
   async getMovieCasts(id: any) {
-    const userId = await this.userService.getUserId();
+    let userId = await this.userService.getUserId();
+
+    if(isNaN(userId) || userId == null){ //for guest users
+      userId = environment.guest_user_id;
+    }
+
     const baseUrl = environment.vrnaFlowUrl;
     const url = baseUrl + 'moviecast' + `?movieId=${id}&userId=${userId}`;
     const capacitorUrl = environment.capaciorUrl + url;
@@ -38,7 +42,12 @@ export class MovieService {
   }
 
   async getRelatedSuggestion(id: any) {
-    const userId = await this.userService.getUserId();
+    let userId = await this.userService.getUserId();
+
+    if(isNaN(userId) || userId == null){ //for guest users
+      userId = environment.guest_user_id;
+    }
+
     const baseUrl = environment.vrnaFlowUrl;
     const url = baseUrl + 'morelikethis' + `?movieId=${id}&userId=${userId}`;
     const capacitorUrl = environment.capaciorUrl + url;

@@ -36,14 +36,13 @@ export class WatchlistService {
         let watchlistData = [];
         (await this.getWatchedMovies()).subscribe(
             (res) => {
-                console.log(res);
                 watchlistData = res.data;
                 if (watchlistData != null && watchlistData[0]) {
                     this.watchlistContents.next(watchlistData);
                 }
             },
             (err) => {
-                this.toast.onFail('Error in getting watchlist');
+                // this.toast.onFail('Error in getting watchlist');
             }
         );
     }

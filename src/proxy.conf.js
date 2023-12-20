@@ -2,6 +2,7 @@ const PROXY_CONFIG = [
   {
     context: [
       "/auth-service",
+      "/aws-service",
       "/orch-service",
       "/vrnaflow",
       "/intelligence-service",
@@ -11,11 +12,27 @@ const PROXY_CONFIG = [
       "/payment-service",
       "/common-service",
       "/subscription-service",
-      "/images",
-      "/video",
+      "/images"
+    ],
+    target: "https://dev.vrnaplex.com",
+    secure: false,
+    logLevel: "debug",
+    changeOrigin: true,
+  },
+  {
+    context: [      
+      "/video",      
+    ],
+    target: "https://video.vrnaplex.com",
+    secure: false,
+    logLevel: "debug",
+    changeOrigin: true,
+  },
+  {
+    context: [      
       "/trailer",
     ],
-    target: "http://45.79.199.120:8089",
+    target: "https://media.vrnaplex.com",
     secure: false,
     logLevel: "debug",
     changeOrigin: true,

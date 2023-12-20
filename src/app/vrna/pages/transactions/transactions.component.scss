@@ -1,0 +1,26 @@
+.paginator {
+    text-align: center;
+    margin-bottom: 1%;
+    .ngx-pagination {
+        padding: 0;
+        li:not(.current, .pagination-next, .pagination-previous) {
+            background: rgba(235, 235, 235, 1);
+        }
+  
+        a,
+        .current {
+            padding: 1rem 1.5rem;
+        }
+    }
+  }
+
+  .poster{
+    border-radius: 15px;
+    box-shadow: 0 0 6px 6px var(--ion-color-step-950);
+    max-width: 85%;
+    max-height: 100%;
+  }
+
+  .curr-amt{
+    font-weight: bold;
+  }

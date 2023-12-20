@@ -6,8 +6,11 @@ ion-modal.vrna-web-player {
         display: block;
 
         .video-js {
-            height  : 100%;
+            width:100% !important;
+            height  : 100%!important;;
             position: initial;
+            background      :  var(--ion-background-color)  ;
+            ;
 
             .player-back-button-main {
                 transition: visibility 0.1s, opacity 0.1s;
@@ -16,7 +19,7 @@ ion-modal.vrna-web-player {
                     position        : absolute;
                     left            : 1em;
                     top             : 1em;
-                    background-color: transparent;
+                    background-color: transparent;                    
                     border          : none;
                     z-index         : 99999;
 
@@ -39,7 +42,7 @@ ion-modal.vrna-web-player {
             .vjs-control-bar {
                 .vjs-progress-control {
                     position: absolute;
-                    width   : 100%;
+                    width   : 100% !important;
                     top     : -5px;
 
                     .vjs-control {

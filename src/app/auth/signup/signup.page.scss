@@ -1,3 +1,4 @@
+#alert_btn_ok:focus{outline: 1px #666 dotted;}
 .signup-page {
     .pwd-strength {
         position     : absolute;
@@ -9,4 +10,11 @@
         color    : #838383;
         font-size: 10px;
     }
+}
+input{
+    border:0 none; 
+    background:#ffffff;
+}
+input:focus{
+    background:#f1f1f1;
 }

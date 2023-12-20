@@ -1,0 +1,194 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="topbar">
+    <ion-button  fill="clear"  slot="start" color="dark" (click)="dismiss()">
+      <ion-icon class="back-btn" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-buttons slot="start">
+      <ion-menu-button  class="menu-btn"  [isActorPage]="isActorPage"></ion-menu-button>
+    </ion-buttons>
+    <ion-img tabindex="-1" slot="start" class="vrna-home-logo" src="assets/images/logo.png" alt="logo" (click)="onNavigate('/home')">
+    </ion-img>
+    <ion-buttons slot="end">
+      <ion-searchbar show-clear-button="never" class="searchbar" slot="end" placeholder="Search actors..."></ion-searchbar>
+    </ion-buttons>
+    <ion-buttons slot="end" class="person-button">
+      <ion-icon name="person-sharp" class="person-icon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding">  
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!--Actor img section-->
+
+  <ion-row class="actor-row">
+    <div class="img-actor">
+      <ion-img tabindex="0" class="arrow-navigable crop-img" [src]="castData.imageUrl" alt="Cast Photo"></ion-img> 
+    </div>
+  </ion-row>
+  <div class="container-fluid"></div>
+  <div class="side-des">
+     <ion-card-content class="side-head">
+         <h3>'I'm a meathead man.You've got smart people,and you've got dumb people.I just happen to be dumb</h3>
+     </ion-card-content>
+  </div>
+  <div class="side-actor-name">
+      <ion-card-content class="actor-names">
+        <div class="actor-vertical-line"></div>
+        <h1>{{castData.castname | uppercase}}</h1>
+        <h4>Actor and musician</h4>
+      </ion-card-content>
+  </div>
+  
+  <!--His movie section-->
+  <ion-row class="row-one ion-justify-content-center">
+      <div class="Horizontal-line"></div>
+      <div class="Horizontal-line-two"></div>
+      <div class="Horizontal-line-bottom"></div>
+      <div class="Horizontal-line-bottom-two"></div>
+
+      <!--side contents------------>
+      <div class="side-contens">
+        <div class="vertical-actor-name">
+            <h1>ACTORS</h1>
+          </div>
+          <div class="film-icon">
+            <ion-icon name="film-outline"></ion-icon>
+          </div>
+        </div>
+  
+     <!--HIs movies-->
+    <ion-col size="9" class="content-col">
+        <div class="head-line">
+          <div class="vertical-line"></div>
+          <h2 class="head-name">HIS MOVIES</h2>
+        </div>
+        <ion-card-content class="Releted-movies">
+          <app-carousel [isActorPage]="isActorPage"  [sectionName]="'related_cast_movies'" [carouselData]="castMoviesData" [carouselOptions]="suggestionOptions"></app-carousel>
+          <div *ngIf="castMoviesData && castMoviesData.length > 0">
+              <div class="button-prev">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+              </div>
+              <div class="button-next">
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+              </div>
+          </div>
+        </ion-card-content>
+
+
+        <!---center contents-->
+        <ion-grid [fixed]="true"  class="actor-bio">
+          <ion-card-content>
+            <ion-row>
+              <ion-col size="6"  >
+                <ion-card-content>
+                  <ion-img tabindex="0" class="arrow-navigable landscape-img" src="assets/images/sk.img" alt="Cast Photo"></ion-img> 
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="6"  >
+                <ion-card-content>
+                  <div class="description">
+                    <span class="cast-color">{{castData.castname}}</span> {{ castData.description }}
+                  </div>
+                </ion-card-content>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <ion-card-content>
+                  <ion-row class="second-row">
+                    <ion-col size="6">
+                      <div class="description-container">
+                        <div class="description-two">
+                          <h3 class="des-head"> The beggininers of his carrierr</h3>
+                             <span class="cast-des">{{ castData.description }}</span> 
+                        </div>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="second-img">
+                      <ion-img tabindex="0" class="arrow-navigable landscape-img" [src]="castData.imageUrl" alt="Cast Photo"></ion-img>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>             
+               </ion-col>
+              <ion-col size="6" class="watch-trailer">
+                <ion-card-content>
+                  <video class="trailer-video" [src]="trailerUrl" #trailerVideo (click)="playVideo(trailerVideo)"></video>
+                  <button *ngIf="!isVideoPlaying" class="play-button" (click)="playVideo(trailerVideo)">
+                    <span>WATCH TRAILER</span>
+                    <ion-icon name="play-circle"></ion-icon>
+                    </button>
+                  </ion-card-content>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <ion-card-content>
+                  <ion-img  class="landscape-img" src="assets/images/sk2.jpg" alt="Cast Photo"></ion-img> 
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="6" >
+                <ion-card-content>
+                  <h3 class="des-head">Future Game Coming 20 april 2020</h3>
+                  <div class="description-last">
+                    {{ castData.description }}
+                  </div>
+                </ion-card-content>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-grid>
+      </ion-col>
+  </ion-row>
+  
+  <ion-row class="two"></ion-row>
+
+
+  <!---Footer-->
+  <ion-row class="three">
+    <section id="movies-section">
+      <div id="container flex" class="text-center">
+        <ion-button   [id]="'footer_Mnu-' + i"   size="small" fill="clear" tabindex="0" class="flex box arrow-navigable poster" 
+          routerLink="menu.url" *ngFor="let menu of menus;let i=index">
+          {{menu.title}}
+        </ion-button>
+      </div>
+      <div id="container">
+        <div class="box-sitemap arrow-navigable poster" id="redbox_1" routerLink="/policy">
+          <p>Privacy Policy &nbsp;/ </p>
+        </div>
+        <div  class="box-sitemap arrow-navigable poster" id="redbo_2" (click)="navigate()">
+          <p>Terms of use</p>
+        </div>
+    </div>
+    <div id="container">
+        <div class="box-sitemap" style="color: #ffffff63;">
+          Copyright © {{date | date: 'yyyy' }} VRNA All Rights Reserved.
+          Site is maintained by VRNA Media Markets Private Limited .<br />
+          Site last updated.<span id="last-updated">{{ lastUpdatedDate }}</span>
+        </div>
+    </div>
+      <div id="container" >
+        <div class="box-sitemap" style="color: #ffffff63;font-size: 30px;">
+         <a class="arrow-navigable poster" href="https://www.facebook.com/vrnaplex"><ion-icon name="logo-facebook"></ion-icon></a>
+        </div>
+        <div class="box-sitemap" style="color: #ffffff63;font-size: 30px;">
+          <a class="arrow-navigable poster" href="https://www.youtube.com/vrnaplex"><ion-icon name="logo-youtube"></ion-icon></a>
+         </div>
+        <div class="box-sitemap" style="color: #ffffff63;font-size: 30px;">
+          <a class="arrow-navigable poster" href="https://www.twitter.com/vrnaplex"><ion-icon name="logo-twitter"></ion-icon></a>
+        </div>
+        <div class="box-sitemap" style="color: #ffffff63;font-size: 30px;">
+          <a class="arrow-navigable poster" href="https://www.instagram.com/vrnaplex"><ion-icon name="logo-instagram"></ion-icon></a>
+        </div>
+        <div  class="box-sitemap" style="color: #ffffff63;font-size: 30px;" >
+           <a class="arrow-navigable poster" href="https://www.linkedin.com/vrnaplex"><ion-icon name="logo-linkedin"></ion-icon></a> 
+        </div>
+      </div>
+    </section>
+  </ion-row>
+
+</ion-content>

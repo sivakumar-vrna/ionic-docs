@@ -1,0 +1,212 @@
+<!-- <form class="my-5"  [formGroup]="addProfileForm" (ngSubmit)="onSubmit()"> -->
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button 
+          (keydown)="keypressOnaddbackbtn($event)"
+          tabindex="0"
+          class="arrow-navigable"
+          defaultHref="/switch-profiles"
+        ></ion-back-button>
+      </ion-buttons>
+      <ion-title>Add Profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content class="">
+  <ion-grid>
+    <form class="mb-5" [formGroup]="addProfileForm" (ngSubmit)="onSubmit()">
+      <ion-row class="mt-1 display">
+        <!-- IMAGE -->
+        <div>
+          <img
+            [src]="userImage"
+            *ngIf="userImage"
+            alt="userImage"
+            class="profile-image"
+          />
+          <ion-icon
+            name="camera-outline"
+            class="edit arrow-navigable"
+            tabindex="0"
+            (click)="selectImage()"
+          ></ion-icon>
+          <input
+            type="file"
+            #fileInput
+            (change)="onFileSelected($event)"
+            style="display: none"
+            accept="image/*"
+            formControlName="imageUrl"
+          />
+        </div>
+
+        <!-- NAME -->
+        <ion-item lines="none" class="outline_input_item mt-5">
+          <input
+            tabindex="0"
+            id="Add_profile_input"
+            type="text"
+            placeholder="Name"
+            formControlName="name"
+            class="outline_input arrow-navigable"
+          />
+        </ion-item>
+
+        <!-- AGE -->
+        <ion-item lines="none" class="outline_input_item my-2">
+          <input
+            (keydown)="keyoressOnAge($event)"
+            tabindex="0"
+            type="number"
+            placeholder="Age"
+            formControlName="age"
+            class="outline_input arrow-navigable"
+            [(ngModel)]="inputValue" 
+            (ngModelChange)="checkAge()"
+          />
+        </ion-item>
+
+        <!-- RESTRICTED -->
+        <!--<ion-item lines="none" class="outline_input_item">
+          <input type="text" placeholder="Restricted" formControlName="restricted" class="outline_input"/>
+        </ion-item>-->
+
+        <ion-item lines="none" class="outline_input_item">
+          <select
+            id="Drop_opt"
+            (keydown)="keypressOnAddOpt($event)"
+            tabindex="0"
+            class="form-control arrow-navigable m-0"
+            style="appearance: auto !important"
+            placeholder="Restricted"
+            formControlName="restricted"
+            [(ngModel)]="optRestrict"
+            >
+            <!-- [disabled]="containsRestrict" -->
+            <option value="">Restricted</option>
+            <option value="N">No</option>
+            <option value="Y">Yes</option>
+
+            <!--
+            <option value="N" [selected]="NoRestrict">No</option>
+            <option value="Y" [selected]="containsRestrict">Yes</option>
+            -->
+
+          </select>
+        </ion-item>
+
+        <!-- PASSWORD -->
+        <ion-item lines="none" class="outline_input_item mt-2">
+          <input
+            tabindex="0"
+            (keydown)="keypressOnAddPwd($event)"
+            [type]="hide ? 'password' : 'text'"
+            placeholder="Password"
+            formControlName="password"
+            maxlength="4"
+            pattern="[0-9]*"
+            class="outline_input arrow-navigable"
+          />
+          <ion-icon
+            id="Add_pwd_eye"
+            tabindex="0"
+            [name]="hide ? 'eye-off-outline' : 'eye-outline'"
+            slot="end"
+            (click)="hide = !hide"
+          ></ion-icon>
+        </ion-item>
+        <div class="mt-2">
+          <ion-text
+            color="danger"
+            *ngIf="
+              addProfileForm.get('password').hasError('required') &&
+              addProfileForm.get('password').touched
+            "
+          >
+            Password is required.
+          </ion-text>
+          <ion-text
+            color="danger"
+            *ngIf="
+              addProfileForm.get('password').hasError('pattern') ||
+              addProfileForm.get('password').hasError('minLength')
+            "
+          >
+            Password must be 4 digits & numeric
+          </ion-text>
+        </div>
+
+        <!-- SAVE BUTTON -->
+        <ion-button
+          id="btnSave"
+          tabindex="0"
+          fill="clear"
+          class="save-profile mt-3 arrow-navigable"
+          expand="block"
+          type="submit"
+          [disabled]="isLoading"
+          >Save
+        </ion-button>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>
+
+<!-- <form class=""  color="dark">
+  <ion-row class="">
+    Email
+    <ion-col class="ion-padding-vertical" size="12">
+      <label class="form-label">Email</label>
+      <ion-item class="form-control" lines="none">
+        <ion-icon class="me-2" name="mail-outline" slot="start"></ion-icon>
+        <input id="id_email_input" tabindex="0" class="form-control arrow-navigable" autofocus="true" clearInput="true" inputmode="email" type="email" formControlName="email" maxlength="55" required/>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isSubmitted || (f.email.dirty)"
+        class="help-block">
+        <small class="error-msg" *ngIf="f.email.invalid">{{getEmailErrorMsg()}}</small>
+      </ion-text>
+    </ion-col>
+
+    Password
+    <ion-col class="ion-padding-bottom signup-password position-relative" size="12">
+      <label class="form-label">Password
+      </label>
+      <ion-item class="form-control" lines="none">
+        <ion-icon  class="me-2" name="lock-open-outline" slot="start"></ion-icon>
+        
+        <input class="form-control arrow-navigable" tabindex="0" [type]="hide ? 'password' : 'text'" formControlName="password" maxlength="25" required />
+        <ion-icon class="arrow-navigable" tabindex="0" [name]="hide ? 'eye-outline' : 'eye-off-outline'" slot="end" (click)="hide= !hide">
+        </ion-icon>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isSubmitted || (f.password.dirty )" class="help-block w-100">
+        <small class="error-msg" *ngIf="f.password.invalid">{{getPwdErrorMsg()}}</small>
+      </ion-text>
+      <div class="pwd-strength shadow" *ngIf="f.password.errors?.pattern && passwordFocused">
+        <app-password [hasNumber]="hasNumber" [hasUpper]="hasUpper" [hasLower]="hasLower"
+          [hasSpecialCharacter]="hasSpecialCharacter" [hasMinCharacter]="!f.password.errors?.minlength">
+        </app-password>
+      </div>
+    </ion-col>
+
+    Re-Enter Password
+    <ion-col class="ion-padding-bottom confirm-password" size="12">
+      <label class="form-label">Retype Password</label>
+      <ion-item class="form-control" lines="none">
+        <ion-icon class="me-2" name="lock-open-outline" slot="start"></ion-icon>
+        
+        <input class="form-control arrow-navigable" tabindex="0"  [type]="hideRetype ? 'password' : 'text'" formControlName="confirmPassword" maxlength="25" required />
+        <ion-icon class="arrow-navigable" tabindex="0" [name]="hideRetype ? 'eye-outline':'eye-off-outline'" slot="end" (click)="hideRetype= !hideRetype"></ion-icon>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isSubmitted || (f.confirmPassword.dirty )" class="help-block">
+        <small class="error-msg" *ngIf="f.confirmPassword.invalid">{{getConfirmPwdErrorMsg()}}</small>
+      </ion-text>
+    </ion-col>
+
+    Submit Button
+    <ion-col class="ion-padding-top" size="12">
+      <ion-button class="arrow-navigable" tabindex="0"  color="primary mx-auto" expand="block" type="submit" [disabled]="isLoading">Sign Up
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</form> -->

@@ -1,0 +1,18 @@
+::ng-deep {
+    .filtered-pop {
+        //--max-height: 70vh;
+        //--max-width: 60vw;
+        //--min-width : 335px;
+        --min-width : 100%;
+        --min-height : 100%;
+    }    
+}
+
+.arrow-navigable:focus{
+    outline: 1px #666 dotted;
+}
+
+.text{
+    position: relative;
+    left: 40px;
+}

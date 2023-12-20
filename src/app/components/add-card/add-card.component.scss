@@ -1,0 +1,11 @@
+::ng-deep {
+    .add-new-card-modal {
+        --max-height: 70vh;
+        --max-width: 60vw;
+        --min-width : 335px;
+    }    
+}
+.highlighted {
+    background-color:black;
+    color: white; 
+   }

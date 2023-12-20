@@ -3,13 +3,12 @@
 
     <!-- Email -->
     <ion-col class="ion-padding-vertical" size="12">
-      <label class="form-label">Email</label>
+      <label class="form-label">{{i18n_SignupPageLabels.email}}</label>
       <ion-item class="form-control" lines="none">
         <ion-icon class="me-2" name="mail-outline" slot="start"></ion-icon>
-        <ion-input autofocus="true" inputmode="email" type="email" formControlName="email" required>
-        </ion-input>
+        <input (keydown)="keypressOnEmail($event)" id="id_email_input" tabindex="0" class="form-control arrow-navigable" autofocus="true" clearInput="true" inputmode="email" type="email" formControlName="email" maxlength="55" required/>
       </ion-item>
-      <ion-text color="danger" *ngIf="isSubmitted && (f.email.dirty || f.email.touched || f.email.invalid)"
+      <ion-text color="danger" *ngIf="isSubmitted || (f.email.dirty)"
         class="help-block">
         <small class="error-msg" *ngIf="f.email.invalid">{{getEmailErrorMsg()}}</small>
       </ion-text>
@@ -17,17 +16,18 @@
 
     <!-- Password -->
     <ion-col class="ion-padding-bottom signup-password position-relative" size="12">
-      <label class="form-label">Password
+      <label class="form-label">{{i18n_SignupPageLabels.password}}
       </label>
       <ion-item class="form-control" lines="none">
-        <ion-icon class="me-2" name="lock-open-outline" slot="start"></ion-icon>
-        <ion-input [type]="hide ? 'password' : 'text'" formControlName="password" maxlength="25"
-          (ionFocus)="passwordFocused= true" (ionBlur)="passwordFocused= false">
-        </ion-input>
-        <ion-icon [name]="hide ? 'eye-outline' : 'eye-off-outline'" slot="end" (click)="hide= !hide">
+        <ion-icon  class="me-2" name="lock-open-outline" slot="start"></ion-icon>
+        <!-- <ion-input tabindex="1" class="arrow-navigable" [type]="hide ? 'password' : 'text'" formControlName="password" maxlength="25"
+          (ionFocus)="passwordFocused= true" (ionBlur)="passwordFocused= false" required>
+        </ion-input> -->
+        <input (keydown)="keypressOnPwd($event)"  id="pwd" class="form-control arrow-navigable" tabindex="0" [type]="hide ? 'password' : 'text'" formControlName="password" maxlength="25" required />
+        <ion-icon (keydown)="keypressPwdEye($event)" class="arrow-navigable" tabindex="0" [name]="hide ? 'eye-outline' : 'eye-off-outline'" slot="end" (click)="hide= !hide">
         </ion-icon>
       </ion-item>
-      <ion-text color="danger" *ngIf="isSubmitted || (f.password.dirty || f.password.touched)" class="help-block w-100">
+      <ion-text color="danger" *ngIf="isSubmitted || (f.password.dirty )" class="help-block w-100">
         <small class="error-msg" *ngIf="f.password.invalid">{{getPwdErrorMsg()}}</small>
       </ion-text>
       <div class="pwd-strength shadow" *ngIf="f.password.errors?.pattern && passwordFocused">
@@ -39,33 +39,39 @@
 
     <!-- Re-Enter Password -->
     <ion-col class="ion-padding-bottom confirm-password" size="12">
-      <label class="form-label">Retype Password</label>
+      <label class="form-label">{{i18n_SignupPageLabels.password}}</label>
       <ion-item class="form-control" lines="none">
         <ion-icon class="me-2" name="lock-open-outline" slot="start"></ion-icon>
-        <ion-input [type]="hideRetype ? 'password' : 'text'" formControlName="confirmPassword" maxlength="25" required>
-        </ion-input>
-        <ion-icon [name]="hideRetype ? 'eye-outline' :
-        'eye-off-outline'" slot="end" (click)="hideRetype=
-        !hideRetype"></ion-icon>
+        <!-- <ion-input [type]="hideRetype ? 'password' : 'text'" formControlName="confirmPassword" maxlength="25" required>
+        </ion-input> -->
+        <input  (keydown)="keypressConfirmPwd($event)" id="ConfirmPwd" class="form-control arrow-navigable" tabindex="0"  [type]="hideRetype ? 'password' : 'text'" formControlName="confirmPassword" maxlength="25" required />
+        <ion-icon  (keydown)="keypressConfirmPwdEye($event)" class="arrow-navigable" tabindex="0" [name]="hideRetype ? 'eye-outline':'eye-off-outline'" slot="end" (click)="hideRetype= !hideRetype"></ion-icon>
       </ion-item>
-      <ion-text color="danger" *ngIf="isSubmitted || (f.confirmPassword.dirty ||
-      f.confirmPassword.touched)" class="help-block">
+      <ion-text color="danger" *ngIf="isSubmitted || (f.confirmPassword.dirty )" class="help-block">
         <small class="error-msg" *ngIf="f.confirmPassword.invalid">{{getConfirmPwdErrorMsg()}}</small>
       </ion-text>
     </ion-col>
 
     <!-- Submit Button -->
     <ion-col class="ion-padding-top" size="12">
-      <ion-button color="primary mx-auto" expand="block" type="submit" [disabled]="isLoading">Sign Up
+      <ion-button (keydown)="keypressOnSignUpbtn($event)" class="arrow-navigable" tabindex="0"  
+      color="primary mx-auto" expand="block" type="submit" [disabled]="isLoading">{{i18n_SignupPageLabels.signup}}
+
+        <ion-spinner name="bubbles" *ngIf="isSubmitted"></ion-spinner>
+
       </ion-button>
     </ion-col>
 
     <!-- Signup -->
     <ion-col class="signup-link ion-no-padding ion-no-margin" size="12">
       <p class="fs-12 pointer">
-        Have account already? <ion-text color="secondary" [routerLink]="['/auth/login']"> Sign In to
-          your account</ion-text>
+        {{i18n_SignupPageLabels.auth_have_account_already}}? <ion-text (keydown)="keypressOnSignUpbtn($event)" class="arrow-navigable" tabindex="0"  color="secondary" [routerLink]="['/auth/login']">
+          {{i18n_SignupPageLabels.auth_signin_toyour_account}}</ion-text>
       </p>
+      <!-- <p   class="fs-12 pointer">
+       Phone Signup |<ion-text class="arrow-navigable" tabindex="0"  color="secondary" [routerLink]="['/auth/phone']"> Sign In using
+          Mobile Number </ion-text>
+      </p> -->
     </ion-col>
   </ion-row>
 </form>

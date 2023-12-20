@@ -1,3 +1,4 @@
+#alert_btn_ok:focus{outline:1px #000 dashed;}
 .forgot-pwd-link {
     font-size: 12px;
 
@@ -9,4 +10,15 @@
             color: var(--ion-color-primary);
         }
     }
+}
+.submit-enter {
+    position: absolute;
+    visibility: hidden;
+    left: -1000px;
+}
+input{border:0 none; background:#ffffff;}
+input:focus{background:#f1f1f1;}
+
+.remember {
+    font-size: 12px;
 }

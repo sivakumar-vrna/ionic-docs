@@ -1,7 +1,6 @@
-<ion-button class="social-media-btn google-login mx-auto ion-margin-bottom"
+<ion-button (keydown)="keypressOnGooglebtn($event)" tabindex="1" class="arrow-navigable social-media-btn google-login mx-auto ion-margin-bottom"
   fill="clear" expand="block"
-  (click)="signInWithGoogle()">
-  <ion-img class="ion-margin-end" slot="start" src="assets/images/google.png">
-  </ion-img>
-  <ion-label> Sign in Google </ion-label>
+  (click)="signInWithGoogle()" aria-label="Sign in with Google">  
+  <ion-icon name="logo-google" class="ion-margin-end" slot="start"></ion-icon>
+  <ion-label> {{btnLabel}} </ion-label>
 </ion-button>

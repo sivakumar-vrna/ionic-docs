@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
-  <title>VRNA</title>
+  <title>VRNA Plex</title>
+  <meta name="title" content="VRNA Plex" />
+  <meta name="description" content="Your Favorite Movies & Shows In One Place. Choose from the list of the best selection of movies, series, children’s programs and the VRNA exclusive." />
+  <meta name="keywords" content="online cinema, online films, OTT Platorm, Tamil movies, Telugu movies" />
+  <link rel="canonical" href="https://vrnaplex.com" />
+  <link rel="preload" href="/assets/images/logo.png" as="image" />  
 
   <base href="/" />
-
   <meta name="color-scheme" content="light dark" />
   <meta name="viewport"
     content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
-
-  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico" />
 
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -22,34 +24,17 @@
   <meta name="theme-color" content="#070a0d">
   <meta name="google-signin-client_id"
     content="706306776113-i5i82n0gt2os9ijb83aka4sbfmm2b7re.apps.googleusercontent.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
+  <meta name="facebook-domain-verification" content="kz1mpe8mbydw458s3ae7vmvrk0ah13" />
 
+  <link rel="preconnect" href="https://firebase.googleapis.com" />
+  <link rel="preconnect" href="https://video.vrnaplex.com" />
+  <link rel="preconnect" href="https://media.vrnaplex.com" />
+
+  <link rel=”preload” href=”/assetsfonts/Lato/Lato-Regular.ttf″ as=”font”>
+
+</head>
 <body class="mat-typography">
   <app-root></app-root>
-
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <noscript>enable javaScript and use the VRNA Plex movie app.</noscript>
 </body>
-<script>
-  window.fbAsyncInit = function () {
-    FB.init({
-      appId: '1451898008558618',
-      cookie: true, // enable cookies to allow the server to access the session
-      xfbml: true, // parse social plugins on this page
-      version: 'v2.8' // use graph api version 2.8
-    });
-  };
-
-  // Load the SDK asynchronously
-  (function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
 </html>

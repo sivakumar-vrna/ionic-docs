@@ -9,12 +9,12 @@ import { FooterComponent } from './footer.component';
     FooterComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule, 
     IonicModule,
     RouterModule
   ],
   exports: [
-    FooterComponent
-  ]
+    FooterComponent 
+  ],
 })
 export class FooterModule { }

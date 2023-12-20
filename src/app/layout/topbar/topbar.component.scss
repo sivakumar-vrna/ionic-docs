@@ -182,3 +182,24 @@
         }
     }
 }
+
+.poster:focus {
+    border-radius: 15px;
+    box-shadow: 0 0 6px 6px var(--ion-color-step-950);
+    transform: scale(0.90); 
+    transition: 0.3s;
+    outline: none;
+  }
+  
+.notification-badge{
+    border-radius: 30px;
+    font-size: 8px;
+    padding: 5px 6px 5px 6px;
+    position: absolute;
+    right: 50px;
+    bottom: 22px;
+}
+
+ion-popover {
+    --width: 30rem;
+  }

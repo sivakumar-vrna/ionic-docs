@@ -1,0 +1,39 @@
+  <ion-header  class="ion-no-border container-fluid my-3">
+      <ion-toolbar  class="topbar">
+          <ion-button  slot="start" fill="clear">
+            <h4 class="topbar-label">Favorite</h4>
+          </ion-button>
+        <ion-buttons (keydown)="KeypressOnSearchBtn($event)" class="mx-3" slot="start">
+          <ion-searchbar id="favorite_movies_search" show-clear-button="never"  #search_fav  class="searchbar" [(ngModel)]="searchQuery"
+          (ionChange)="SearchFilter()"   slot="end" placeholder="Movie name..."></ion-searchbar>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-img tabindex="-1" class="vrna-home-logo" src="assets/images/logo 2.png" alt="logo"></ion-img>
+        </ion-buttons>
+      </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content class="content my-5">
+    <ion-row class="main">
+      <div class="container-fluid head">
+        <h3 id="fav_cnt"  tabindex="0" class="actors">
+          <h4>Favorite: <span class="Favorite_count">{{ favouritesDataSource?.length }} Movies</span></h4>
+        </h3>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-spinner name="dots" *ngIf="isLoadingData"></ion-spinner>
+          <ion-text *ngIf="!isLoadingData && favouritesDataSource?.length === 0">
+            No records available on this Favorite Movies.
+          </ion-text>
+          <ng-container *ngIf="!isLoadingData && favouritesDataSource?.length > 0">
+            <ion-col class="view-category-card" size='12' size-xs='6' size-sm='4' size-md='3' size-lg='2' size-xl='2' size-xxl='2'
+              *ngFor="let favouritesDataSource   of favouritesDataSource; let i=index;" (keydown)="keypressOnFav($event,i,uniquePageId)">
+              <app-poster-card-tv [movieId]="uniquePageId" [sectionName]="'favorite'" [carouselIndex]="i" [sectionName]="'fav_index'" [cardData]="favouritesDataSource"></app-poster-card-tv>
+             </ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+  </ion-content>

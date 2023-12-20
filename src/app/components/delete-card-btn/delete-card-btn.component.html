@@ -1,3 +1,5 @@
-<ion-button fill="clear" (click)="onDelete()">
+<ion-button fill="clear" (click)="onDelete()" 
+(keydown)="keypressOnCardDelBtn($event, cardIndex)"
+class="arrow-navigable" tabindex="0" id="delCard-{{cardIndex}}">
   <ion-icon name="trash" color="danger"></ion-icon>
 </ion-button>

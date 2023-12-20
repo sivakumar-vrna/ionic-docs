@@ -1,0 +1,50 @@
+.card {
+  border: none;
+  width: 340px;
+  background-color: #1c1e21;
+  color: #fff;
+}
+
+.contain {
+  margin: 1rem 0 0 0;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .contain {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 27%;
+  }
+  .signup-link{
+    display: flex;
+    justify-content: flex-end;
+
+    margin-left: 23%;
+  }
+}
+
+.form-input {
+  position: relative;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.form-control {
+  max-height: 95%;
+  background-color: #dfe7f3;
+  text-indent: 24px;
+  font-size: 15px;
+}
+
+.form-control:focus {
+  background-color: #25272a;
+  box-shadow: none;
+  color: #fff;
+  border-color: #4f63e7;
+}
+
+.signup {
+  height: 50px;
+  font-size: 14px;
+}

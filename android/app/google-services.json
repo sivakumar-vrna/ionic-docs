@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:706306776113:android:fea1ae285edd575e144910",
+        "mobilesdk_app_id": "1:706306776113:android:6499ba7fc3ff7610144910",
         "android_client_info": {
-          "package_name": "io.ionic.starter"
+          "package_name": "com.vrna.customer"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "706306776113-8vvjhegjn34598qbovos7j2krommar9p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vrna.customer",
+            "certificate_hash": "6e728b51ae7c4167c00ec0dc05ae4d203579dcfe"
+          }
+        },
         {
           "client_id": "706306776113-i5i82n0gt2os9ijb83aka4sbfmm2b7re.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +37,13 @@
             {
               "client_id": "706306776113-i5i82n0gt2os9ijb83aka4sbfmm2b7re.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "706306776113-9gd34c3ev59ksu1jpb6v95vk080mo4sn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vrna.customer"
+              }
             }
           ]
         }

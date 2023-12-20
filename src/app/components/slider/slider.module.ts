@@ -9,12 +9,17 @@ import { CastSliderComponent } from './cast-slider/cast-slider.component';
 import { LazyLoadImagesModule } from 'ngx-lazy-load-images';
 import { ContinueCardModule } from '../continue-card/continue-card.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ViewportNotifierDirective } from '../../viewport-notifier.directive';
+import { TopCastSliderComponent } from './top-cast-slider/top-cast-slider.component';
+
 
 @NgModule({
   declarations: [
     BannerComponent,
     CarouselComponent,
-    CastSliderComponent
+    CastSliderComponent,
+    ViewportNotifierDirective,
+    TopCastSliderComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +33,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   exports: [
     BannerComponent,
     CarouselComponent,
-    CastSliderComponent
+    CastSliderComponent,
+    TopCastSliderComponent
   ]
 })
 export class SliderModule { }

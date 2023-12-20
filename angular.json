@@ -42,14 +42,14 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
-            "aot": false,
-            "vendorChunk": true,
+            "aot": true,
+            "vendorChunk": false,
             "extractLicenses": false,
             "buildOptimizer": false,
-            "sourceMap": true,
+            "sourceMap": false,
             "optimization": false,
-            "namedChunks": true,
-            "serviceWorker": true,
+            "namedChunks": false,
+            "serviceWorker": false,
             "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
@@ -58,15 +58,19 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/proxy.conf.js",
+                  "with": "src/proxy.conf.prod.js"
                 }
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "budgets": [
                 {
@@ -75,6 +79,41 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                },
+                {
+                  "replace": "src/proxy.conf.js",
+                  "with": "src/proxy.conf.staging.js"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "namedChunks": true,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             },
             "ci": {
               "progress": false
@@ -90,6 +129,12 @@
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
+            },
+            "staging": {
+              "browserTarget": "app:build:staging"
+            },
+            "development": {
+              "browserTarget": "app:build:development"
             },
             "ci": {}
           }
@@ -177,6 +222,90 @@
               "devServerTarget": "app:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/app/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "optimization": false,
+            "sourceMap": false,
+            "extractLicenses": false
+          },
+          "configurations": {
+            "development": {
+              "sourceMap": true,
+              "optimization": false
+            },
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/proxy.conf.js",
+                  "with": "src/proxy.conf.prod.js"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": true,
+              "extractLicenses": true
+            },
+            "staging": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                },
+                {
+                  "replace": "src/proxy.conf.js",
+                  "with": "src/proxy.conf.staging.js"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": true,
+              "extractLicenses": true
+            },
+            "ci": {}
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "app:build:development",
+              "serverTarget": "app:server:development"
+            },
+            "production": {
+              "browserTarget": "app:build:production",
+              "serverTarget": "app:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "app:build:production",
+              "serverTarget": "app:server:production"
+            },
+            "development": {
+              "browserTarget": "app:build:development",
+              "serverTarget": "app:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

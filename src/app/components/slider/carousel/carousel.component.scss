@@ -1,0 +1,8 @@
+.poster:focus {        
+    border-radius: 15px;
+    box-shadow: 8px 8px 8px 8px var(--ion-color-step-950);
+    transform: scale(0.90); 
+    transition: 0.3s;
+    outline: none;
+}
+//#carouselSwiper{min-height:120px !important;}

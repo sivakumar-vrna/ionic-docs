@@ -1,0 +1,67 @@
+.display{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.manage-profile{
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.fit-content {
+    object-fit:cover;
+}
+.center-content{
+    justify-content: center;
+}
+.profiles{
+    justify-content: center;
+    border: 1px solid white;
+    height: 12rem !important;
+    width: 12rem  !important;
+    object-fit:cover;
+    border-radius: 8px;
+}
+.add-profile{
+    min-height: 15rem !important;
+    min-width: 15rem  !important;
+    font-size: 180px;
+    font-weight: bolder;
+}
+.delete-profile{
+    font-size: 20px;
+    position: absolute;
+    left: 85%;
+    color: rgb(141, 0, 0);
+    // width: 50%;
+    // height: 10%;
+    // color: white;
+    // top: 0%;
+    // background-color: rgb(141, 0, 0);    
+    // margin: 20%;
+    // border-radius: 15px;
+}
+::ng-deep {
+    .profile-add-modal {    
+        --min-width : 100%;
+        --min-height : 100%;
+    }
+}
+.profiles:focus {      
+    border-radius: 15px;
+    box-shadow: 6px -6px -6px 6px var(--ion-color-step-950);
+    transform: scale(0.9);
+    transition: 0.3s;
+    outline: none;
+  }
+
+  
+  
+  @media screen and (max-width: 1024px) {
+    .profiles {
+      width: 6rem !important;
+      height: 6rem !important;
+    }
+  }
+  

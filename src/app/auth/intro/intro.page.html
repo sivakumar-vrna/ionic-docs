@@ -1,18 +1,21 @@
-<ion-content id="introPage">
-  <swiper #introSlide [config]="introOptions">
+<ion-content  id="introPage">
+  <swiper #introSlide [config]="introOptions" (keydown)="keypressOnSwiper($event)">
     <ng-template swiperSlide>
-      <div class="d-flex flex-column h-100">
-        <img class="intro-slide-img" src="assets/images/intro/intro-media-1.png" />
+      <div tabindex="0" id="intro_page" class="d-flex flex-column h-100 arrow-navigable intro" 
+        (keydown)="keypressOnFirstSlide($event)">
+        <img class="intro-slide-img" src="assets/images/intro/intro-media-1.png" 
+        loading="lazy" />
         <ion-text class="my-auto ion-padding ion-text-center" color="dark">
-          <h2>Welcome to VRNA</h2>
+          <h2>{{i18n_IntroPageLabels.introslide_1_title}}<!--Welcome to VRNA--></h2>
           <p>
-            <b>VRNA</b> is your go to video streaming app for the best of
-            video
-            contents.
+            {{i18n_IntroPageLabels.introslide_1_descr}}
+            <!--VRNA is your go to video streaming app for the best of
+            video contents.-->
           </p>
         </ion-text>
-        <ion-text class="ion-padding ion-text-end" color="dark" *ngIf="isDevice">
-          <ion-button (click)="next()" fill="solid" color="dark">
+        <ion-text class="ion-padding ion-text-end" color="dark" *ngIf="showSignupOptOnIntroScreen">
+          <ion-button id="btnFirstScreen" tabindex="0" class="arrow-navigable" (click)="next()" 
+          fill="solid" color="dark">
             <ion-icon name="arrow-forward-outline"></ion-icon>
           </ion-button>
         </ion-text>
@@ -20,42 +23,53 @@
     </ng-template>
 
     <ng-template swiperSlide>
-      <div class="d-flex flex-column h-100">
-        <img class="intro-slide-img" src="assets/images/intro/intro-media-2.png" />
+      <div tabindex="0" class="d-flex flex-column h-100 arrow-navigable intro" 
+        (keydown)="keypressOnSecondSlide($event)">
+        <img class="intro-slide-img" src="assets/images/intro/intro-media-2.png" loading="lazy" />
         <ion-text class="my-auto ion-padding ion-text-center" color="dark">
-          <h2>Theater Quality</h2>
+          <h2>{{i18n_IntroPageLabels.introslide_2_title}} <!--Theater Quality--></h2>
           <p>
-            <b>VRNA</b> is an platform build to give you high quality in
-            theater
-            experience.
+            {{i18n_IntroPageLabels.introslide_2_descr}} <!--VRNA is an platform build to give you high quality in theater experience. -->
           </p>
         </ion-text>
-        <ion-text class="ion-padding ion-text-end" color="dark" *ngIf="isDevice">
-          <ion-button (click)="next()" fill="solid" color="dark">
+        <ion-text class="ion-padding ion-text-end" color="dark" *ngIf="showSignupOptOnIntroScreen">
+          <ion-button id="btnSecondScreen" (click)="next()" fill="solid" 
+          color="dark">
             <ion-icon name="arrow-forward-outline"></ion-icon>
           </ion-button>
         </ion-text>
       </div>
     </ng-template>
 
-    <ng-template swiperSlide>
-      <div class="d-flex flex-column h-100">
-        <img class="intro-slide-img" src="assets/images/intro/intro-media-3.png" />
+    <ng-template  swiperSlide>
+      <div (keydown)="keypressonLastslide($event)"  tabindex="0" 
+        class="d-flex flex-column h-100 arrow-navigable intro">
+        <img class="intro-slide-img" src="assets/images/intro/intro-media-3.png" 
+        loading="lazy" />
         <ion-text class="my-auto ion-padding ion-text-center" color="dark">
-          <h2>Get Started</h2>
+          <h2>{{i18n_IntroPageLabels.introslide_3_title}} <!--Get Started--></h2>
           <p>
-            <b>VRNA</b> all available, ad-free, with a world class customer
-            experience.
+            {{i18n_IntroPageLabels.introslide_3_descr}}
+            <!--VRNA all available, ad-free, with a world class customer experience.-->
           </p>
-          <ion-button (click)="start('/auth/login')" expand="block" fill="solid" color="primary" *ngIf="isDevice">Login
+          <ion-button   id="btnThirdScreenLogin" class="arrow-navigable" tabindex="0"
+           (click)="start('/auth/login')" expand="block" fill="solid" color="primary" 
+           *ngIf="showSignupOptOnIntroScreen">{{i18n_IntroPageLabels.login}}
           </ion-button>
-          <ion-button (click)="start('/auth/signup')" expand="block" fill="solid" color="secondary" *ngIf="isDevice">Signup
+          <ion-button class="arrow-navigable" tabindex="0" (click)="start('/auth/signup')" 
+          expand="block" fill="solid" color="secondary" 
+          *ngIf="showSignupOptOnIntroScreen">{{i18n_IntroPageLabels.signup}}
           </ion-button>
-          <p class="terms">
-            By signing up, you agree to our <a [routerLink]="['/terms']">Terms of Service</a> and <a
-              [routerLink]="['/policy']">Privacy Policy</a>.
-          </p>
+          <p class="terms" *ngIf="showSignupOptOnIntroScreen">
+            {{i18n_IntroPageLabels.by_signin_you_agree}} <a tabindex="-1" 
+            [routerLink]="['/terms']">{{i18n_IntroPageLabels.footer_terms_of_use}}</a> and <a
+              [routerLink]="['/policy']" tabindex="-1">{{i18n_IntroPageLabels.footer_privacy_policy}}</a>.
+          </p>         
+
         </ion-text>
+
+        
+
       </div>
     </ng-template>
 

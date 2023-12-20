@@ -13,6 +13,7 @@ export class IntroGuard implements CanLoad {
     route: Route,
     segments: UrlSegment[]): Promise<boolean> {
     const hasSeenIntro = await Storage.get({ key: INTRO_KEY });
+    //let hasSeenIntro:any = {};
     if (isPlatform('capacitor')) {
       if (hasSeenIntro && (hasSeenIntro.value === 'true')) {
         return true;

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<div class="mainContent">
+  <div no-margin margin-top class="feedbackCard">
+    <ion-row class="textCenter">
+      <div class="share-text">Share with buddies</div>
+    </ion-row>
+    <div class="logoList">
+      <ion-row>
+        <ion-col size="12" class="textCenter">
+          <!-- <a
+            href="whatsapp://send?text="
+            title="Share On Whatsapp"
+            onclick="window.open('whatsapp://send?text=Hey%21%20Check%20out%20this%20amazing%20movie%20on%20VRNA%0ANow%20Playing%20at%20' + encodeURIComponent(document.URL)); return false;"
+          >
+          <ion-icon name="logo-whatsapp" size="large" class="socialLogo" color="success"></ion-icon>
+          </a> -->
+
+          <a [href]="getWhatsAppShareLink()" target="_blank"
+          (keydown)="keypressOnSocialBtn($event, 1)" id="btn-1" 
+          tabindex="0" class="arrow-navigable">
+            <ion-icon name="logo-whatsapp" size="large" class="socialLogo" color="success"></ion-icon>
+          </a>
+
+          <a
+            href="https://www.facebook.com/sharer/sharer.php?u={{encoded}}&quote={{share_text}}"
+            (keydown)="keypressOnSocialBtn($event, 2)" id="btn-2"
+            target="_blank"
+            title="Share on Facebook"
+            tabindex="0"
+            class="arrow-navigable"
+          >
+          <ion-icon name="logo-facebook" size="large" class="socialLogo"></ion-icon>
+          </a>
+
+          <a
+            href="https://twitter.com/intent/tweet/?text={{share_text}}"
+            (keydown)="keypressOnSocialBtn($event, 3)" id="btn-3"
+            target="_blank"
+            title="Share on Twitter"
+            tabindex="0"
+            class="arrow-navigable"
+          >
+          <ion-icon name="logo-twitter" size="large" class="socialLogo" color="secondary"></ion-icon>
+          </a>
+
+          <a
+            href="mailto:?subject=Sharing a movie from VRNA Plex&amp;body={{share_text}}"
+            (keydown)="keypressOnSocialBtn($event, 4)" id="btn-4"
+            target="_blank"
+            title="Share by Email"
+            tabindex="0"
+            class="arrow-navigable"
+          >
+          <ion-icon name="mail" size="large" class="socialLogo" color="success"></ion-icon>
+          
+        </a>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-button (keydown)="keypressOnSocialBtn($event, 5)" id="btn-5" 
+    class="btn arrow-navigable" tabindex="0" color="primary" (click)="closeModal()">
+      Close
+    </ion-button>
+  </div>
+</div>

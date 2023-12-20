@@ -1,16 +1,30 @@
 <ion-toolbar class="home-topbar">
-  <ion-img slot="start" class="vrna-home-logo" src="assets/images/logo.png" alt="logo" (click)="onNavigate('/home')">
+  <ion-img tabindex="-1" slot="start" class="vrna-home-logo" src="assets/images/logo.png" alt="logo" (click)="onNavigate('/home')">
   </ion-img>
 
   <ion-buttons class="home-menu-btn" slot="end">
-    <ion-button color="primary" size="small" (click)="getLocation()">
+    <ion-button  (keydown)="keypressOnLoaction($event)"  color="primary" size="small" (click)="getLocation()" tabindex="0" class="arrow-navigable poster">
       {{currency}} <ion-icon name="location-outline"></ion-icon>
     </ion-button>
-    <ion-toggle [checked]="currentTheme" (ionChange)="onThemeChange($event)"></ion-toggle>
-    <ion-button class="ion-margin-start me-2" Fill="clear" (click)="onNavigate('/search')">
+    <ion-toggle (keydown)="keypressOnToggle($event)" [checked]="currentTheme" (ionChange)="onThemeChange($event)" tabindex="0" class="arrow-navigable poster"></ion-toggle>
+    <ion-button id="Searhicon_home" (keydown)="keypressOnSearchIcon($event)" class="ion-margin-start me-2 arrow-navigable poster" Fill="clear" (click)="onNavigate('/search')" tabindex="0">
       <ion-icon class="home-search-icon" name="search-outline"></ion-icon>
     </ion-button>
-    <ion-menu-button></ion-menu-button>
+
+    <!-- Notifications -->
+    <ion-button (keydown)="keypressOnNotification($event)"  tabindex="0" class="arrow-navigable poster" id="bottom-start">
+      <ion-icon name="notifications-outline" class="notification-icon"></ion-icon>
+    </ion-button>
+    <ion-badge color="danger" slot="end" class="notification-badge">{{notification_length}}</ion-badge>
+    <ion-popover trigger="bottom-start" side="bottom" alignment="start">
+      <ng-template>
+        <ion-content class="ion-padding">
+          <app-notifications [notifications]='notifications'></app-notifications>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+    
+    <ion-menu-button (keydown)="keypressOnMenu($event)"  class="arrow-navigable poster" tabindex="0" id="btnMnu"></ion-menu-button>
   </ion-buttons>
 
 </ion-toolbar>

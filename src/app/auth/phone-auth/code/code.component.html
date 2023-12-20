@@ -1,0 +1,15 @@
+<div class="otp">
+  <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+  <ion-col class="ion-padding-top" size="12">
+    <ion-button color="primary mx-auto mt-4"  (click)="handleClick()" type="submit" expand="block" [disabled]="isSubmitted" >Verify Otp
+      <ion-spinner name="bubbles" *nIf="isSubmitted" ></ion-spinner>
+    </ion-button>
+  </ion-col>
+</div>
+<ion-col class="signup-link ion-no-padding ion-no-margin" size="12">
+    <p class="fs-12 pointer">
+      Have account already? <ion-text color="secondary" [routerLink]="['/auth/login']"> Sign In to
+        your account</ion-text>
+    </p>
+  </ion-col>
+

@@ -1,4 +1,19 @@
-<ion-button class="favorites-btn" [color]="favIcon === 'heart' ? 'danger' : 'primary'" fill="clear" (click)="onFavorite()" [disabled]="loading">
-  <ion-icon [name]="favIcon" *ngIf="!loading"></ion-icon>
-  <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
-</ion-button>
+<ion-row>
+  <div class="ms-auto my-auto btn-main">
+    <ion-button [id]="'btnFav'+'_'+uniquePageId" class="btn-trans arrow-navigable" tabindex="0" 
+      [color]="favIcon === 'heart' ? 'danger' : 'btn-trans'" (click)="onFavorite()" 
+      [disabled]="loading">
+    <ion-icon  [name]="favIcon" *ngIf="!loading"></ion-icon>
+    <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
+  </ion-button>
+</div>
+<div class="btn-overlay"></div>
+</ion-row>
+<ion-row class="ion-justify-content-center">
+  <div>
+      <ion-text class="text-dec">{{btnDesc}}</ion-text>    
+  </div>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <span>&nbsp;</span>
+  </ion-row>

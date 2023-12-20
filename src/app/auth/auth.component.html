@@ -1,40 +1,54 @@
 <ion-content class="auth-page">
   <ion-grid class="h-100 auth-page_main ion-no-padding">
     <ion-row class="h-100 ion-align-items-center">
-      <ion-col class="auth-page_left h-100 ion-hide-md-down ion-no-padding ion-no-margin" size-md="4" size-lg="4"
-        size-xl="5">
+      <ion-col class="auth-page_left h-100 ion-hide-md-down ion-no-padding ion-no-margin" 
+        size-md="4" size-lg="4" size-xl="5" size-xxl="5">
         <app-intro></app-intro>
       </ion-col>
-      <ion-col class="auth-page_right ion-padding mx-auto" size="12" size-sm="12" size-md="8" size-lg="8" size-xl="7">
+      <ion-col class="auth-page_right ion-padding mx-auto" size="12" 
+      size-sm="12" size-md="8" size-lg="8" size-xl="7" size-xxl="7">
       
         <ion-row class="h-100">
           <ion-col size="12">
-            <ion-img class="auth-logo-img" src="assets/images/logo.png"></ion-img>
+            <ion-img id="Vrna_logo" tabindex="0" class="auth-logo-img" src="assets/images/logo.png"></ion-img>
           </ion-col>
           <ion-col size="12">
             <router-outlet></router-outlet>
           </ion-col>
 
-          <ion-col class="ion-no-padding ion-no-margin" size="12">
+          <ion-col class="ion-no-padding ion-no-margin" size="12" >
             <p class="social-btn-divider">or</p>
           </ion-col>
 
           <!-- Social Login -->
           <ion-col class="ion-padding-vertical" size="12">
-            <app-google-auth></app-google-auth>
-            <app-fb-auth></app-fb-auth>
+            <app-google-auth [btnLabel]="i18n_AuthPageLabels.signin_with_google"></app-google-auth>
+            <!-- <app-fb-auth [btnLabel]="i18n_AuthPageLabels.signin_with_facebook"></app-fb-auth> -->
           </ion-col>
-
           <ion-col class="ion-padding-vertical" size="12">
-            <ion-text>
-             
-            </ion-text>
+              <div class="terms ion-text-center terms">
+                {{i18n_AuthPageLabels.by_signin_you_agree}} <a (keydown)="keypressOnterms($event)" class="arrow-navigable" tabindex="0"  [routerLink]="['/terms']">{{i18n_AuthPageLabels.footer_terms_of_use}}</a> and <a
+                class="arrow-navigable"   (keydown)="keypressOnprivacy($event)" tabindex="0"  [routerLink]="['/policy']">{{i18n_AuthPageLabels.footer_privacy_policy}}</a>.
+                
+                <span *ngIf="user_browser_country" class="terms ion-text-center">
+                  <br />{{i18n_AuthPageLabels.your_location}}: {{user_browser_country}}
+                </span>
+              </div>
+
+              &nbsp;<br />
+              <div id="container flex" class="text-center">
+                <ion-button [id]="'locale_Mnu-' + i" size="small" fill="clear" tabindex="0" class="flex box arrow-navigable" 
+                  (click)="switchLocale(locale)" 
+                  *ngFor="let locale of locales;let i=index">
+                  {{locale.title}}
+                </ion-button>
+              </div>
+
+
           </ion-col>
         </ion-row>
-        <p class="terms">
-          By signing in, you agree to our <a [routerLink]="['/terms']">Terms of Service</a> and <a
-            [routerLink]="['/policy']">Privacy Policy</a>.
-        </p>
+        
+        
       </ion-col>
     </ion-row>
   </ion-grid>

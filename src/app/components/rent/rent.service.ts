@@ -14,7 +14,6 @@ export class RentService {
   ) { }
 
   async onRent(data) {
-    console.log(data);
     const modal = await this.modalController.create({
       component: RentComponent,
       cssClass: 'rent-modal',
@@ -27,7 +26,6 @@ export class RentService {
     modal.onDidDismiss().then((modelData) => {
       if (modelData.data) {
         this.orchRentService.userRentedMovies();
-        console.log('Modal Data Success: ' + modelData.data);
       }
     });
     return await modal.present();

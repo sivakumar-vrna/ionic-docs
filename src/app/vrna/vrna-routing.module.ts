@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from 'src/app/guards/auth.guard';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { MyAccountComponent } from './pages/my-account/my-account.component';
 import { VrnaPage } from './vrna.page';
+
 
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'movie/:id',
-        loadChildren: () => import('./pages/movie-details/movie-details.module').then(m => m.MovieDetailsPageModule),
+        loadChildren: () => import('src/app/vrna/pages/movie-details/movie-details.module').then(m => m.MovieDetailsPageModule)
       },
       {
         path: 'profile',
@@ -39,6 +40,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/support/support.module').then(m => m.SupportPageModule),
       },
       {
+        path: 'my-account',
+        component:MyAccountComponent
+      },
+      {
         path: 'transactions',
         component: TransactionsComponent,
       },
@@ -50,6 +55,34 @@ const routes: Routes = [
         path: 'filter-details',
         loadChildren: () => import('./pages/filter-details/filter-details.module').then(m => m.FilterDetailsModule),
       },
+      {
+        path:'movie-details',
+        loadChildren:()=> import('./pages/movie-details/movie-details.module').then(m => m.MovieDetailsPageModule),
+      },
+      {
+        path:'social-share',
+        loadChildren:()=> import('./pages/social-share/social-share.module').then(m => m.SocialShareModule),
+      },
+      {
+        path:'switch-profiles',
+        loadChildren:()=> import('./pages/switch-profiles/switch-profiles.module').then(m => m.SwitchProfilesModule),
+      },
+      {
+        path:'add-profile',
+        loadChildren:()=> import('./pages/add-profile/add-profile.module').then(m => m.AddProfileModule),
+      },
+      {
+        path:'actor-page-mobile',
+        loadChildren:()=> import('./pages/actor-page/actor-page-mobile/actor-page.module').then(m => m.ActorPageMobileModule),
+      },
+      {
+        path:'actor-page-web',
+        loadChildren:()=> import('./pages/actor-page/actor-page-web/actor-page-web.module').then(m => m.ActorPageWebModule)
+      },
+      {
+        path:'actor-page-tv',
+        loadChildren:() => import('./pages/actor-page/actor-page-tv/actor-page-tv.module').then(m => m.ActorPageTvModule)
+      }
     ]
   }
 ];

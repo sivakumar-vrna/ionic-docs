@@ -6,7 +6,8 @@
 }
 
 .side-menu-list {
-    height: 90%;
+    max-height: 90% !important;
+    overflow-y: scroll;
 
     ion-item {
         &.side-menu-active {
@@ -26,3 +27,12 @@
         width   : 100%;
     }
 }
+
+.poster:focus {
+    border-radius: 15px;
+    box-shadow: 0 0 6px 6px var(--ion-color-step-950);
+    transform: scale(0.90); 
+    transition: 0.3s;
+    outline: none;
+  }
+  

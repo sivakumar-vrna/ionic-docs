@@ -1,13 +1,20 @@
-#banner-main {
+@import '~video.js/dist/video-js.css';
+.hide{display:none;}
+.show{display:block;}
+#divMutedWarning{position:absolute; padding:10px; width:100%; left:0; top:0; z-index:100; color:orange; text-align:center;}
 
+#banner-main {
+          
     .swiper-slide {
 
         .banner-img {
             margin: 1px auto;
-
+            //background-image   : url('/assets/images/movie-posters-placeholder.jpg');
+            background-repeat  : no-repeat;
+            //border-radius: 20px;
             img {
-                border-radius: 20px;
-                box-shadow   : 0 0.225rem 0.29rem rgb(0 0 0);
+                //border-radius: 20px;
+                //box-shadow   : 0 0.225rem 0.29rem rgb(0 0 0);
             }
         }
     }
@@ -15,20 +22,17 @@
     @media only screen and (max-width: 1200px) {
         .swiper {
 
+          /*  
             .swiper-button-prev,
             .swiper-button-next,
             .swiper-pagination {
                 display: none;
             }
+          */
         }
-      
-        // .generes{
-        //     position:fixed;
-        // }
-        // .swiper-slide {
-        //     // margin-bottom: 10px;
-        // }
-    }
+      }
+
+       
 
     @media only screen and (min-width: 1200px) {
         .swiper {
@@ -68,40 +72,218 @@
             }
         }
     }
-    
+  }
 
-    // .swiper-slide {
-    //     //margin-bottom: 2em;
-    // }
-    
-}
-
-.container{
-    width: 159px;
-    padding: 16px;
-    background: rgb(24 37 44);
-    border-radius: 9px;
-    margin: 5px;
-    color: white;
-    cursor: pointer;
-}
-.generes{
-    left: 85px;
+  .banner-image {
     position: relative;
-}
-.generes:hover{
-    background-color: rgb(229, 32, 88);
-}
+    display: inline-block; 
+    align-items: center;
+    justify-content: center;
+    min-width:100%;
+    object-fit: fill;            
+    background-color: var(--ion-background-color);
+  }
 
-@media only screen and (max-width: 768px) {
-    .container {
-      width: 100%;
-      margin: 0;
-      justify-content: center;
-      align-items: center;
+  .video-div {
+    position: absolute;    
+    align-items: center;
+    justify-content: center;
+    min-width:100%;
+    object-fit: fill;        
+    border-radius: 20px;    
+    background-color: var(--ion-background-color);
+  }
+
+  .overlay-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;    
+    //opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+  }
+
+  .banner-img {
+    position: relative;
+    display: inline-block; 
+    height: 100%;
+    object-fit: fill;
+    min-width:100%;
+    align-items: center;
+    justify-content: center;    
+  }
+  
+  .trailer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;    
+    //opacity: 0;
+    pointer-events: none;    
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    background-color: #000000;
+  }
+  
+  .banner-img:hover .trailer{
+    //opacity: 1;
+    //pointer-events: auto;
+  }
+  
+  .banner-img img {
+    display:inline-block;
+    margin-bottom: 2px;
+  }
+       
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 50px;
+    border-radius: 10px 10px 10px 10px ;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.5); 
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  .play-button ion-icon {
+    font-size: 25px;
+    color: #fff;
+  }
+  
+  .play-button:hover {
+    width: 90px;
+    height: 50px;
+    background-color: var(--ion-color-primary);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .play-button.hidden {
+    display: none;
+  }
+
+  .movie-details {
+    position: absolute;
+    bottom: 5px;
+    //left: 10px;
+    color: #fff;
+    width:100%;
+    //width: 300px;
+    //display: flex;
+    //flex-direction: column;
+    //align-items: flex-start;
+    text-align: center;
+  }
+  
+  .movie-details h4 {
+    font-size: 1.5vw;
+    margin-bottom: 3px;
+    font-family:'Lato' ;
+    font-display: swap;
+    font-weight: bolder;
+  }
+  
+  .details-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+  }
+  
+  .details-row p {
+    margin-right: 10px;
+    font-size: 1vw;
+    font-family: 'Lato';
+    font-display: swap;
+    font-weight: bold;
+  }
+  
+  .mute-overlay {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var( --ion-background-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    right: 100px;
+    bottom: 10px;
+    z-index: 9999;
+  }
+  .subtitle-button{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:  rgba(0, 0, 0, 0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    right: 50px;
+    bottom: 10px;
+    z-index: 9999;
+
+  }
+  .subtitle-button.subtitle-button-disabled {
+    opacity: 0.5;
+  }
+  .subtitle-content {
+    display: none;
+  }
+  
+  .subtitle-content.show {
+    display: block;
+  }
+  @media only screen and (max-width: 768px) {
+    .mute-overlay {
+      right: 5px;
+      margin-left: auto;
+      left: 5px;
     }
-    .generes {
-      left: 0;
-      text-align: center;
+    .subtitle-button{
+      right: 50px;
+      margin-left: auto;
     }
   }
+  
+  @media only screen and (max-width: 768px) {
+    .movie-details {
+      h4 {
+        font-size: 2vw;
+      }
+  
+      .details-row p {
+        font-size: 1vw;
+      }
+  
+      .rent-button {
+        //font-size: 1.5vw;
+        //width: 16vw;
+        //height: 4vw;
+      }
+    }
+  }
+  
+  .hidden {
+    display: none;
+  }
+
+  .poster:focus {
+    border-radius: 20px;
+    box-shadow: var(--ion-color-step-950) 0px 8px 12px;
+    transform: scale(0.98); 
+    transition: 0.3s;
+    outline: none;
+  }
+  

@@ -1,0 +1,41 @@
+.textCenter {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.socialLogo {
+  width: 50px;
+  height: 50px;
+  margin-left: 12px;
+}
+
+.logoList {
+  margin-top: 30px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.btn {
+  float: right;
+  font-family: "Lato";
+  font-size: 14px;
+}
+.mainContent {
+  flex: 1;
+  background: transparent !important;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  display: flex;
+}
+.feedbackCard {
+  width: 100%;
+  border-radius: 4px;
+  background-color: white;
+}
+.share-text {
+  font-size: 16px;
+  font-family: "Lato";
+}

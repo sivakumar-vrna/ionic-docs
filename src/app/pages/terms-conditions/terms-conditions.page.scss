@@ -5,3 +5,14 @@
     padding-left : 5%;
     font-size    : 16px;
 }
+.arrow-navigable:focus{
+  outline: 3px #e90505 dotted;
+}
+.highlightonfocus:focus{outline:#ccc !important;}
+
+.head{
+  background-color:var( --ion-background-color);
+}
+.arrow-navigable {
+  cursor: pointer;
+}

@@ -2,3 +2,7 @@
     padding  : 0 5%;
     max-width: 775px;
 }
+ion-list {
+    max-height: 200px; 
+    overflow-y: auto; 
+}

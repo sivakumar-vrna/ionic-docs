@@ -2,11 +2,6 @@
     .reset-page_main {
         margin : 0;
         padding: 0;
-
-        // .reset-page_left {
-        //     background-color: rgb(var(--ion-color-primary-rgb));
-        // }
-
         .reset-page_right {
             max-width: 375px !important;
 
@@ -18,7 +13,8 @@
             .reset-form {
                 .form-label {
                     color      : #434343;
-                    font-family: 'Nunito';
+                    font-family: 'Lato';
+                    font-display: swap;
                 }
                 .resend-code{
                     font-size: 12px;
@@ -62,5 +58,40 @@
         border-radius: 20px;
     }
 
+   
+}
+ .resend-code-link{
+    font-size: 12px;
+    position: relative; 
+    left: 15vw;
+    cursor: pointer;
+    color : var(--ion-color-secondary);
+    
+    &:hover{
+    color: var(--ion-color-primary);
+}
+ }
 
+.loign-link {
+    font-size: 12px;
+
+    a {
+        color : var(--ion-color-secondary);
+        cursor: pointer;
+        position:absolute;
+
+
+        &:hover {
+            color: var(--ion-color-primary);
+        }
+    }
+    
+   
+}
+input{
+    border:0 none; 
+    background:#ffffff;
+}
+input:focus{
+    background:#f1f1f1;
 }

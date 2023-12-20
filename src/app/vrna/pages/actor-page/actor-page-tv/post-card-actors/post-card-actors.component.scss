@@ -1,0 +1,77 @@
+.poster-card-tv {    
+    max-width: 95%;
+    max-height: 100%;
+    transition: transform 0.3s, border-color 0.3s;
+    
+  .post-img {      
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin: 1px auto;
+  }
+}
+.cast-name{
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  color: #fff;
+}
+ //tv scale action
+.poster-card-tv:focus {      
+  box-shadow: 6px -6px -6px 6px var(--ion-color-step-950);
+  transform: scale(1.1);
+  transition: 0.3s;
+  outline: none;
+
+}
+.poster-card-tv:focus .post-img{
+  border: 3px solid #e2ba1f;
+  box-shadow:0 0 40px 0  #e2ba1f;
+ 
+}
+.poster-card-tv:focus .post-img{
+  border: 3px solid #e2ba1f;
+  box-shadow:0 0 40px 0  #e2ba1f;
+
+}
+.poster-card-tv:focus .post-moviename h4{
+   color: #d7af1c;
+   padding-bottom: 25px;
+}
+
+
+//Actor-page  css style
+.pc-img-actor-movies{      
+  background-image: url("/assets/images/movie-posters-placeholder.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: 1px auto;
+  box-shadow: 0px 8px 28px 0px black; 
+  }
+.pc-img-actor-movies:hover {
+  opacity: 0.80;
+  transform: scale(0.9);
+  transition: 0.3s;
+  box-shadow: none !important;
+}
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; 
+  transition: opacity 0.3s ease-in-out; 
+  
+}
+.play-icon ion-icon{
+  background-color:#00c6fe;
+  color: white;  
+  font-size: 50px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.poster-card-main:hover .play-icon {
+  opacity: 1;
+}
+

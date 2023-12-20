@@ -1,0 +1,24 @@
+<div class="contain">
+  <div class="row d-flex align-items-center justify-content-center">
+    <form class="col-md-6">
+      <div class="card px-5 py-5">
+        <div class="form-input">
+          <input type="text" name="phoneNumber"  class="form-control"
+            placeholder="Enter Phone Number" [(ngModel)]="phoneNumber" min="10" max="15">
+        </div>
+         <ion-col class="ion-padding-top" size="12">
+          <ion-button color="primary mx-auto" (click)="getOTP()" type="submit" expand="block" [disabled]="isSubmitted" >Get Otp
+            <ion-spinner name="bubbles" *ngIf="isSubmitted" ></ion-spinner>
+          </ion-button>
+        </ion-col>
+       
+        <div id="sign-in-button"></div>
+      </div>
+    </form>
+   <ion-col class="signup-link ion-no-padding ion-no-margin" size="12">  
+     <p class="-12 pointefsr">
+      Have account already? <ion-text color="secondary" [routerLink]="['/auth/login']"> Sign In to
+        your account</ion-text>
+    </p> 
+   </ion-col>
+  </div>

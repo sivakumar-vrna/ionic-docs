@@ -1,0 +1,58 @@
+<ion-content>
+  <ion-row class="first">
+    <!-- firt col -->
+    <ion-col size="2" class="side-bar" (keydown)="KeypressOnsidebar($event)" >
+      <ion-card-content class="my-3 w-100 d-flex flex-column justify-content-center align-items-center">
+        <ion-avatar id="avatar-img"  (keydown)="KeypressOnAllAvatar($event)" t tabindex="0"  class="rounded-image arrow-navigable icons">
+          <ion-img *ngIf="pId == 'false'" [src]="userImage"></ion-img>
+          <ion-img *ngIf="pId == 'true'" [src]="multiUserImage"></ion-img>
+        </ion-avatar>
+        <ion-label class="Username">
+          <h3 *ngIf="pId == 'false'">Hi,{{name}}</h3>
+          <h3 *ngIf="pId == 'true'">Hi,{{multiUsername}}</h3>
+         </ion-label>
+        
+         <ion-row class="my-3 mx-3">
+          <div class="search-icon" *ngFor="let menu of menus">
+            <a tabindex="0" [routerLink]="menu.link" routerLinkActive="menu-active" [class.menu-active]="menu.id === menuActive">
+              <ion-icon  (keydown)="KeypressOnAllSearch($event)"  id="search-icon" tabindex="0" class="arrow-navigable icons" *ngIf="menu.id === 5" name="search-sharp"></ion-icon>
+            </a>
+          </div>
+         </ion-row>
+         
+        <ion-row    class="my-4 mx-3 center-row">
+          <div class="center-icons">
+            <li tabindex="0" class="nav-item" *ngFor="let menu of menus">
+              <a [routerLink]="menu.link" routerLinkActive="menu-active" [class.menu-active]="menu.id === menuActive">
+                <ion-img id="home_icon"   (keydown)="KeypressOnHome($event)" tabindex="0"*ngIf="menu.id === 1" class="home-img arrow-navigable icons" src="assets/icons/logo-1024px.png"></ion-img>
+                <i id="All_movies" (keydown)="KeypressOnAllMovies($event)"  tabindex="0" *ngIf="menu.id === 2" class="fas fa-duotone fa-film arrow-navigable icons"></i>
+                <ion-icon id="Favorite_icon"  (keydown)="KeypressOnFav($event)" tabindex="0" class="arrow-navigable icons" *ngIf="menu.id === 3" name="heart-outline"></ion-icon>
+                <i  id="actors_icon" (keydown)="KeypressOnAllActors($event)" tabindex="0" *ngIf="menu.id === 4" class="fas fa-duotone fa-masks-theater arrow-navigable icons"></i>
+              </a>
+            </li>
+          </div>
+        </ion-row>
+        
+        <ion-row class="my-2 mx-3">
+          <div class="setting-icon" *ngFor="let menu of menus">
+            <a [routerLink]="menu.link" routerLinkActive="menu-active" [class.menu-active]="menu.id === menuActive" (click)="onMenuClick(menu.id)">
+              <ion-icon (keydown)="KeypressOnSetting($event)" id="setting-icon" tabindex="0" class="arrow-navigable icons" *ngIf="menu.id === 6"  name="settings-sharp"></ion-icon>
+            </a>
+          </div>
+         </ion-row>
+
+         <ion-row  class="mx-3">
+            <ion-button  (keydown)="KeypressOnbackBtn($event)" id="back_btn"  tabindex="0" class="back_btn arrow-navigable icons" (click)="Backtohome()" fill="clear">back</ion-button>
+         </ion-row>
+        </ion-card-content> 
+    </ion-col>
+
+    <!-- second col -->
+    <ion-col  class="second-col" size="10" >
+      <router-outlet></router-outlet>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+
+

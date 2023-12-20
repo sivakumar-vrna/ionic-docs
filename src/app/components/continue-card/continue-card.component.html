@@ -1,10 +1,10 @@
-<div class="ion-no-padding ion-no-margin continue-card-main" (click)="onContinueWatch()">
+<div tabindex="0" id="{{sectionName}}-{{carouselIndex}}" class="arrow-navigable poster ion-no-padding ion-no-margin continue-card-main" (click)="onContinueWatch()">
   <div class="card-img" lazy-load-images>
-    <img [attr.data-src]="cardData.posterurl" loading="lazy" />
-    <ion-progress-bar class="continue-watch-progress" color="secondary" [value]="cardData.percentWatched"></ion-progress-bar>
+    <img [attr.data-src]="cardData.moviebannerurl" loading="lazy" />
+    <ion-progress-bar class="continue-watch-progress" color="success" [value]="cardData.percentWatched"></ion-progress-bar>
   </div>
 
-  <ion-label class="rented-ribbon" *ngIf="cardData.isRented">
+  <!--<ion-label class="rented-ribbon" *ngIf="cardData.isRented">
     <span>Rented</span>
-  </ion-label>
+  </ion-label>-->
 </div>

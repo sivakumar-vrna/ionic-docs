@@ -1,0 +1,122 @@
+    //topbar
+    ::ng-deep #search_all_actors .searchbar-search-icon {
+        position: absolute;
+        margin-left: 84% !important;
+        cursor: pointer; 
+        color:#54717f;
+    }
+
+    ::ng-deep .searchbar .searchbar-input {
+        position: relative;
+        background-color:#16262ff0; 
+        align-items: start;
+        justify-content: start; 
+    }
+   
+    .searchbar {
+        position: relative;
+        --placeholder-color: initial;
+        text-align: start;
+    }
+    .vrna-home-logo {
+        height      : 40px;
+        padding-left: 5px;
+    }
+
+    .content{
+        position:relative;
+        --ion-background-color:#0a151b;
+        top: 20px;
+        left: 15px;
+        width: 95%;
+        height: 80%;
+    }
+    
+    .topbar{
+        position: relative;
+        --background: #0a151b; 
+        width: 97%;
+    }
+    .topbar-label{
+        position: relative;
+        top: 10px;
+        color:#54717f;
+        text-transform: none;
+        align-items: start; 
+        font-size: 20px;
+    }
+    //main content
+    .main{
+        position: relative;
+        
+    }
+    .head h3{
+        position: relative;
+        font-size: 30px;
+        font-weight: 900;
+        gap: 10px;
+    }
+    .all {
+        color: #ffffff;
+    }
+    .actors {
+        color:#e2ba1f; 
+        letter-spacing: 0.1em;
+
+    }
+    
+    //image
+    .image-container {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        overflow: hidden;
+    }
+    .cast-item {
+        cursor: pointer;
+        width: 160px;
+        text-align: center;
+        position: relative;
+        transition: transform 0.3s, border-color 0.3s;
+    }
+    .cast-item:hover{
+        transform: scale(1.1); 
+        color: #d8b31e;
+        z-index: 1;
+        position: relative;
+    }
+    .cast-item:hover h4{
+        color: #d8b31e;
+        background-color: transparent;
+        z-index: 1;
+    }
+    .cast-item:hover .actor-img{
+        border: 4px solid#e2ba21; 
+        position: absolute;
+        box-shadow:0 0 30px 0  #e2ba1f;
+    }
+    .actor-img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+    }
+    .cast-item h4 {
+        position: relative;
+        text-align: start;
+        align-items: start;
+        color: white; 
+        width: 100%;
+        top: 10px;
+        white-space: nowrap;
+    }
+
+    
+     
+      
+
+    
+
+
+
+

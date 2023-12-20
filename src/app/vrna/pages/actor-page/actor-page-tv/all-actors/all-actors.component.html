@@ -1,0 +1,42 @@
+ <ion-header class="ion-no-border container-fluid my-3">
+      <ion-toolbar class="topbar">
+          <ion-button  slot="start" fill="clear">
+            <h4 class="topbar-label">Actors</h4>
+          </ion-button>
+        <ion-buttons (keydown)="KeypressOnSearchBtn($event)"   id="searchbtn_{{uniquePageId}}" class="mx-3" slot="start">
+          <ion-searchbar   id="search_all_actors" #search_actors  show-clear-button="never" class="searchbar" [(ngModel)]="searchQuery" (ionChange)="filterCast()"  slot="end" placeholder="Actor name..."></ion-searchbar>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-img  tabindex="-1" class="vrna-home-logo" src="assets/images/logo 2.png" alt="logo"></ion-img>
+        </ion-buttons>
+      </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="content my-5">
+      <ion-row class="main">
+          <div class="container-fluid head">
+            <h3 id="actors_cnt" tabindex="0" class="actors">
+              <span class="all">ALL</span> ACTORS
+            </h3>
+          </div>
+          <ion-grid>
+          <ion-row>
+          <ion-list  *ngIf="featuredCastData$ | async as castData">
+            <div class="image-container">
+              <ion-spinner name="dots" *ngIf="castData_loading"></ion-spinner>
+              <ion-text *ngIf="!castData_loading &&castData.length === 0">
+                No records available for All Actors.
+              </ion-text>
+              <ion-col (click)="onCastDetail(cast)" id="all_actors"  size='12' size-xs='6' size-sm='4' size-md='3' size-lg='2' size-xl='2' size-xxl='2'
+              *ngFor="let cast of castData; let i=index;" (keydown)="keypressOnCast($event,i,uniquePageId)">
+                <app-post-card-actors  [movieId]="uniquePageId" [sectionName]="'Actors_index'" [carouselIndex]="i" [cardData]="cast"></app-post-card-actors>
+             </ion-col>
+            </div>
+          </ion-list>
+          </ion-row>
+        </ion-grid>
+      </ion-row>
+</ion-content>
+
+
+

@@ -1,0 +1,10 @@
+<div tabindex="0" id="{{sectionName}}-{{carouselIndex}}_{{movieId}}" 
+  class="arrow-navigable  ion-no-padding ion-no-margin poster-card-tv" 
+  lines="none" (click)="onCardClick()">
+  <div class="post-img" lazy-load-images>
+    <img [src]="cardData.imageUrl" loading="lazy" />
+  </div>
+  <div class="post-moviename my-2">
+    <h4 class="cast-name">{{ cardData.castname }}</h4>
+ </div>
+</div>

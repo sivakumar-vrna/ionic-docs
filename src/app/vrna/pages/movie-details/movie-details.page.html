@@ -1,95 +1,185 @@
 <ion-header class="ion-no-border" *ngIf="!isLoading">
   <ion-toolbar class="movie-detail-topbar" *ngIf="movieDetails">
-    <ion-button fill="clear" class="back-btn" slot="start" (click)="dismiss()">
+    <ion-button tabindex="0" [id]="'btnBack_Movie_detail'+uniquePageId"
+     (keydown)="keypressOnBackBtn($event)"
+     fill="clear" class="back-btn arrow-navigable" slot="start" (click)="dismiss()">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-button>
 
     <ion-title>
-      <ion-text>
-        <h4 class="fs-14 ion-no-margin">
-          {{movieDetails.moviename}} ( {{movieDetails.movieyear}})
-        </h4>
-        <div class="common-genre py-1 ion-no-margin ion-text-start">
-          <ul>
-            <li *ngFor="let genre of movieDetails.genre">{{genre}}</li>
-          </ul>
-        </div>
+      <ion-text class="title-color">
+        <div class="fs-25">
+          <span>{{movieDetails.moviename}} ({{movieDetails.movieyear}})</span>
+        </div>        
       </ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="movie-details-content" fullscreen>
-  <ion-grid class="ion-no-padding">
-    <ion-row *ngIf="movieDetails">
-      <ion-col class="position-relative movie-detail-banner">
-
-        <!-- Banner Image -->
-        <ion-img class="mdc-banner-img" [src]="movieDetails.moviebannerurl"></ion-img>
-
-        <div class="bg-overlay"></div>
-
-        <div class="bottom-bar d-flex">
-          <!-- Play Trailer -->
-          <app-play-trailer [trailerUrl]="movieDetails.trailerurl"></app-play-trailer>
-          <!-- Rating -->
-          <div class="ms-auto my-auto">
-            <app-rating [userRating]="movieDetails.userRating" [movieId]="movieDetails.movieId"></app-rating>
+<ion-content  class="movie-details-content"  fullscreen>
+  <ion-grid class="ion-no-padding">    
+    <ion-row *ngIf="movieDetails" class="banner-bg">
+        <ion-col class="position-relative movie-detail-banner" >
+          <ion-img [id]="'BannerImg'+ uniquePageId" (keydown)="keypressOnBannerImg($event)" tabindex="0"  class="mdc-banner-img" [src]="movieDetails.moviebannerurl"></ion-img>                  
+			    <div class="bg-overlay" id="id-bg-overlay"></div>          
+          <div class="bottom-bar d-flex">            
+            <div class="ms-auto my-auto">
+              <app-rating id="Rating" [userRating]="movieDetails.userRating" [movieId]="movieDetails.movieId" [uniquePageId]="uniquePageId"></app-rating>
+            </div>
           </div>
-        </div>
-      </ion-col>
-    </ion-row>
+          </ion-col>          
+      </ion-row>
 
+      <ion-row id="myHeader"> 
+        <ion-text color="primary">&nbsp;&nbsp;&nbsp;* {{MoviePageLabels.available_for_rent}}</ion-text>        
+      </ion-row>      
+
+      <ion-row>         
+        <ion-text class="ion-text-wrap pt-2 my-0 mdc-description">&nbsp;&nbsp;&nbsp;({{MoviePageLabels.rented_movies_usage_notice}})</ion-text>        
+      </ion-row>
+
+      <ion-row *ngIf="movieDetails">          
+          <ion-col class="position-relative btn-width">
+            <div class="d-flex" (keydown)="handleKeyboardEventOnPlayBtn($event)">
+              <ion-button [id]="'btnPlayOrRent'+uniquePageId" tabindex="0" class="w-50 arrow-navigable d-btn" 
+                expand="block" fill="solid" color="warning" (click)="onSubmit(movieDetails.isRented)" 
+                *ngIf="movieId && movieDetails.effectiveDate < currentDate">
+                {{movieDetails.isRented ? MoviePageLabels.play : MoviePageLabels.rent}}
+              </ion-button>
+              <ion-button [id]="'btnPlayOrRent'+uniquePageId" fill="clear" size="small" *ngIf="movieId && movieDetails.effectiveDate >= currentDate" readonly
+                tabindex="0" class="w-100 arrow-navigable">{{MoviePageLabels.releasing_soon}}
+              </ion-button>
+            </div>
+          </ion-col>
+      </ion-row>
+
+        <!--<div class="bg-overlay"></div>-->
+        <ion-row *ngIf="movieDetails" (keydown)="keypressOnMovieIconSlide($event)">
+          <ion-col class="position-relative btn-width">
+          <div class="d-flex scroll" >                           
+              <app-play-trailer [movieId]="movieId" [uniquePageId]="uniquePageId" 
+              [btnDesc]="MoviePageLabels.trailer"
+              (keydown)="kepressOnPlayTrailerBtn($event)" (ionBlur)="unFocus('btn-trailer')" (ionFocus)="focus('btn-trailer')" [trailerUrl]="movieDetails.trailerurl" [contentData]="movieDetails"></app-play-trailer>            
+            
+              <app-favorite-btn (keydown)="keypressOnFavBtn($event)" [uniquePageId]="uniquePageId" 
+              [btnDesc]="MoviePageLabels.favorite"
+              (ionBlur)="unFocus('btn-fav')" (ionFocus)="focus('btn-fav')" [movieId]="movieId" *ngIf="movieId && movieDetails.effectiveDate < currentDate"></app-favorite-btn>
+            
+              <app-btn-text [movieId]="movieId" [uniquePageId]="uniquePageId"  (keydown)="keypressOnShareBtn($event)" (ionBlur)="unFocus('btn-share')" (ionFocus)="focus('btn-share')" [btnName]="'share-social'" [btnDesc]="MoviePageLabels.share" (click)="showShareOptions()"></app-btn-text>
+              
+              <app-btn-text [movieId]="movieId" [uniquePageId]="uniquePageId"  id="btn-wish" 
+              (keydown)="keypressOnWishBtn($event)" (ionBlur)="unFocus('btn-wish')" (ionFocus)="focus('btn-wish')" [btnName]="inWishList === true ? 'trash-outline' : 'duplicate-outline'" [btnIdName]="'wishList'" [btnDesc]="MoviePageLabels.wishlist" [btnValue]="inWishList" (click)="addToWishList()"></app-btn-text>
+                          
+              <app-btn-text [movieId]="movieId" [uniquePageId]="uniquePageId"  id="btn-dislike" 
+              (keydown)="keypressOnDislikeBtn($event)" (ionBlur)="unFocus('btn-dislike')" (ionFocus)="focus('btn-dislike')" [btnName]="isBlocked === true ? 'thumbs-down-sharp' : 'thumbs-down-outline'" [btnIdName]="'dislike'" [btnDesc]="MoviePageLabels.not_for_me" [btnValue]="isBlocked" (click)="blockMovie()"></app-btn-text>
+            
+              <app-btn-text [movieId]="movieId" [uniquePageId]="uniquePageId"  id="btn-like" 
+              (keydown)="keypressOnLikeBtn($event)" (ionBlur)="unFocus('btn-like')" (ionFocus)="focus('btn-like')" [btnName]="isLiked === true ? 'thumbs-up-sharp' : 'thumbs-up-outline'" [btnDesc]="MoviePageLabels.like"   [btnIdName]="'like'" [btnValue]="isLiked" (click)="likestatus(true)"></app-btn-text>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      
     <ion-row *ngIf="movieDetails">
       <ion-col class="mdc-details px-3" size="12">
-        <p class="ion-text-wrap pt-2 my-0 mdc-description">
+        <span class="ion-text-wrap pt-2 my-0 mdc-description span-text">
           {{movieDetails.description}}
-        </p>
+        </span>
         <table class="mdc-detail-table mt-2">
           <tr>
-            <th>Director</th>
-            <td><span>{{movieDetails.director}}</span></td>
+            <td><span class="span-title">{{MoviePageLabels.director}}</span></td>
+            <td><span class="span-text">{{movieDetails.director}}</span></td>
           </tr>
           <tr>
-            <th>Producer</th>
-            <td><span>{{movieDetails.producer}}</span></td>
+            <td><span class="span-title">{{MoviePageLabels.producer}}</span></td>
+            <td><span class="span-text">{{movieDetails.producer}}</span></td>
           </tr>
           <tr>
-            <th>Musician</th>
-            <td><span>{{movieDetails.musicdirector}}</span></td>
+            <td><span class="span-title">{{MoviePageLabels.musician}}</span></td>
+            <td><span class="span-text">{{movieDetails.musicdirector}}</span></td>
           </tr>
           <tr>
-            <th>Cast</th>
+            <td><span class="span-title">{{MoviePageLabels.vrna_rating}}</span></td>
+            <td><span class="span-text">{{movieDetails.vrnaRating}}/10</span></td>
+            <td></td>
+          </tr>
+          <tr>            
             <td>
-              <a class="comma cast-link" *ngFor="let cast of casts" (click)="onCastDetail(cast)">{{cast.castname}}</a>
+              <div class="common-genre py-1 ion-no-margin ion-text-start" *ngIf="genreMap">            
+                <a [id]="'movie_genre-'+i+'_'+uniquePageId" (keydown)="keypressOnMovieGenre($event,i)" tabindex="0"  (click)="openIonModal(genre)" *ngFor="let genre of movieDetails.genre;let i=index;" class="genre-text arrow-navigable">{{getGenreDesc(genre)}}</a>
+              </div>
+            </td>          
+          </tr>
+          </table>
+          <table class="mdc-detail-table">
+            <tr>
+              <td>&nbsp;</td>            
+            </tr>
+          <tr>
+            <td class="gradient-box"><span class="gradient-text">{{movieDetails.country}}</span></td>
+            <td>&nbsp;</td>            
+            <td class="gradient-box"><span class="gradient-text">{{movieDetails.certificate}}</span></td>
+            <td>&nbsp;</td>            
+            <td class="gradient-box"><span class="gradient-text">{{movieDetails.language}}</span></td>
+            <td>&nbsp;&nbsp;</td>            
+            <td class="gradient-box"><span class="gradient-text">{{movieDetails.movielength}}</span></td>
+            <td>&nbsp;&nbsp;</td>            
+            <td class="gradient-box"><span class="gradient-text">{{movieDetails.maturityrating}}</span></td>
+            <td></td>            
+          </tr>  
+          <tr>
+            <td>&nbsp;</td>            
+          </tr>
+          <tr>              
+            <td class="img-box">
+              <img src="../../../../assets/images/dts.png">
+            </td>             
+            <td>&nbsp;&nbsp;</td>  
+            <td class="img-box">
+              <img src="../../../../assets/images/hdr.png">
             </td>
           </tr>
+          <!--<tr>
+            <th>Cast</th>
+            <td (keydown)="keypressOnCastBtn($event)">-->
+              <!-- <a id="lnkCast" tabindex="0" class="comma cast-link arrow-navigable" *ngFor="let cast of casts" (click)="onCastDetail(cast)">{{cast.castname}}</a> -->
+              <!--<app-top-cast-slider [domainUrl]="domainUrl" [castData]="casts"></app-top-cast-slider>
+            </td>
+          </tr>-->
+        </table>
+
+        <table class="mdc-detail-table">
+          <tr>
+            <td>&nbsp;</td>            
+          </tr>
+          <tr >          
+            <td></td>  
+            <td><span class="span-title">{{MoviePageLabels.subtitles}}</span></td>
+            <td></td>
+            <td><span class="span-text">({{movieDetails.subtitles?.length || '0'}})</span></td>            
+            <td></td>
+            <td><span class="span-title">{{MoviePageLabels.audio_languages}}</span></td>
+            <td></td>
+            <td><span class="span-text">({{movieDetails.audiolanguages?.length || '0'}})</span></td>            
+            <td></td>
+          </tr>
+          <!--<tr>
+            <th>Cast</th>
+            <td (keydown)="keypressOnCastBtn($event)">-->
+              <!-- <a id="lnkCast" tabindex="0" class="comma cast-link arrow-navigable" *ngFor="let cast of casts" (click)="onCastDetail(cast)">{{cast.castname}}</a> -->
+              <!--<app-top-cast-slider [domainUrl]="domainUrl" [castData]="casts"></app-top-cast-slider>
+            </td>
+          </tr>-->
         </table>
       </ion-col>
 
       <ion-col class="position-relative mt-2 pe-3" size="12">
-        <ion-row id="myHeader">
-          <ion-col class="position-relative" size="4">
-            <div class="d-flex">
-              <ion-button class="share-btn" color="primary" fill="clear" (click)="shareUs()">
-                <ion-icon name="share-social"></ion-icon>
-              </ion-button>
-              <app-favorite-btn [movieId]="movieId" *ngIf="movieId"></app-favorite-btn>
-            </div>
-          </ion-col>
-          <ion-col class="position-relative" size="2"> </ion-col>
-          <ion-col class="position-relative" size="6">
-            <div class="d-flex">
-              <ion-button class="w-100" expand="block" fill="solid" color="primary"
-                (click)="onSubmit(movieDetails.isRented)">
-                {{movieDetails.isRented ? 'Play': 'Rent'}}
-              </ion-button>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
+        
+        </ion-col>
+      </ion-row>
 
+
+      
     <!-- #Skeleton Loader -->
     <ion-row *ngIf="!movieDetails">
       <ion-col class="position-relative" size="12">
@@ -160,18 +250,37 @@
       </ion-col>
     </ion-row>
 
-    <!---------------------------------- #Related Suggestions Section --------------------------------------->
+
     <ion-row class="suggestions-section p-3" *ngIf="suggestions">
       <!-- title -->
       <ion-col size="12">
         <ion-text class="suggestions-section-title" color="primary">
-          <h5 class="m-1">Related Suggestions</h5>
+          <h5 id="id_topcast" tabindex="0" class="m-1">{{MoviePageLabels.top_cast}}</h5>
         </ion-text>
       </ion-col>
 
       <!-- carousal -->
       <ion-col size="12">
-        <app-carousel [carouselData]="suggestions" [carouselOptions]="suggestionOptions"></app-carousel>
+        <app-top-cast-slider [movieId]="movieId" [uniquePageId]="uniquePageId" [sectionName]="'top_cast_clider'" [domainUrl]="domainUrl" 
+        [castData]="casts"></app-top-cast-slider>
+      </ion-col>
+    </ion-row>
+
+    <!---------------------------------- #Related Suggestions Section --------------------------------------->
+    <ion-row class="suggestions-section p-3" *ngIf="suggestions">
+      <!-- title -->
+      <ion-col size="12">
+        <ion-text class="suggestions-section-title" color="primary">
+          <h5 class="m-1" id="idHeadingRelSugg">{{MoviePageLabels.related_suggestions}}</h5>
+        </ion-text>
+      </ion-col>
+
+      <!-- carousal -->
+      <ion-col size="12">
+        <app-carousel  [uniquePageId]="uniquePageId" [sectionName]="'cardSuggestions'" [movieId]="movieId" 
+         id="cardSuggestions" 
+         (keydown)="handleKeyboardEventOnSlider($event, movieId)"
+         [carouselData]="suggestions" ></app-carousel>
       </ion-col>
     </ion-row>
 
@@ -188,6 +297,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
 </ion-content>

@@ -43,4 +43,18 @@ export class ProfileService {
     return this.http.getCall(url, capacitorUrl);
   }
 
+  getUserProfileImgUploadUrl() {
+    const baseUrl = environment.awsUrl;
+    const url = baseUrl + 'aws/user/upload?fileType=jpg';
+    const capacitorUrl = environment.capaciorUrl + url;
+    return this.http.getCall(url, capacitorUrl);
+  }
+
+  updateUserProfile(data: any) {
+    const baseUrl = environment.authUrl;
+    const url = baseUrl + 'profile/update';
+    const capacitorUrl = environment.capaciorUrl + url;
+    return this.http.postCall(url, capacitorUrl, data);
+  }
+
 }

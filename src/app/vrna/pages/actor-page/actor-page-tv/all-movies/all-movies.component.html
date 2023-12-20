@@ -1,0 +1,53 @@
+<ion-header  class="ion-no-border container-fluid my-3">
+    <ion-toolbar class="topbar">
+          <ion-button  slot="start" fill="clear">
+            <h4 class="topbar-label">Movies</h4>
+          </ion-button>
+        <ion-buttons (keydown)="KeypressOnSearchBtn($event)" class="mx-3" slot="start">
+          <ion-searchbar id="All-movies-search" show-clear-button="never"  #search_movies  class="searchbar"  (ionChange)="onSearch($event)"  slot="end" placeholder="Movie name..."></ion-searchbar>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-img tabindex="-1" class="vrna-home-logo" src="assets/images/logo 2.png" alt="logo"></ion-img>
+        </ion-buttons>
+      </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content class="content my-5">
+    <ion-row class="main">
+      <div tabindex="0"  class="container-fluid head">
+        <h3 id="movies_cnt" tabindex="0" class="actors">
+          <span  class="all">ALL</span> MOVIES
+        </h3>
+      </div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-spinner name="dots" *ngIf="isLoadingData"></ion-spinner>
+          <ion-text *ngIf="!isLoadingData && homeData.length === 0">
+            No records available for All Movies.
+          </ion-text>
+          <ion-col  class="view-category-card" size='12' size-xs='6' size-sm='4' size-md='3' size-lg='2' size-xl='2' size-xxl='2'
+            *ngFor="let movie of homeData; let i=index;"  (keydown)="keypressOnCnt($event,i,uniquePageId)">
+            <app-poster-card-tv [movieId]="uniquePageId"  [carouselIndex]="i" [sectionName]="'homedata_index'" [cardData]="movie"></app-poster-card-tv>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

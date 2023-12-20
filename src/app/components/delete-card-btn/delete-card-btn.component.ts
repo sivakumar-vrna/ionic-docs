@@ -10,6 +10,7 @@ import { ToastWidget } from 'src/app/widgets/toast.widget';
 })
 export class DeleteCardBtnComponent implements OnInit {
   @Input() cardDetail: any;
+  @Input() cardIndex: any;
   @Output() cardDeleted = new EventEmitter();
 
   constructor(
@@ -17,7 +18,34 @@ export class DeleteCardBtnComponent implements OnInit {
     private toast: ToastWidget
   ) { }
 
-  ngOnInit() { }
+  keypressOnCardDelBtn(event: KeyboardEvent, cardIndex: any): void {  
+    let elem: any;  
+    if(event.key == 'ArrowDown'){
+      event.stopPropagation();
+      elem = document.getElementById('delCard-'+(cardIndex+1));
+      if(!elem){
+        elem = document.getElementById('btnAddCard');
+      }
+    }
+    if(event.key == 'ArrowUp'){
+      event.stopPropagation();
+      elem = document.getElementById('delCard-'+(cardIndex-1));
+      if(!elem){
+        elem = document.getElementById('tabCards');
+      }
+    }
+    if(elem){
+      elem.focus();
+    }
+  }
+
+  ngOnInit() {
+    console.time('Perf: CompnDeleteCardBtn Screen');
+  }
+
+  ngAfterViewInit() {
+    console.timeEnd('Perf: CompnDeleteCardBtn Screen');
+  }
 
   async onDelete() {
     const deleteCardData = {
@@ -32,15 +60,20 @@ export class DeleteCardBtnComponent implements OnInit {
     if (value) {
       (await this.cardService.deleteCard(deleteCardData)).subscribe(
         (res: any) => {
-          console.log(res);
           if (res.status.toLowerCase() === 'success' && res.statusCode == 200) {
             this.cardDeleted.emit();
-            this.toast.onSuccess(res.message);
+              setTimeout(() => {
+                let elem = document.getElementById('btnAddCard');
+                if(elem){
+                  elem.focus();
+                }
+              }, 1000);
+            // this.toast.onSuccess(res.message);
           } else {
-            this.toast.onFail('Failed to delete card');
+            // this.toast.onFail('Failed to delete card');
           }
         }, (err: any) => {
-          this.toast.onFail('network error in delete card');
+          // this.toast.onFail('network error in delete card');
         }
       )
     }

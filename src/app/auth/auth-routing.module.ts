@@ -4,6 +4,9 @@ import { AuthComponent } from './auth.component';
 import { ForgotPwdPage } from './forgot-pwd/forgot-pwd.page';
 import { LoginPage } from './login/login.page';
 import { SignupPage } from './signup/signup.page';
+import { PhoneAuthComponent } from './phone-auth/phone-auth.component';
+import { CodeComponent } from './phone-auth/code/code.component';
+import { PhPwdComponent } from './phone-auth/ph-pwd/ph-pwd.component';
 
 const routes: Routes = [
     {
@@ -26,6 +29,18 @@ const routes: Routes = [
             {
                 path: 'reset',
                 component: ForgotPwdPage,
+            },
+            {
+                path:'phone',
+                component:PhoneAuthComponent,
+            },
+            {
+                path:'code',
+                component:CodeComponent,
+            },
+            {
+                path:'ph-pwd',
+                component:PhPwdComponent
             }
         ]
     }

@@ -24,37 +24,37 @@
   </defs>
 </svg>
 
-<div class="comment-stars">
+<div class="comment-stars" (keydown)="keypressOnStarRate($event)">
 
   <input class="comment-stars-input" type="radio" name="rating" value="5" id="rating-5" [checked]="userRating === 5">
-  <label class="comment-stars-view" for="rating-5" (click)="onSubmit(5)">
+  <label [id]="'btn_star-5-'+uniquePageId"  tabindex="0" class="comment-stars-view arrow-navigable" for="rating-5" (click)="onSubmit(5)">
     <svg class="icon icon-star">
       <use xlink:href="#icon-star"></use>
     </svg>
   </label>
 
   <input class="comment-stars-input" type="radio" name="rating" value="4" id="rating-4" [checked]="userRating === 4">
-  <label class="comment-stars-view" for="rating-4" (click)="onSubmit(4)">
+  <label [id]="'btn_star-4-'+uniquePageId"   tabindex="0" class="comment-stars-view arrow-navigable" for="rating-4" (click)="onSubmit(4)">
     <svg class="icon icon-star">
       <use xlink:href="#icon-star"></use>
     </svg>
   </label>
 
   <input class="comment-stars-input" type="radio" name="rating" value="3" id="rating-3" [checked]="userRating === 3">
-  <label class="comment-stars-view" for="rating-3" (click)="onSubmit(3)">
+  <label [id]="'btn_star-3-'+uniquePageId"  tabindex="0" class="comment-stars-view arrow-navigable" for="rating-3" (click)="onSubmit(3)">
     <svg class="icon icon-star">
       <use xlink:href="#icon-star"></use>
     </svg>
   </label>
 
   <input class="comment-stars-input" type="radio" name="rating" value="2" id="rating-2" [checked]="userRating === 2">
-  <label class="comment-stars-view" for="rating-2">
-    <svg class="icon icon-star" (click)="onSubmit(2)">
+  <label [id]="'btn_star-2-'+uniquePageId"  tabindex="0" class="comment-stars-view arrow-navigable" for="rating-2">
+    <svg  class="icon icon-star" (click)="onSubmit(2)">
       <use xlink:href="#icon-star"></use>
     </svg></label>
 
   <input class="comment-stars-input" type="radio" name="rating" value="1" id="rating-1" [checked]="userRating === 1">
-  <label class="comment-stars-view" for="rating-1">
+  <label [id]="'btn_star-1-'+uniquePageId"  tabindex="0" class="comment-stars-view arrow-navigable" for="rating-1">
     <svg class="icon icon-star" (click)="onSubmit(1)">
       <use xlink:href="#icon-star"></use>
     </svg></label>

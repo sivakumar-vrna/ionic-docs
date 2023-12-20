@@ -4,7 +4,7 @@
     <string name="title_activity_main">VRNA</string>
     <string name="package_name">com.vrna.customer</string>
     <string name="custom_url_scheme">com.vrna.customer</string>
-    <string name="facebook_app_id">543676063325841</string>
-    <string name="facebook_client_token">24cce8112851e620157dd20218aa88ee</string>
+    <string name="facebook_app_id">887882988657968</string>
+    <string name="facebook_client_token">d78518e99f5df042acd98332f3743167</string>
     <string name="server_client_id">706306776113-i5i82n0gt2os9ijb83aka4sbfmm2b7re.apps.googleusercontent.com</string>
 </resources>

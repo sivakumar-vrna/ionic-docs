@@ -2,7 +2,7 @@ ion-content#introPage {
     --background: var(--ion-color-primary-tint);
 
     .swiper {
-        background-image   : url(/assets/images/intro-bg-1.png);
+        background-image   : none; //url(/assets/images/intro-bg-1.png);
         background-repeat  : no-repeat;
         background-size    : cover;
         background-position: 100% 100%;
@@ -35,4 +35,14 @@ ion-content#introPage {
         }
     }
 
+}
+#btnFirstScreen:hover{
+transform: scale(1.2);
+}
+.intro:focus{
+    border-radius: 15px;
+    box-shadow: 6px -6px -6px 6px var(--ion-color-step-950);
+    transform: scale(0.9);
+    transition: 0.3s;
+    outline: none;
 }

@@ -64,6 +64,10 @@
 		"classpath": "com.codetrixstudio.capacitor.GoogleAuth.GoogleAuth"
 	},
 	{
+		"pkg": "capacitor-firebase-auth",
+		"classpath": "com.baumblatt.capacitor.firebase.auth.CapacitorFirebaseAuth"
+	},
+	{
 		"pkg": "capacitor-video-player",
 		"classpath": "com.jeep.plugin.capacitor.capacitorvideoplayer.CapacitorVideoPlayerPlugin"
 	}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ToastWidget } from 'src/app/widgets/toast.widget';
 import { IntelligenceService, RENTED_KEY } from '../../../shared/services/intelligence.service';
 import { Storage } from '@capacitor/storage';
@@ -13,6 +13,10 @@ export class UiRentDataService {
     rentedMoviesList$ = new Subject();
     rentContentData = new Subject();
     isNewMovieRented$ = new Subject<boolean>();
+    
+    private rentedSubject = new BehaviorSubject<string | null>(null);
+    rented_update$ = this.rentedSubject.asObservable();
+  
 
     constructor(
         private intelligenceService: IntelligenceService,
@@ -39,10 +43,10 @@ export class UiRentDataService {
                 }
                 this.onNewMovieRented(true);
             } else {
-                this.toaster.onFail('Error in request');
+                // this.toaster.onFail('Error in request');
             }
         }, (err) => {
-            this.toaster.onFail('Error in request');
+            // this.toaster.onFail('Error in request');
         }
         )
     }
@@ -50,5 +54,14 @@ export class UiRentDataService {
     onNewMovieRented(isRented: boolean) {
         this.isNewMovieRented$.next(isRented);
     }
+
+    setRented_update(value: string) {
+        localStorage.setItem('rented_has_update ', value);
+        this.rentedSubject.next(value);
+      }
+    
+      getRented_update(): string | null {
+        return localStorage.getItem('rented_has_update ');
+      }
 
 }

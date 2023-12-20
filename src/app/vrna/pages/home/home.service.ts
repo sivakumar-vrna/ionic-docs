@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { isPlatform } from '@ionic/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { VrnaflowService } from 'src/app/shared/services/vrnaflow.service';
-import { environment } from 'src/environments/environment';
 import { OrchService } from '../../services/ui-orchestration/orch.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -17,8 +16,11 @@ export class HomeService {
     homeData$ = new Subject();
     bannerData = new Subject();
     favouritesData = new Subject();
+    wishlistData = new Subject();
     rentedData = new Subject();
     continueWatchData = new Subject();
+
+    featuredCastData = new Subject();
 
     constructor(
         private vrnaflowService: VrnaflowService,
@@ -30,19 +32,23 @@ export class HomeService {
         await this.getBannerData();
         await this.getContinueWatchData();
         await this.getFavouriteData();
+        await this.getWishlistData();
         await this.getRentedData();
         await this.getHomeData();
+        await this.getFeaturedCast();
     }
 
     async getBannerData() {
         (await this.vrnaflowService.getBanners()).subscribe(
             (res: any) => {
                 if (res.status.toLowerCase() === 'success' && res.statusCode == 200) {
-                    const tempData = res.data;
+                    let tempData = res.data;
                     this.bannerData.next(this.orchService.orchestrateData(tempData));
+                    tempData = null;
                 } else {
                     this.errorService.onError(res);
                 }
+                res = null;
             },
             (err) => {
                 this.errorService.onError(err);
@@ -54,11 +60,31 @@ export class HomeService {
         (await this.vrnaflowService.getFavourites()).subscribe(
             (res: any) => {
                 if (res.status.toLowerCase() === 'success' && res.statusCode == 200) {
-                    const tempData = res.data;
+                    let tempData = res.data;
                     this.favouritesData.next(this.orchService.orchestrateData(tempData));
+                    tempData = null;
                 } else {
                     this.errorService.onError(res);
                 }
+                res = null;
+            },
+            (err) => {
+                this.errorService.onError(err);
+            }
+        );
+    }
+
+    async getWishlistData() {
+        (await this.vrnaflowService.getWishlist()).subscribe(
+            (res: any) => {
+                if (res.status.toLowerCase() === 'success' && res.statusCode == 200) {
+                    let tempData = res.data;
+                    this.wishlistData.next(this.orchService.orchestrateData(tempData));
+                    tempData = null;
+                } else {
+                    this.errorService.onError(res);
+                }
+                res = null;
             },
             (err) => {
                 this.errorService.onError(err);
@@ -70,11 +96,13 @@ export class HomeService {
         (await this.vrnaflowService.getRented()).subscribe(
             (res: any) => {
                 if (res.status.toLowerCase() === 'success' && res.statusCode == 200) {
-                    const tempData = res.data;
+                    let tempData = res.data;
                     this.rentedData.next(this.orchService.orchestrateData(tempData));
+                    tempData = null;
                 } else {
                     this.errorService.onError(res);
                 }
+                res = null;
             },
             (err) => {
                 this.errorService.onError(err);
@@ -86,11 +114,14 @@ export class HomeService {
         (await this.vrnaflowService.getContinueWatching()).subscribe(
             (res: any) => {
                 if (res.status.toLowerCase() === 'success' && res.statusCode == 200) {
-                    const tempData = res.data;
+                    let tempData = res.data;
+                    //tempData.map(result => result['posterurl'] = 'https://media.vrnplex.com' + result.posterurl);
                     this.continueWatchData.next(this.orchService.orchestrateData(tempData));
+                    tempData = null;
                 } else {
                     this.errorService.onError(res);
                 }
+                res = null;
             },
             (err) => {
                 this.errorService.onError(err);
@@ -102,13 +133,40 @@ export class HomeService {
         (await this.vrnaflowService.onLoadHomePage()).subscribe(
             (res: any) => {
                 if (res.status.toLowerCase() === 'success' && res.statusCode == 200) {
-                    const tempData = res.data;
-                    
+                    let tempData = res.data;
                     this.dataConstruction(tempData);
-                    
+                    tempData = null;
                 } else {
                     this.errorService.onError(res);
                 }
+                res = null;
+            },
+            (err) => {
+                this.errorService.onError(err);
+            }
+        );
+    }
+
+    async getFeaturedCast() {
+        (await this.vrnaflowService.featuredCast() ).subscribe(
+            (res: any) => {
+                if (res.status.toLowerCase() === 'success' && res.statusCode == 200) {
+                    let tempData = res.data;
+
+
+                    //map the cast data with correct url
+                    tempData.map(castmap => {
+                        //cast['imageUrl'] = this.domainUrl + '/images' + cast.imageUrl;
+                        castmap['imageUrl'] = environment.cloudflareUrl + castmap.imageUrl;
+                    });
+                    this.featuredCastData.next(tempData);          
+
+
+                    tempData = null;
+                } else {
+                    this.errorService.onError(res);
+                }
+                res = null;
             },
             (err) => {
                 this.errorService.onError(err);
@@ -117,14 +175,16 @@ export class HomeService {
     }
 
     dataConstruction(data: any) {
-        const tempHomedata = [];
+        let tempHomedata = [];
         Object.keys(data).forEach(key => {
-            const tempData = {
+            let tempData = {
                 title: key,
                 data: this.orchService.orchestrateData(data[key])
             };
             tempHomedata.push(tempData);
+            tempData = null;
         });
         this.homeData$.next(tempHomedata);
+        tempHomedata = null;
     }
 }

@@ -1,80 +1,57 @@
-<ion-toolbar class="footer-main">
-  <ion-text slot="start">
-    <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved
-    </p>
-  </ion-text>
-
-  <ion-buttons class="social-icons" slot="end">
-    <ion-button>
-      <ion-icon name="logo-facebook"></ion-icon>
+<section id="movies-section">
+  <div id="container flex" class="text-center">
+    <ion-button   [id]="'footer_Mnu-' + i" (keydown)="keypressOnfooter($event)"  size="small" fill="clear" tabindex="0" class="flex box arrow-navigable poster" 
+      (click)="menu.url === '/home' ? scrollToTopOfPage() : null" 
+      [routerLink]="menu.url" *ngFor="let menu of menus;let i=index">
+      {{menu.title}}
     </ion-button>
-    <ion-button>
-      <ion-icon name="logo-twitter"></ion-icon>
-    </ion-button>
-    <ion-button>
-      <ion-icon name="logo-linkedin"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-</ion-toolbar>
-
-<section>
-  <div id="container">
-    <!-- flex container -->
-
-    <div class="box" id="bluebox">
-      <!-- flex item -->
-      <p>Home</p>
-    </div>
-
-    <div class="box" id="redbox">
-      <!-- flex item -->
-      <p>Categories</p>
-    </div>
-    <div class="box" id="redbox">
-      <!-- flex item -->
-      <p>Latest Movies</p>
-    </div>
-    <div class="box" id="redbox">
-      <!-- flex item -->
-      <p>Favorite Movies</p>
-    </div>
-    <div class="box" id="redbox">
-      <!-- flex item -->
-      <p>Trending Movies</p>
-    </div>
   </div>
   <div id="container">
-    <!-- flex container -->
-
-    <div class="box-sitemap" id="bluebox">
-      <!-- flex item -->
-      <p>Sitemap &nbsp;/ </p>
+    <!--
+      <div class="box-sitemap arrow-navigable poster" id="bluebox">
+      <p>Sitemap &nbsp;/</p>
     </div>
-
-    <div class="box-sitemap" id="redbox" routerLink="/error/504">
-      <!-- flex item -->
-      <p>Privacy Policy &nbsp;/ </p>
+    -->
+    <div (keydown)="keypressOnCnt_1($event)" class="box-sitemap arrow-navigable poster" id="redbox_1" routerLink="/policy">
+      <p>{{footer_links?.[0].title}} &nbsp;/ </p>
     </div>
-    <div class="box-sitemap" id="redbox" (click)="navigate()">
-      <!-- flex item -->
-      <p>Terms of use</p>
+    <div (keydown)="keypressOnCnt_2($event)" class="box-sitemap arrow-navigable poster" id="redbo_2" (click)="navigate()">
+      <p>{{footer_links?.[1].title}}</p>
     </div>
-  </div>
-  <div id="container">
+</div>
+<div id="container">
     <div class="box-sitemap" style="color: #ffffff63;">
-      VRNA Copyright © 2019. This site is maintained by Corporation of Tourism & Commerce Marketing.<br />
-      Site last updated [25/05/2019]
+      <!--Copyright © {{date | date: 'yyyy' }} VRNA All Rights Reserved-->
+      {{FooterPageLabels.copyright}}.<br />
+      <!--Site is maintained by VRNA Media Markets Private Limited-->
+      {{FooterPageLabels.footer_site_maintained}}.<br />
+      {{FooterPageLabels.footer_site_last_update}} <span id="last-updated"></span>
     </div>
-  </div>
-  <div id="container">
-    <div class="box-sitemap" style="color: #ffffff63;font-size: 30px;">
-      <ion-icon name="logo-facebook"></ion-icon>
+</div>
+
+<div id="container flex" class="text-center">
+  <ion-button [id]="'locale_Mnu-' + i" size="small" fill="clear" tabindex="0" class="flex box arrow-navigable poster" 
+    (click)="switchLocale(locale)" 
+    *ngFor="let locale of locales;let i=index">
+    {{locale.title}}
+  </ion-button>
+</div>
+
+  <div id="container" >
+    <div (keydown)="keypressOnFooterFb($event)" class="box-sitemap" style="color: #ffffff63;font-size: 30px;">
+     <a class="arrow-navigable poster" href="https://www.facebook.com/vrnaplex"><ion-icon name="logo-facebook"></ion-icon></a>
     </div>
     <div class="box-sitemap" style="color: #ffffff63;font-size: 30px;">
-      <ion-icon name="logo-twitter"></ion-icon>
+      <a class="arrow-navigable poster" href="https://www.youtube.com/vrnaplex"><ion-icon name="logo-youtube"></ion-icon></a>
+     </div>
+    <div class="box-sitemap" style="color: #ffffff63;font-size: 30px;">
+      <a class="arrow-navigable poster" href="https://www.twitter.com/vrnaplex"><ion-icon name="logo-twitter"></ion-icon></a>
     </div>
     <div class="box-sitemap" style="color: #ffffff63;font-size: 30px;">
-      <ion-icon name="logo-linkedin"></ion-icon>
+      <a class="arrow-navigable poster" href="https://www.instagram.com/vrnaplex"><ion-icon name="logo-instagram"></ion-icon></a>
+    </div>
+    <div (keydown)=" keypressOnFooterlinkedin($event)" class="box-sitemap" style="color: #ffffff63;font-size: 30px;" >
+       <a class="arrow-navigable poster" href="https://www.linkedin.com/vrnaplex"><ion-icon name="logo-linkedin"></ion-icon></a> 
     </div>
   </div>
 </section>

@@ -8,14 +8,15 @@ import { SideMenuModule } from '../layout/side-menu/side-menu.module';
 import { FooterModule } from '../layout/footer/footer.module';
 import { CastDetailsPageModule } from './pages/cast-details/cast-details.module';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { MyAccountComponent } from './pages/my-account/my-account.component';
 import { TopbarModule } from '../layout/topbar/topbar.module';
 import { LocationModule } from '../components/location/location.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { VrnaHttpInterceptorService } from './services/interceptors/vrna-http.interceptor';
 import { GlobalErrorHandlerService } from './services/error-handler/error-handler.service';
 import { HomeService } from './pages/home/home.service';
-import { FilterDetailsPage } from './pages/filter-details/filter-details.page';
 
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,11 +27,13 @@ import { FilterDetailsPage } from './pages/filter-details/filter-details.page';
     FooterModule,
     CastDetailsPageModule,
     TopbarModule,
-    LocationModule
+    LocationModule,
+    NgxPaginationModule,
   ],
   declarations: [
     VrnaPage,
-    TransactionsComponent
+    TransactionsComponent,
+    MyAccountComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: VrnaHttpInterceptorService, multi: true },

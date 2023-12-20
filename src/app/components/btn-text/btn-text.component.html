@@ -1,0 +1,22 @@
+<ion-row>
+<div class="ms-auto my-auto btn-main">
+    
+    <ion-button tabindex="0" class="arrow-navigable" [id]="btnIdName +'-btn'+'_'+uniquePageId" 
+    [ngClass]="btnValue === true ? 'btnSelect' : 'btnDefault'" 
+    [color]="btnValue === true ? 'btnSelect' : 'btnDefault'" 
+    (click)="changeIcon(this)">
+      <ion-icon name="{{btnName}}"></ion-icon>
+    </ion-button>
+</div>
+
+<div class="btn-overlay"></div>
+</ion-row>
+<ion-row class="ion-justify-content-center">
+<div>
+    <ion-text class="text-dec">{{btnDesc}}</ion-text>    
+</div>
+</ion-row>
+
+<ion-row class="ion-justify-content-center">
+  <span>&nbsp;</span>
+</ion-row>

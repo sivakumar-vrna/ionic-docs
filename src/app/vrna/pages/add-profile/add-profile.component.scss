@@ -1,0 +1,53 @@
+.display{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.save-profile{
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 8rem;
+}
+
+.center{
+    justify-content:center;
+}
+
+.profile-image{
+    border: 1px solid white;    
+    border-radius: 8px;    
+    height: 12rem;
+    width: 12rem;
+    object-fit:cover;   
+}
+
+
+.edit{
+    padding: 9px;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    top: 110px;
+    right: 115px;
+    background: white;
+    border-radius: 30px;
+}
+.outline_input_item{
+    border: 1px solid white;
+    border-radius: 8px;
+    width: 20rem;
+}
+
+.outline_input{
+    background: transparent;
+    width: 20rem;
+    border: 0px;
+}
+.highlighted {
+    background-color:black;
+    color: white; 
+   }
+
+.pwdError{
+    align-items: start !important;
+}

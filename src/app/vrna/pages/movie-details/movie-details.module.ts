@@ -3,12 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
 import { MovieDetailsPageRoutingModule } from './movie-details-routing.module';
-
 import { MovieDetailsPage } from './movie-details.page';
 import { TopbarModule } from 'src/app/layout/topbar/topbar.module';
-import { PlayerModule } from 'src/app/components/player/player.module';
 import { RentModule } from 'src/app/components/rent/rent.module';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { AddCardModule } from '../../../components/add-card/add-card.module';
@@ -16,8 +13,11 @@ import { UiRentDataService } from '../../services/ui-orchestration/ui-rent-data.
 import { SliderModule } from 'src/app/components/slider/slider.module';
 import { FavoriteBtnModule } from 'src/app/components/favorite-btn/favorite-btn.module';
 import { RatingModule } from 'src/app/components/rating/rating.module';
+import { ButtonTextModule } from 'src/app/components/btn-text/btn-text.module';
 import { MovieDetailsService } from './movie-details.service';
 import { LazyLoadImagesModule } from 'ngx-lazy-load-images';
+import { PlayerModule } from 'src/app/components/player/player.module';
+import { SocialShareModule } from '../social-share/social-share.module';
 
 @NgModule({
   imports: [
@@ -33,10 +33,12 @@ import { LazyLoadImagesModule } from 'ngx-lazy-load-images';
     SliderModule,
     FavoriteBtnModule,
     RatingModule,
-    LazyLoadImagesModule
+    ButtonTextModule,
+    LazyLoadImagesModule,
+    SocialShareModule
   ],
   declarations: [
-    MovieDetailsPage
+    MovieDetailsPage,
   ],
   exports: [
     MovieDetailsPage,

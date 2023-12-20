@@ -1,5 +1,13 @@
-<ion-header class="home-header ion-no-border">
-  <app-topbar></app-topbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (keydown)="keypressOnMenu($event)" tabindex="0" class="arrow-navigable" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Transactions</ion-title>
+    <ion-buttons class="home-menu-btn" slot="end">
+      <ion-menu-button id="btnMenu" tabindex="0" class="arrow-navigable mnuclass-for-dpad"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -12,9 +20,10 @@
       Transactions
     </ion-list-header>
 
-    <ion-item *ngFor="let transaction of transactionsDataSource">
+    <ion-item *ngFor="let transaction of transactionsDataSource | paginate : { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: count};
+    let i = index">
       <ion-thumbnail slot="start">
-        <ion-img [src]="transaction.posterImage"></ion-img>
+        <ion-img id="poster_img{{i}}" [src]="transaction.posterImage" tabindex="0" class="poster arrow-navigable"></ion-img>
       </ion-thumbnail>
       <ion-label>
         <h2>{{transaction.movieName}}</h2>
@@ -22,9 +31,22 @@
         <p>Rent Status: {{transaction.rentStatus}}</p>
       </ion-label>
       <ion-label slot="end">
-        <h6>{{transaction.paidAmount | currency}}</h6>
+        <h5 class="curr-amt">{{transaction.paidCurrency}}&nbsp;{{transaction.paidAmount}}</h5>
         <p>Date: {{transaction.rentedDate | date}}</p>
       </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
+
+<pagination-controls 
+  class="paginator"       
+  previousLabel="Prev"
+  nextLabel="Next"
+  (keydown)="keypressOnPagination($event)"
+  (pageChange)="onChange($event)">
+</pagination-controls>
+
+<pagination-template 
+  #p="paginationApi"
+  (pageChange)="onChange($event)">    
+</pagination-template>

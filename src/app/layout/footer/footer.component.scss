@@ -7,6 +7,7 @@
     /* center items vertically, in this case */
     align-items: center;
     /* center items horizontally, in this case */
+    cursor: pointer;
 
 }
 
@@ -20,12 +21,14 @@ section {
 }
 
 .box {
-    width: 140px;
-    margin: 5px;
-    text-align: center;
+    //width: 140px;
+    //margin: 5px;
+    //text-align: center;
     color: white;
     /* will center text in <p>, which is not a flex item */
 }
+
+.copyright-text{padding-left:10px;}
 
 .box-sitemap {
     margin: 5px;
@@ -33,3 +36,16 @@ section {
     color: white;
     cursor: pointer;
 }
+a{
+    text-decoration: none;
+    color: #ffffff63 ;
+}
+.poster:focus {
+    border-radius: 15px;
+    box-shadow: 0 0 6px 6px var(--ion-color-step-950);
+    transform: scale(0.90); 
+    transition: 0.3s;
+    outline: none;
+}
+
+ion-button{text-transform: none !important;}

@@ -1,8 +1,9 @@
-<div id="carouselSwiper">
+<div  [id]="sectionName+'_carouselSwiper_'+uniquePageId" tabindex="0"  (keydown)="keypressOnCarousel($event)" 
+(click)="onCardFocus(sectionName,uniquePageId)">
   <swiper #carousel [config]="continuewatching ? continueWatchOption : carouselOptions">
-    <ng-template swiperSlide *ngFor="let carousel of carouselData; trackBy:trackItems">
-      <app-poster-card [cardData]="carousel" *ngIf="!continuewatching"></app-poster-card>
-      <app-continue-card [cardData]="carousel" *ngIf="continuewatching"></app-continue-card>
+    <ng-template swiperSlide *ngFor="let carousel of carouselData; let i = index; trackBy:trackItems;">
+      <app-poster-card class="view-category-card"  [movieId]="uniquePageId" [sectionName]="sectionName" [cardData]="carousel" [carouselIndex]="i" *ngIf="!continuewatching" [isActorPage]="isActorPage"></app-poster-card>
+      <app-continue-card [sectionName]="sectionName" [cardData]="carousel" [carouselIndex]="i" *ngIf="continuewatching && carousel.isRented"></app-continue-card>
     </ng-template>
   </swiper>
 </div>

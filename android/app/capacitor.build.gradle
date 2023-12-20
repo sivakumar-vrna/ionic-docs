@@ -2,8 +2,8 @@
 
 android {
   compileOptions {
-      sourceCompatibility JavaVersion.VERSION_1_8
-      targetCompatibility JavaVersion.VERSION_1_8
+      sourceCompatibility JavaVersion.VERSION_17
+      targetCompatibility JavaVersion.VERSION_17
   }
 }
 
@@ -25,10 +25,11 @@ dependencies {
     implementation project(':capacitor-storage')
     implementation project(':capacitor-toast')
     implementation project(':codetrix-studio-capacitor-google-auth')
+    implementation project(':capacitor-firebase-auth')
     implementation project(':capacitor-video-player')
-
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
 }
-
+apply from: "../../node_modules/cordova-android-play-services-gradle-release/cordova-android-play-services-gradle-release.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

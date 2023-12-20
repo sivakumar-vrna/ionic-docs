@@ -1,0 +1,188 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+   ion-content{
+    --ion-background-color: #061015;
+   }
+   .first{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+   }
+  .second-col{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 17%;
+    background-color: #0a151b;
+  }
+ 
+  .rounded-image {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 80px; 
+    height: 80px;
+    cursor: pointer;
+  }
+  .Username{
+    position: relative;
+    top: 15px;
+    width: auto;
+    color:#54717f;
+    align-items: center;
+    justify-content: center;
+  }
+  .search-icon{
+    position: relative;
+    cursor: pointer;
+  }
+  .search-icon ion-icon{
+    font-size: 40px;
+    color:#435a64;
+  }
+  .setting-icon{
+    position: relative;
+    cursor: pointer;
+  }
+  .setting-icon ion-icon{
+    font-size: 40px;
+    color:#435a64;
+  }
+  .home-img{
+    width: 40px;
+    height: 40px;
+    color:#435a64;
+    cursor: pointer;
+  }
+  .center-icons {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    top: 20px; 
+  }
+  .center-icons ion-img,
+  .center-icons ion-icon,
+  .center-icons i {
+    font-size: 40px;
+    width: 40px; 
+    height: 40px;
+    color: #435a64;
+    cursor: pointer;
+  }
+  .center-icons ion-img {
+    width: 50px; 
+    height: 50px;
+  }
+  .center-icons .nav-item a.menu-active ion-icon,
+  .center-icons .nav-item a.menu-active i,
+  .center-icons .nav-item a.menu-active ion-img{
+    color: #e2ba1f !important;
+  }
+  .nav-item{
+      display: block;
+      text-decoration: none;
+      list-style-type: none;
+  }
+  .setting-icon a.menu-active ion-icon,
+  .search-icon  a.menu-active ion-icon{
+    color: #e2ba1f !important;
+  }
+  .back_btn{
+    color:#435a64;
+  }
+  .icons:focus {  
+    border-radius: 15px;      
+    transform: scale(1.2); 
+    transition: 0.3s;
+    outline: none;
+  }
+
+  @media screen and (max-width:7680px)  {
+    ion-content{
+      --ion-background-color: #061015;
+     }
+    .first {
+      height: 100vh; 
+      overflow: hidden;
+    }
+    .side-bar {
+      width: 25%; 
+      position: relative;
+      height: auto;
+    }
+
+    .rounded-image {
+      position: relative;
+      border-radius: 50%;
+      overflow: hidden;
+      width: 50px; 
+      height: 50px;
+      cursor: pointer;
+    }
+  
+    .center-icons {
+      gap: 20px; 
+      position: relative;
+      margin-top: -90%;
+    }
+    .Username{
+      position: relative;
+      top: 15px;
+      width: auto;
+      color:#54717f;
+      align-items: center;
+      justify-content: center;
+    }
+    .Username h3{
+      font-size: 15px;
+    }
+    .search-icon{
+      position: relative;
+      cursor: pointer;
+    }
+    .search-icon ion-icon{
+      font-size: 30px;
+      color:#435a64;
+    }
+    .setting-icon{
+      position: relative;
+      cursor: pointer;
+      top: -10px;
+
+    }
+    .setting-icon ion-icon{
+      font-size: 30px;
+      color:#435a64;
+    }
+    .center-icons {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      top: 25px; 
+    }
+    .center-icons ion-img,
+    .center-icons ion-icon,
+    .center-icons i {
+      font-size: 30px;
+      width: 30px; 
+      height: 30px;
+      color: #435a64;
+      cursor: pointer;
+    }
+    .center-icons ion-img {
+      width: 30px; 
+      height: 30px;
+    }
+    .back_btn{
+      position: relative;
+      top: -30px;
+    }
+    .center-icons .nav-item a.menu-active ion-icon,
+    .center-icons .nav-item a.menu-active i,
+    .center-icons .nav-item a.menu-active ion-img{
+      color: #e2ba1f !important;
+    }
+  }

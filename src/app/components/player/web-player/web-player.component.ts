@@ -45,6 +45,8 @@ export class WebPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async ngOnInit() {
+    console.time('Perf: CompnPlayerWebPlayer Screen');
+
     this.userId = await this.userService.getUserId();
   }
 
@@ -54,10 +56,10 @@ export class WebPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
       message: 'Please wait...',
     });
     await loading.present();
-    const token = await this.userService.getCurrentToken();
+    //const token = await this.userService.getCurrentToken();
     videojs.Hls.xhr.beforeRequest = (options) => {
       options.headers = {
-        vrnaToken: token,
+        //Authorization: token,
         securityKey: this.playerService.cookie$
       };
       return options;
@@ -87,6 +89,9 @@ export class WebPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.addButton('back', 'arrow_back');
+
+    console.timeEnd('Perf: CompnPlayerWebPlayer Screen');
+
   }
 
   addButton(name, icon) {
@@ -103,12 +108,10 @@ export class WebPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async onPlay() {
     this.totalDuration = this.player.duration();
-    console.log('On play Total Duration : ' + this.totalDuration);
   }
 
   async onPause() {
     this.currentTime = this.player.currentTime();
-    console.log('On Pause Total Duration : ' + this.currentTime);
     if (this.totalDuration === this.currentTime) {
       this.onPlayEnd();
     } else {
@@ -130,7 +133,6 @@ export class WebPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onPlayEnd() {
-    console.log('On play End : ' + this.currentTime);
     const continueDetail = {
       movieId: this.contentData.movieId,
       moviename: this.contentData.moviename,

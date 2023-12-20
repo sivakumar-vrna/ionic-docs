@@ -1,4 +1,4 @@
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BackgroundColorOptions, StatusBar, Style } from '@capacitor/status-bar';
 import { isPlatform } from '@ionic/core';
 import { Storage } from '@capacitor/storage';

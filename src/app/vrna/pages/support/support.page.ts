@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { IonTextarea } from '@ionic/angular';
 import { supportService } from 'src/app/shared/services/support/support.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ToastWidget } from 'src/app/widgets/toast.widget';
@@ -15,6 +16,11 @@ export class SupportPage implements OnInit, AfterViewInit {
   isLoading = false;
   mailResponse: string;
   userEmail: string;
+  uniquePageId: any;
+  isMenuClosed = false;
+
+
+
 
   @ViewChild('support') support: any;
   constructor(
@@ -28,14 +34,91 @@ export class SupportPage implements OnInit, AfterViewInit {
     });
   }
 
+  keypressOnbackbtn(event:KeyboardEvent){
+    let elem:any;
+    if(event.key === 'ArrowRight'){
+      elem =  document.getElementById('btnMenuSupport_'+this.uniquePageId);
+    }
+    if (elem) {
+      event.stopPropagation();
+      elem.focus();
+      event.preventDefault();
+    }
+    if(event.key == 'ArrowDown'){
+      event.stopPropagation();
+      this.support.setFocus();
+    }
+  }
+  keypressOnMenubtn(event:KeyboardEvent){
+    let elem:any;
+    if(event.key === 'ArrowLeft'){
+      elem = document.getElementById('btnbackSupport_'+this.uniquePageId);
+    }
+    if (elem) {
+      event.stopPropagation();
+      elem.focus();
+      event.preventDefault();
+    }
+    if(event.key == 'ArrowDown'){
+      event.stopPropagation();
+      this.support.setFocus();
+    }
+    if (event.key === 'BackButton') {
+      this.isMenuClosed = true;
+      this.focusBtnsIfClosed();
+    }
+  }
+  focusBtnsIfClosed() {
+    const menuBtn = document.getElementById('btnMenuSupport_' + this.uniquePageId);
+    const backBtn = document.getElementById('btnbackSupport_' + this.uniquePageId);
+  
+    if (this.isMenuClosed) {
+      if (menuBtn) {
+        menuBtn.focus();
+        this.isMenuClosed = false;
+      }
+    } else {
+      if (backBtn) {
+        backBtn.focus();
+        this.isMenuClosed = true;
+      }
+    }
+  }
+  keypressOnSupportBtn(event:KeyboardEvent):void{
+    if(event.key == 'ArrowUp'){
+      event.stopPropagation();
+      this.support.setFocus();
+      event.preventDefault();
+    }
+    
+  }
+   
+  keypressOnNewline(event: KeyboardEvent, textarea: IonTextarea): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const currentValue = textarea.value;
+      const newValue = currentValue + '\n';
+      textarea.value = newValue;
+      textarea.setFocus();
+      this.supportForm.get('content').setValue(newValue);
+    }
+  }
+
+ 
+  
   async ngOnInit() {
-    this.userEmail = await this.userService.getEmail()
+    console.time('Perf: Support Screen');
+    this.userEmail = await this.userService.getEmail();
+
+    this.uniquePageId = Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15);
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.support.setFocus();
-    }, 500);
+    }, 1500);
+    console.timeEnd('Perf: Support Screen');
   }
 
   get f() {
@@ -45,7 +128,6 @@ export class SupportPage implements OnInit, AfterViewInit {
   async onSubmit() {
     this.isSubmitted = true;
     this.isLoading = true;
-    console.log(this.supportForm.valid);
     if (this.supportForm.valid) {
       const mailData = {
         mailId: this.userEmail,
@@ -55,6 +137,12 @@ export class SupportPage implements OnInit, AfterViewInit {
       (await this.supportService.reachUs(mailData)).subscribe((res) => {
         if (res.status.toLowerCase() === 'success') {
           this.mailResponse = res.message;
+          setTimeout(() => {
+            let firstElem= document.getElementById('nextmsg');   
+            if(firstElem){
+              firstElem.focus();
+            }
+          },100 );
         } else {
           this.isSubmitted = false;
           this.isLoading = false;
@@ -66,9 +154,9 @@ export class SupportPage implements OnInit, AfterViewInit {
     } else {
       this.isLoading = false;
       if (this.supportForm.value.content.length == 0) {
-        this.toast.onFail('Please enter value.');
+        // this.toast.onFail('Please enter value.');
       } else {
-        this.toast.onFail('Please enter minimum 25 charecters.');
+        // this.toast.onFail('Please enter minimum 25 charecters.');
       }
     }
   }
@@ -78,6 +166,9 @@ export class SupportPage implements OnInit, AfterViewInit {
     this.isSubmitted = false;
     this.isLoading = false;
     this.onClear();
+    setTimeout(() => {
+      this.support.setFocus();
+    }, 500);
   }
 
   getContentErrorMsg() {

@@ -1,13 +1,13 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button id="btnBack" tabindex="0" (keydown)="keypressOnBackBtn($event)" class="arrow-navigable" defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>
       Search
     </ion-title>
-    <ion-buttons class="home-menu-btn" slot="end">
-      <ion-menu-button></ion-menu-button>
+    <ion-buttons id="back_btn"  tabindex="0" (keydown)="keypressOnMenuBtn($event)" class="home-menu-btn arrow-navigable" slot="end">
+      <ion-menu-button id="btnMenu"   tabindex="0" ></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -16,49 +16,156 @@
   <ion-grid class="search-input">
     <ion-row>
       <ion-col size="12">
-        <ion-searchbar class="search-input" #search autocomplete="true" inputmode="search" animated="true"
-          debounce="1000" (ionChange)="fromSearchBar($event); getFilteredItems($event)">
-        </ion-searchbar>
+        <ion-row>
+          <ion-col size="11" (keydown)="keypressOnKeywordInput($event)">
+            <ion-searchbar id="Search_Bar" tabindex="0"  class="search-input" #search 
+            autocomplete="true" inputmode="search"  animated="true" debounce="1000" 
+            (ionClear)="clearSearchResults()" (ionBlur)="onBlurInput()">
+            </ion-searchbar>
+          </ion-col>
+          <ion-col size="0" (keydown)="keypressOnSeach($event)" style="text-align: end;">
+            <ion-button class="arrow-navigable" tabindex="0" id="elemSearch" fill="clear" (click)="fromSearchBar($event)">
+              <ion-icon name="search" slot="start" class="ion-text-center"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
       </ion-col>
+      
 
       <ion-col size="12">
         <ion-row>
-
-          <ion-col size="4">
+          <ion-col size="6">
             <small>Genre:</small>
             <ion-item>
-              <ion-select placeholder="All" [(ngModel)]="genre" (ionChange)="getFilteredItems( 'genre')">
-                <ion-select-option [value]="genre.genreId" *ngFor="let genre of genres">{{genre.genreDesc}}
+              <!--
+              <ion-select   #genreSelect (keydown)="keypressOnGenreOpt($event,i)"
+              style="appearance: auto !important;"
+              interface="action-sheet" id="elemGenre" tabindex="0" 
+              class="arrow-navigable form-control" placeholder="All" 
+              [(ngModel)]="genre" (ionChange)="getFilteredItems($event,'genre')">
+                <ion-select-option value="" selected>All</ion-select-option>
+                <ion-select-option [value]="genre.genreId" id="genres_index-{{i}}"   *ngFor="let genre of genres; let i=index;">{{genre.genreDesc}}
                 </ion-select-option>
               </ion-select>
+            -->
+            <select #genreSelect (keydown)="keypressOnGenreOpt($event)"
+            style="appearance: auto !important;"
+            interface="action-sheet" id="elemGenre" tabindex="0" 
+            class="arrow-navigable form-control" placeholder="All" 
+            [(ngModel)]="genre" (change)="getFilteredItems($event,'genre')">
+              <option value="" selected>All</option>
+              <option [value]="genre.genreId"  *ngFor="let genre of genres">{{genre.genreDesc}}
+              </option>
+            </select>
+
             </ion-item>
           </ion-col>
 
-          <ion-col size="4">
-            <small>Rating</small>
-            <ion-item>
-              <ion-select placeholder="All" [(ngModel)]="rating" (ionChange)="getFilteredItems('rating')">
-                <ion-select-option value="0">All</ion-select-option>
+          <ion-col size="6">      
+            <small>Rating</small>      
+            <ion-item class="input-container" align-items-center no-padding>              
+              <!-- <ion-select id="elemRating" 
+              style="appearance: auto !important;"
+              (keydown)="keypressOnRatingOpt($event)"
+              interface="action-sheet" tabindex="0" 
+              class="arrow-navigable form-control" placeholder="Rating" [(ngModel)]="rating" (ionChange)="getFilteredItems($event,'rating')">
+                <ion-select-option selected value="">All</ion-select-option>
                 <ion-select-option value="1">1</ion-select-option>
                 <ion-select-option value="2">2</ion-select-option>
                 <ion-select-option value="3">3</ion-select-option>
                 <ion-select-option value="4">4</ion-select-option>
                 <ion-select-option value="5">5</ion-select-option>
-              </ion-select>
+                <ion-select-option value="6">6</ion-select-option>
+                <ion-select-option value="7">7</ion-select-option>
+                <ion-select-option value="8">8</ion-select-option>
+                <ion-select-option value="9">9</ion-select-option>
+                <ion-select-option value="10">10</ion-select-option>
+              </ion-select> -->
+
+               <!-- for temporary  this selete-option-->
+              <select id="elemRating" 
+              style="appearance: auto !important;"
+              (keydown)="keypressOnRatingOpt($event)"
+              interface="action-sheet" tabindex="0" 
+              class="arrow-navigable form-control" placeholder="Rating" [(ngModel)]="rating" (change)="getFilteredItems($event,'rating')">
+                <option selected value="">All</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
             </ion-item>
           </ion-col>
 
-          <ion-col size="4">
+          <ion-col size="6">
+            <small>Maturity Rating</small>
+            <ion-item>        
+              <!-- <ion-select id="elemMaturity" 
+              style="appearance: auto !important;"
+              (keydown)="keypressOnMaturityOpt($event)"
+              interface="action-sheet" tabindex="0" 
+              class="arrow-navigable form-control" placeholder="All" [(ngModel)]="maturity" (ionChange)="getFilteredItems($event,'maturity')">
+                <ion-select-option value="" selected>All</ion-select-option>
+                <ion-select-option value="7">7+ Years</ion-select-option>
+                <ion-select-option value="12">12+ Years</ion-select-option>
+                <ion-select-option value="16">16+ Years</ion-select-option>
+                <ion-select-option value="18">18+ Years</ion-select-option>
+              </ion-select> -->
+
+               <!-- for temporary  this selete-option-->
+               <select id="elemMaturity" 
+              style="appearance: auto !important;"
+              (keydown)="keypressOnMaturityOpt($event)"
+              interface="action-sheet" tabindex="0" 
+              class="arrow-navigable form-control" placeholder="All" [(ngModel)]="maturity" (change)="getFilteredItems($event,'maturity')">
+                <option value="" selected>All</option>
+                <option value="7">7+ Years</option>
+                <option value="12">12+ Years</option>
+                <option value="16">16+ Years</option>
+                <option value="18">18+ Years</option>
+              </select>
+            </ion-item>
+          </ion-col>
+          
+          <ion-col size="6">
             <small>Time Range</small>
             <ion-item>
-              <ion-select placeholder="All" [(ngModel)]="timeRange" (ionChange)="getFilteredItems('timeRange')">
+               <!-- <ion-select id="elemTimeRange" 
+              style="appearance: auto !important;"
+              (keydown)="keypressOnTimerangeOpt($event)"
+              interface="action-sheet" tabindex="0" 
+              class="arrow-navigable form-control" placeholder="All" [(ngModel)]="timeRange" (ionChange)="getFilteredItems($event,'timeRange')">
+                <ion-select-option selected value="">All</ion-select-option>
                 <ion-select-option value="0">current Year</ion-select-option>
                 <ion-select-option value="1">1 to 4 Years Old</ion-select-option>
                 <ion-select-option value="2">5 to 10 years</ion-select-option>
                 <ion-select-option value="3">10 to 15 Years</ion-select-option>
                 <ion-select-option value="4">Before 15 Years</ion-select-option>
-              </ion-select>
+              </ion-select> -->
+
+               <select id="elemTimeRange" 
+              style="appearance: auto !important;"
+              (keydown)="keypressOnTimerangeOpt($event)"
+              interface="action-sheet" tabindex="0" 
+              class="arrow-navigable form-control" placeholder="All" [(ngModel)]="timeRange" (change)="getFilteredItems($event,'timeRange')">
+                <option selected value="">All</option>
+                <option value="0">current Year</option>
+                <option value="1">1 to 4 Years Old</option>
+                <option value="2">5 to 10 years</option>
+                <option value="3">10 to 15 Years</option>
+                <option value="4">Before 15 Years</option>
+              </select>
             </ion-item>
+          </ion-col>
+
+          <ion-col size="12" (keydown)="keypressOnBtn($event)"  class="ion-text-center">
+            <ion-button id="elembtn" tabindex="0" class="arrow-navigable" fill="clear" (click)="clearAllFilters()">CLEAR</ion-button>
           </ion-col>
         </ion-row>
       </ion-col>
@@ -77,14 +184,15 @@
       </ion-col>
       <ion-col size="12" *ngIf="searchKey">
         <ion-text>
-          <h6>Result for <b>{{searchKey | uppercase}}</b> : <ion-label color="secondary">{{searchResult?.length}}
+          <h4>Result for <b>{{searchKey | uppercase}}</b> : <ion-label color="secondary">{{searchResult?.length}}
               results
             </ion-label>
-          </h6>
+          </h4>
         </ion-text>
       </ion-col>
-      <ion-col size="6" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let result of searchResult">
-        <app-poster-card [cardData]="result"></app-poster-card>
+      <ion-col size="6" size-sm="6" size-md="4" size-lg="3" size-xl="2" size-xxl="2" *ngFor="let result of searchResult; let i=index">
+        <ion-spinner name="dots" id="divSpinnerLoader" *ngIf="search_loading"></ion-spinner>
+        <app-poster-card [sectionName]="'search_result'" [carouselIndex]="i" [cardData]="result"></app-poster-card>
       </ion-col>
     </ion-row>
   </ion-grid>

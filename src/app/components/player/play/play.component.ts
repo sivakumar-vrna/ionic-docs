@@ -21,6 +21,8 @@ export class PlayComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.time('Perf: CompnPlayerPlay Screen');
+
     this.options = {
       fluid: true,
       aspectRatio: '16:9',
@@ -32,6 +34,9 @@ export class PlayComponent implements OnInit {
       }],
       withCredentials: true,
     }
-    console.log(this.options);
+  }
+
+  ngAfterViewInit() {
+    console.timeEnd('Perf: CompnPlayerPlay Screen');
   }
 }

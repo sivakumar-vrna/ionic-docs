@@ -10,6 +10,8 @@ import { PlayerService } from '../player/service/player.service';
 export class ContinueCardComponent implements OnInit {
 
   @Input() cardData: any;
+  @Input() carouselIndex: number;
+  @Input() sectionName:string = '';
 
   percentageWatched: number;
 
@@ -18,13 +20,25 @@ export class ContinueCardComponent implements OnInit {
     private movieService: MovieDetailsService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.time('Perf: CompnContinueCard Screen');
+  }
 
-  onContinueWatch() {
-    if (this.cardData.isRented) {
-      this.player.playMovie(this.cardData, true);
-    } else {
-      this.movieService.movieDetailsModal(this.cardData.movieId);
+  ngAfterViewInit() {
+    console.timeEnd('Perf: CompnContinueCard Screen');
+  }
+
+  // all the movies in continue watch section can be played directly
+    onContinueWatch() {      
+      this.player.playMovie(this.cardData, true, this.cardData.pauseTime); 
     }
   }
-}
+  
+  // onContinueWatch() {
+  //   if (this.cardData.isRented) {
+  //     this.player.playMovie(this.cardData, true);
+  //   } else {
+  //     this.movieService.movieDetailsModal(this.cardData.movieId);
+  //   }
+  // }
+

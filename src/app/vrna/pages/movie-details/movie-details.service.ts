@@ -18,6 +18,7 @@ export class MovieDetailsService {
         const modal = await this.modalController.create({
             component: MovieDetailsPage,
             cssClass: 'movie-details-modal',
+            backdropDismiss: true,
             componentProps: {
                 'movieId': id,
             }

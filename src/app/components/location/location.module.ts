@@ -5,6 +5,8 @@ import { LocationService } from './location.service';
 import { IonicModule } from '@ionic/angular';
 import { FilterPipe } from 'src/app/shared/pipes/filter.pipe';
 import { HomeService } from 'src/app/vrna/pages/home/home.service';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -13,7 +15,8 @@ import { HomeService } from 'src/app/vrna/pages/home/home.service';
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    FormsModule
   ],
   providers: [
     LocationService,

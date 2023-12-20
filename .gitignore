@@ -37,3 +37,5 @@ proxy.conf.json
 
 # System Files
 package-lock.json
+
+/android/.idea

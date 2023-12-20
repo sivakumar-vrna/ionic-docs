@@ -1,10 +1,17 @@
-<div id="castSlider">
+<div id="castSlider" (keydown)="keypressOnCastSlider($event)">
   <swiper #castSlider [config]="castSliderOptions" lazy-load-images>
-    <ng-template swiperSlide *ngFor="let cast of castData">
-      <div
-        class="cast-image"
+    <ng-template swiperSlide *ngFor="let cast of castData; let i=index;">
+      <!--
+        <div tabindex="0"
+        class="cast-image arrow-navigable poster"
         (click)="onCastDetail(cast)"
-        [attr.data-background-src]="cast.imageUrl"></div>
+        [attr.data-background-src]="cast.imageUrl"></div> -->
+
+        <img tabindex="0"
+        id="{{sectionName}}-{{i}}"
+        class="cast-image arrow-navigable poster"
+        (click)="onCastDetail(cast)"
+        [src]="cast.imageUrl"/>
     </ng-template>
   </swiper>
 </div>

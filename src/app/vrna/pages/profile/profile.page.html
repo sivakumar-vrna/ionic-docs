@@ -1,19 +1,15 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Profile</ion-title>
+  <ion-toolbar>    
+
+    <ion-button slot="start" id="btnBackProfile" [routerLink]="['/home']" autofocus fill="clear" slot="start" autofocus tabindex="0" class="arrow-navigable">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+
+    <ion-title>{{i18n_PageLabels.profile_profile}}</ion-title>
     <ion-buttons class="home-menu-btn" slot="end">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button id="btnMenu" (keydown)="keypressOnProfileMenu($event)" class="arrow-navigable" tabindex="0"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
-  <!-- <ul class="tabs">
-    <li class="profile-tab-title" [ngClass]="{'active': activeTab === 1}" (click)="onSelection(1)">Personel Details
-    </li>
-    <li class="profile-tab-title" [ngClass]="{'active': activeTab === 2}" (click)="onSelection(2)">Address</li>
-    <li class="profile-tab-title" [ngClass]="{'active': activeTab === 3}" (click)="onSelection(3)">Cards</li>
-  </ul> -->
 </ion-header>
 
 <ion-content>
@@ -23,19 +19,18 @@
 
   <!-- Basic -->
   <ion-accordion-group *ngIf="personalData">
-    <ion-accordion value="personel">
-      <ion-item slot="header">
-        <ion-label>Personel Details</ion-label>
+    <ion-accordion value="personal">
+      <ion-item slot="header" id="tabPersonalDet" class="arrow-navigable" tabindex="0" (keydown)="keypressOnPersonalTab($event)">
+        <ion-label>{{i18n_PageLabels.profile_personal_details}}</ion-label>
       </ion-item>
-
       <ion-list slot="content">
         <app-profile-info slot="content" [personalData]="personalData" [userId]="userId"></app-profile-info>
       </ion-list>
     </ion-accordion>
 
     <ion-accordion value="address">
-      <ion-item slot="header">
-        <ion-label>Address</ion-label>
+      <ion-item slot="header"  id="tabAddress"  class="arrow-navigable" tabindex="0"  (keydown)="keypressOnAddressTab($event)">
+        <ion-label>{{i18n_PageLabels.profile_address}}</ion-label>
       </ion-item>
 
       <ion-list slot="content">
@@ -44,39 +39,19 @@
     </ion-accordion>
 
     <ion-accordion value="cards">
-      <ion-item slot="header">
-        <ion-label>Cards</ion-label>
+      <ion-item slot="header" id="tabCards"  class="arrow-navigable" tabindex="0" (keydown)="keypressOnCardsTab($event)">
+        <ion-label>{{i18n_PageLabels.profile_cards}}</ion-label>
       </ion-item>
 
       <ion-list slot="content">
-        <app-saved-cards [cardData]="cardData" (onRefresh)="getProfileData()"></app-saved-cards>
+        <app-saved-cards slot="content" [cardData]="cardData" (onRefresh)="getProfileData()"></app-saved-cards>
       </ion-list>
     </ion-accordion>
 
   </ion-accordion-group>
 
-  <!-- 
-  <div class="profile-tab" *ngIf="personalData">
-    <div class="tab_container">
-      <h6 class="d_active tab_drawer_heading" (click)="onDeviceSelection(1)">Personel Details</h6>
-      <div class="profile-tab-content ion-padding" [ngClass]="{'ion-hide': activeTab !== 1}">
-        <app-profile-info slot="content" [personalData]="personalData" [userId]="userId"></app-profile-info>
-      </div>
-
-      <h6 class="d_active tab_drawer_heading" (click)="onDeviceSelection(2)">Address</h6>
-      <div class="profile-tab-content ion-padding" [ngClass]="{'ion-hide': activeTab !== 2}">
-        <app-profile-address slot="content" [addressData]="personalData" [userId]="userId"></app-profile-address>
-      </div>
-
-      <h6 class="d_active tab_drawer_heading" (click)="onDeviceSelection(3)">Cards</h6>
-      <div class="profile-tab-content ion-padding" [ngClass]="{'ion-hide': activeTab !== 3}">
-        <app-saved-cards [cardData]="cardData" (onRefresh)="getProfileData()"></app-saved-cards>
-      </div>
-    </div>
-  </div> -->
-
   <!-- Skeleton Loader-->
-  <ion-grid class="ion-no-padding" *ngIf="!personalData">
+  <ion-grid class="ion-no-padding" *ngIf="!personalData" class="arrow-navigable" tabindex="0">
     <ion-row>
       <ion-col class="position-relative ion-padding" size="12">
         <ion-skeleton-text animated class="banner-skeleton"></ion-skeleton-text>

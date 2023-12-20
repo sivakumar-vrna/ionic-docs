@@ -1,5 +1,21 @@
-<ion-button class="play-trailer-btn" fill="clear" color="warning"
-  (click)="onPlay()">
-  <ion-icon slot="start" name="play-circle"></ion-icon>
-  Play Trailer
-</ion-button>
+<!--<ion-button tabindex="0" id="btnPlayTrailer"
+  class="play-trailer-btn" fill="solid" color="primary" >
+  <ion-icon slot="start" name="film-outline" class="icon"></ion-icon>    
+</ion-button>-->
+
+<ion-row>
+  <div class="ms-auto my-auto btn-main">
+      <ion-button tabindex="0" [id]="'btn-trailer'+'_'+uniquePageId" class="btn-trans arrow-navigable" color="btn-trans" (click)="onPlay()">
+        <ion-icon name="film-outline"></ion-icon>
+      </ion-button>
+  </div>
+  <div class="btn-overlay"></div>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+  <div>
+      <ion-text class="text-dec">{{btnDesc}}</ion-text>    
+  </div>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <span>&nbsp;</span>
+  </ion-row>

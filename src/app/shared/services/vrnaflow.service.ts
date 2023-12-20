@@ -45,6 +45,13 @@ export class VrnaflowService {
     return this.http.getCall(url, capacitorUrl);
   }
 
+  async getWishlist() {
+    const user = await this.userService.getUserId();
+    const url = this.vrnaFlowUrl + `wishlist?userId=${user}`;
+    const capacitorUrl = environment.capaciorUrl + url;
+    return this.http.getCall(url, capacitorUrl);
+  }
+
   async getContinueWatching() {
     const user = await this.userService.getUserId();
     const url = this.vrnaFlowUrl + `continuewatching?userId=${user}`;
@@ -55,14 +62,24 @@ export class VrnaflowService {
   async featuredCast() {
     const user = await this.userService.getUserId();
     const baseUrl = environment.contentUrl;
-    const url = baseUrl + 'cast/featured' + `?userId=${user}`;
+    let url = baseUrl + 'cast/featured' + `?userId=${user}`;
     const capacitorUrl = environment.capaciorUrl + url;
+
+    //featured cast only work on vrnaplex.com prod url; so replacing proxy with Prod url
+    url = capacitorUrl;
     return this.http.getCall(url, capacitorUrl);
   }
 
   async getConfigurations() {
-    const user = await this.userService.getUserId();
+    let user: number;
+    user = await this.userService.getUserId();    
     const baseUrl = environment.vrnaFlowUrl;
+
+    //if no user, still load all configurations
+    if(user == null || isNaN(user)){
+      user = 4;
+    }
+
     const url = baseUrl + 'masterdata' + `?userId=${user}`;
     const capacitorUrl = environment.capaciorUrl + url;
     return this.http.getCall(url, capacitorUrl);

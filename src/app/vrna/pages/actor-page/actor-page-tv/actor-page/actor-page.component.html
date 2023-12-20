@@ -1,0 +1,56 @@
+  <ion-header class="ion-no-border container-fluid my-3">
+      <ion-toolbar class="topbar">
+          <ion-button  slot="start" fill="clear">
+            <h4 class="topbar-label">Actors</h4>
+          </ion-button>
+        <ion-buttons  (keydown)="KeypressOnSearchBtn($event)" class="mx-3" slot="start">
+          <ion-searchbar [(ngModel)]="searchInput" (ionInput)="onSearchInputChange($event)" id="search_actor"  #Actor_page_search  *ngFor="let cast of castDataArray" show-clear-button="never" class="searchbar"   slot="end" [placeholder]="cast.castname"></ion-searchbar>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-img tabindex="-1" class="vrna-home-logo" src="assets/images/logo 2.png" alt="logo"></ion-img>
+        </ion-buttons>
+      </ion-toolbar>
+  </ion-header>
+
+  <ion-content #content class="content">
+    <ion-row class="main" *ngFor="let cast of (filteredActors.length ? filteredActors : castDataArray)">
+      <div  class="container-fluid head">
+            <h3  class="actors">
+              <span id="actors_name" tabindex="0" class="first-word">{{FirstWord(cast.castname) |uppercase}}</span>
+              <span id="actors_name" tabindex="0" class="all">{{LastWords(cast.castname)|uppercase }}</span> 
+            </h3>
+          </div>
+ 
+          <div class="container-fluid">
+            <ion-row class="my-3 align-items-stretch">
+              <ion-col class="first-col"  size="4">
+                <div class="actor-img-container">
+                  <ion-img  (keydown)="keypressActorImg($event)"  id="actor_img" tabindex="0" class="actor-img arrow-navigable" [src]="cast.imageUrl"></ion-img>
+                </div>    
+              </ion-col>
+              <ion-col class="second-col" size="8">
+                <div class="description" #descriptionContainer tabindex="0" (keydown)="keypressActordes($event)">
+                  <ion-skeleton-text *ngIf="!castMoviesData" animated style="width: 100%; height: 100%"></ion-skeleton-text>
+                  <p id="actor_des" tabindex="0" class="arrow-navigable">
+                    <span class="cast-name">{{cast.castname}}</span>{{cast.description}}
+                  </p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-row>
+
+        <!--His movies-->   
+        <ion-row    tabindex="0"  class="arrow-navigable" class="his-movies">
+          <ion-col size="12">
+            <ion-text>
+              <h3>His Movies:<span class="releted_count"> {{ castMoviesData?.length }} Movies</span></h3>
+            </ion-text>
+          </ion-col>
+          <ion-col   size='10'>
+            <app-carousel  (keydown)="keypressOnRelated_cast($event)"  [isActorPage]="isActorPage"  [sectionName]="'related_cast_movies'" [carouselData]="castMoviesData" [carouselOptions]="suggestionOptions"></app-carousel>
+          </ion-col>
+          <ion-skeleton-text  *ngIf="!castMoviesData" animated style="width: 100%; height: 225px"></ion-skeleton-text>
+        </ion-row>
+        
+</ion-content>

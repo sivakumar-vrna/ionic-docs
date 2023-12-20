@@ -2,6 +2,9 @@
     .auth-page_main {
 
         .auth-page_right {
+            @media (min-width: 576px) {
+                left: 20%;
+              }
             max-width: 375px !important;
 
 
@@ -56,10 +59,13 @@
         }
     }
 
-    p.terms {
+    div.terms, p.terms {
         color    : #838383;
         font-size: 10px;
-        position : absolute;
-        bottom   : 1rem;
+        //position : absolute;
+        //bottom   : 1rem;
     }
 }
+.auth-page_left{
+    position: fixed;
+} 

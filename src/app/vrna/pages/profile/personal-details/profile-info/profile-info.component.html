@@ -1,140 +1,257 @@
 <form class="mx-auto" [formGroup]="profileInfoForm">
     <ion-row>
         <ion-col class="ion-text-center m-auto" size="12" size-sm="12" size-md="3" size-lg="3" size-xl="2">
-            <img class="profile-img" [src]="userImage" />
-        </ion-col>
-        <ion-col size="12" size-sm="12" size-md="9" size-lg="9" size-xl="10">
+            <div class="profile-img-container">
+              <img class="profile-img" [src]="userImage" />
+             </div>
+            
+             <div class="m-auto">
+               <input type="file" id="fileInput" style="display: none"  accept="image/*" (change)="changeImage($event)">
+                <ion-button tabindex="0" class="arrow-navigable" (keydown)="keypressOnChangePhoto($event)"
+                id="btnChangePhoto"  fill="clear" (click)="handleButtonClick()">{{i18n_PageLabels.profile_change_photo}}</ion-button>
+                <ion-button id="btnRemovePhoto" (keydown)="keypressOnRemovePhoto($event)" tabindex="0" 
+                class="arrow-navigable"  fill="clear" color="danger" (click)="updateProfilePhoto()">{{i18n_PageLabels.profile_update_photo}}</ion-button>
+            </div>
+
+            </ion-col>
+            <ion-col size="12" size-sm="12" size-md="9" size-lg="9" size-xl="10">
             <ion-row>
                 <!-- #First Name-->
-                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
-                    <ion-label class="form-label">First Name </ion-label>
+                <ion-col class="ion-padding-vertical" size="12" size-sm="12" 
+                size-md="6" size-lg="6" size-xl="6" size-xxl="6" 
+                (keydown)="keypressOnFname($event)">
+                    <ion-label class="form-label">{{i18n_PageLabels.profile_fname}} </ion-label>
+                    <ion-item id="input_firstName"  tabindex="0" class="arrow-navigable">
+                        <ion-input  type="text" #inputFirstName formControlName="firstName" 
+                        pattern="[a-zA-Z]+"                         
+                        (ionChange)="onFormChange()"
+                        ></ion-input>
+                        <span slot="error">Please provide a valid First Name</span>
+                    </ion-item>
+                    
+                    <!--
                     <ion-toolbar>
                         <ion-item lines="{{f.firstName.disabled ? 'none' : 'full'}}">
-                            <ion-input type="text" formControlName="firstName"></ion-input>
+                            <input type="text" formControlName="firstName" pattern="[a-zA-Z]+" id="input_firstName" class="arrow-navigable form-control" tabindex="0" />
+                            <span slot="error">Please provide a valid First Name</span>
                         </ion-item>
                         <ion-buttons slot="secondary">
-                            <ion-button (click)="onEdit('firstName')">
+                            <ion-button (click)="onEdit('firstName')" class="arrow-navigable" tabindex="0" >
                                 <ion-icon slot="icon-only" color="{{!f.firstName.disabled ? 'danger':'secondary'}}"
                                     name="{{!f.firstName.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
                             </ion-button>
-                            <ion-button (click)="onSubmit('firstName')" *ngIf="!f.firstName.disabled">
+                            <ion-button (click)="onSubmit('firstName')" *ngIf="!f.firstName.disabled" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
                             </ion-button>
                         </ion-buttons>
                     </ion-toolbar>
+                    -->
                 </ion-col>
                 <!-- #Middle Name-->
-                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
-                    <ion-label class="form-label">Middle Name </ion-label>
+                <ion-col class="ion-padding-vertical" size="12" 
+                size-sm="12" size-md="6" size-lg="6" size-xl="6" size-xxl="6"
+                (keydown)="keypressOnMname($event)">
+                    <ion-label class="form-label">{{i18n_PageLabels.profile_mname}} </ion-label>
+                    <ion-item>
+                        <ion-input type="text" #inputMiddleName formControlName="middleName" id="input_middleName" 
+                        pattern="[a-zA-Z]+" 
+                        (ionChange)="onFormChange()"></ion-input>
+                        <span slot="error">Please provide a valid Middle Name</span>
+                    </ion-item>
+
+                    <!--
                     <ion-toolbar>
                         <ion-item lines="{{f.middleName.disabled ? 'none' : 'full'}}">
-                            <ion-input type="text" formControlName="middleName"></ion-input>
+                            <input type="text" formControlName="middleName" id="input_middleName" pattern="[a-zA-Z]+" class="arrow-navigable form-control" tabindex="0" />
+                            <span slot="error">Please provide a valid Middle Name</span>
                         </ion-item>
                         <ion-buttons slot="secondary">
-                            <ion-button (click)="onEdit('middleName')">
+                            <ion-button (click)="onEdit('middleName')" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" color="{{!f.middleName.disabled ? 'danger':'secondary'}}"
                                     name="{{!f.middleName.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
                             </ion-button>
-                            <ion-button (click)="onSubmit('middleName')" *ngIf="!f.middleName.disabled">
+                            <ion-button (click)="onSubmit('middleName')" *ngIf="!f.middleName.disabled" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
                             </ion-button>
                         </ion-buttons>
                     </ion-toolbar>
+                    -->
                 </ion-col>
                 <!-- #Last Name-->
-                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
-                    <ion-label class="form-label">Last Name </ion-label>
+                <ion-col class="ion-padding-vertical" (keydown)="keypressOnLname($event)"
+                size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6" size-xxl="6">
+                    <ion-label class="form-label">{{i18n_PageLabels.profile_lname}} </ion-label>
+                    <ion-item>
+                      <ion-input type="text" #inputLastName formControlName="lastName" id="input_lastName" 
+                        pattern="[a-zA-Z]+" 
+                        (ionChange)="onFormChange()"></ion-input>
+                      <span slot="error">Please provide a valid Last Name</span>
+                    </ion-item>
+
+                    <!--
                     <ion-toolbar>
                         <ion-item lines="{{f.lastName.disabled ? 'none' : 'full'}}">
-                            <ion-input type="text" formControlName="lastName"></ion-input>
+                            <input type="text" formControlName="lastName" id="input_lastName" pattern="[a-zA-Z]+" class="arrow-navigable form-control" tabindex="0" />
+                            <span slot="error">Please provide a valid Last Name</span>
                         </ion-item>
                         <ion-buttons slot="secondary">
-                            <ion-button (click)="onEdit('lastName')">
+                            <ion-button (click)="onEdit('lastName')" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" color="{{!f.lastName.disabled ? 'danger':'secondary'}}"
                                     name="{{!f.lastName.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
                             </ion-button>
-                            <ion-button (click)="onSubmit('lastName')" *ngIf="!f.lastName.disabled">
+                            <ion-button (click)="onSubmit('lastName')" *ngIf="!f.lastName.disabled" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
                             </ion-button>
                         </ion-buttons>
                     </ion-toolbar>
+                    -->
                 </ion-col>
                 <!-- #Gender-->
-                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
-                    <ion-label class="form-label">Gender</ion-label>
-                    <ion-toolbar>
-                        <ion-item lines="{{f.gender.disabled ? 'none' : 'full'}}">
+                <ion-col class="ion-padding-vertical" 
+                size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6" size-xxl="6"
+                (keydown)="keypressOnGender($event)">
+                    <ion-label class="form-label">{{i18n_PageLabels.profile_gender}}</ion-label>
+                        <!--
                             <ion-select placeholder="Select gender" formControlName="gender">
-                                <ion-select-option value="female">Female</ion-select-option>
-                                <ion-select-option value="male">Male</ion-select-option>
-                                <ion-select-option value="unknown">Unknown</ion-select-option>
-                            </ion-select>
+                            <ion-select-option value="female" class="arrow-navigable" tabindex="0">Female</ion-select-option>
+                            <ion-select-option value="male" class="arrow-navigable" tabindex="0">Male</ion-select-option>
+                            <ion-select-option value="unknown" class="arrow-navigable" tabindex="0">Unknown</ion-select-option>
+                        </ion-select>
+                        -->
+
+                        <select class="form-control"
+                        style="appearance: auto !important;" placeholder="Select gender" 
+                        formControlName="gender" id="input_gender" (ionChange)="onFormChange()">
+                            <option value="" selected>{{i18n_PageLabels.profile_gender}}</option>
+                            <option value="female">{{i18n_PageLabels.gender_female}}</option>
+                            <option value="male">{{i18n_PageLabels.gender_male}}</option>
+                            <option value="unknown">{{i18n_PageLabels.gender_unknown}}</option>
+                        </select>
+
+                    <!--
+                    <ion-toolbar>
+                        <ion-item lines="{{f.gender.disabled ? 'none' : 'full'}}" class="arrow-navigable" tabindex="0">
+                            
+
+                            <select class="form-control arrow-navigable" tabindex="0"
+                            style="appearance: auto !important;" placeholder="Select gender" 
+                            formControlName="gender" id="input_gender">
+                                <option value="" selected>Gender</option>
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                                <option value="unknown">Unknown</option>
+                            </select>
+
                         </ion-item>
                         <ion-buttons slot="secondary">
-                            <ion-button (click)="onEdit('gender')">
+                            <ion-button (click)="onEdit('gender')" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" color="{{!f.gender.disabled ? 'danger':'secondary'}}"
                                     name="{{!f.gender.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
                             </ion-button>
-                            <ion-button (click)="onSubmit('gender')" *ngIf="!f.gender.disabled">
+                            <ion-button (click)="onSubmit('gender')" *ngIf="!f.gender.disabled" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
                             </ion-button>
                         </ion-buttons>
-                    </ion-toolbar>
+                    </ion-toolbar>-->
                 </ion-col>
                 <!-- #Date of Birth-->
-                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
-                    <ion-label class="form-label">Date of Birth</ion-label>
+                <ion-col class="ion-padding-vertical" 
+                size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6" size-xxl="6"
+                (keydown)="keypressOnDob($event)">
+                    <ion-label class="form-label">{{i18n_PageLabels.profile_dob}}</ion-label>
+                    <ion-item>
+                        <ion-input type="text"
+                        formControlName="dob" #inputDob id="input_dob" [max]="maxDate" 
+                        (ionChange)="validateDate($event);" placeholder="dd/mm/Year"></ion-input>
+                    </ion-item>
+                    <!--
                     <ion-toolbar>
-                        <ion-item lines="{{f.dob.disabled ? 'none' : 'full'}}">
-                            <ion-input type="date" formControlName="dob"></ion-input>
+                        <ion-item lines="{{ f.dob.disabled ? 'none' : 'full' }}">
+                            <input type="date" tabindex="0" class="arrow-navigable form-control" formControlName="dob" id="input_dob" [max]="maxDate" (ionChange)="validateDate($event)" />
                         </ion-item>
-                        <ion-buttons slot="secondary">
-                            <ion-button (click)="onEdit('dob')">
+                        <ion-buttons slot="se placeholder="dd/mm/year"ondary">
+                            <ion-button (click)="onEdit('dob')" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" color="{{!f.dob.disabled ? 'danger':'secondary'}}"
                                     name="{{!f.dob.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
                             </ion-button>
-                            <ion-button (click)="onSubmit('dob')" *ngIf="!f.dob.disabled">
+                            <ion-button (click)="onSubmit('dob')" *ngIf="!f.dob.disabled" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
                             </ion-button>
                         </ion-buttons>
                     </ion-toolbar>
+                    -->
                 </ion-col>
                 <!-- #Phone-->
-                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
-                    <ion-label class="form-label">Phone</ion-label>
+                <ion-col class="ion-padding-vertical" size="12" 
+                (keydown)="keypressOnPhone($event)"
+                size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="form-label">{{i18n_PageLabels.profile_phone}}</ion-label>
+                    <ion-item>
+                        <ion-input type="number" #inputMobile formControlName="mobile" id="input_mobile" 
+                        min="0" max="10" (ionChange)="onFormChange()"
+                        ></ion-input>
+                        <span slot="error">Please provide a valid phone number</span>
+                    </ion-item>
+                    <!--
                     <ion-toolbar>
                         <ion-item lines="{{f.mobile.disabled ? 'none' : 'full'}}">
-                            <ion-input type="text" formControlName="mobile"></ion-input>
-                        </ion-item>
+                            <input type="number" formControlName="mobile" id="input_mobile" min="0" max="10" class="arrow-navigable form-control" tabindex="0" />
+                            <span slot="error">Please provide a valid phone number</span>
+                        </ion-item>        
                         <ion-buttons slot="secondary">
-                            <ion-button (click)="onEdit('mobile')">
+                            <ion-button (click)="onEdit('mobile')" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" color="{{!f.mobile.disabled ? 'danger':'secondary'}}"
                                     name="{{!f.mobile.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
                             </ion-button>
-                            <ion-button (click)="onSubmit('mobile')" *ngIf="!f.mobile.disabled">
+                            <ion-button (click)="onSubmit('mobile')" *ngIf="!f.mobile.disabled" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
                             </ion-button>
                         </ion-buttons>
                     </ion-toolbar>
+                    -->
                 </ion-col>
                 <!-- #Nationality-->
-                <ion-col class="ion-padding-vertical" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
-                    <ion-label class="form-label">Nationality</ion-label>
-                    <ion-toolbar>
+                <ion-col class="ion-padding-vertical" size="12" 
+                size-sm="12" size-md="6" size-lg="6" size-xl="6" size-xxl="6"
+                (keydown)="keypressOnNat($event)">
+                    <ion-label class="form-label">{{i18n_PageLabels.profile_nationality}}</ion-label>
+                    <ion-item>
+                      <ion-input type="text" #inputNationality formControlName="nationality" id="input_nationality" 
+                        pattern="[a-zA-Z]+" 
+                        (ionChange)="onFormChange()"></ion-input>
+                      <span slot="error">Nationality is invalid</span>
+                    </ion-item>
+                    <!--<ion-toolbar>
                         <ion-item lines="{{f.nationality.disabled ? 'none' : 'full'}}">
-                            <ion-input type="text" formControlName="nationality"></ion-input>
+                            <input type="text" formControlName="nationality" id="input_nationality" pattern="[a-zA-Z]+" class="arrow-navigable form-control" tabindex="0" />
+                            <span slot="error">Nationality is invalid</span>
                         </ion-item>
                         <ion-buttons slot="secondary">
-                            <ion-button (click)="onEdit('nationality')">
+                            <ion-button (click)="onEdit('nationality')" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" color="{{!f.nationality.disabled ? 'danger':'secondary'}}"
                                     name="{{!f.nationality.disabled ? 'close-circle' : 'pencil'}}"></ion-icon>
                             </ion-button>
-                            <ion-button (click)="onSubmit('nationality')" *ngIf="!f.nationality.disabled">
+                            <ion-button (click)="onSubmit('nationality')" *ngIf="!f.nationality.disabled" class="arrow-navigable" tabindex="0">
                                 <ion-icon slot="icon-only" name="save" color="success"></ion-icon>
                             </ion-button>
                         </ion-buttons>
-                    </ion-toolbar>
+                    </ion-toolbar>-->
                 </ion-col>
+                <!-- #Save Profile-->
+                <ion-col class="ion-padding-vertical" size="12" 
+                size-sm="12" size-md="6" size-lg="6" size-xl="6" size-xxl="6">
+
+                  <ion-chip *ngIf="profile_update_saved"
+                  color="success">Profile Saved Successfully!</ion-chip>
+                  
+                  <ion-button (keydown)="keypressOnSaveBtn($event)" id="btnSaveAll" class="arrow-navigable" tabindex="0" 
+                  fill="solid" color="warning" 
+                  shape="round" (click)="onSubmitProfileForm()">
+                  <ion-icon slot="start" name="save"></ion-icon>{{i18n_PageLabels.profile_save}}
+                  </ion-button>               
+                        
+                </ion-col>
+
             </ion-row>
         </ion-col>
     </ion-row>

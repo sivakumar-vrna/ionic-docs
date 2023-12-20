@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { TopbarComponent } from './topbar.component';
+import { NotificationsModule } from 'src/app/vrna/pages/notifications/notifications.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { TopbarComponent } from './topbar.component';
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule
+    RouterModule,
+    NotificationsModule
   ],
   exports: [
     TopbarComponent
